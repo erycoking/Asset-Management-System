@@ -7,19 +7,9 @@ public class Equipment {
 	private String equip_id;
 	private String name;
 	private int quantity;
-	private int current_value;
+	private double current_value;
 	private String description;
 	private Date date_acquired;
-	
-	public Equipment(String equip_id, String name, int quantity, int current_value, String description, Date date_acquired) {
-		super();
-		this.equip_id = equip_id;
-		this.name = name;
-		this.quantity = quantity;
-		this.current_value = current_value;
-		this.description = description;
-		this.date_acquired = date_acquired;
-	}
 	
 	public String getEquip_id() {
 		return equip_id;
@@ -39,10 +29,10 @@ public class Equipment {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getCurrent_value() {
+	public double getCurrent_value() {
 		return current_value;
 	}
-	public void setCurrent_value(int current_value) {
+	public void setCurrent_value(double current_value) {
 		this.current_value = current_value;
 	}
 	public String getDescription() {

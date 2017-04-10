@@ -11,7 +11,7 @@ public class validateUserInput {
 		return passwd.matches("\\w{8,}");
 	}
 	public boolean validateDepartment(String dep){
-		return dep.matches("[a-zA-Z]+");
+		return dep.matches("[a-zA-Z]+[ ]*[a-zA-Z]*");
 	}
 	public boolean validateFaculty(String fac){
 		return fac.matches("[a-zA-Z]+");

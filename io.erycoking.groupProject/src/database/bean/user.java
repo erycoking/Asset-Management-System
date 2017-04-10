@@ -2,27 +2,16 @@ package database.bean;
 
 public class user {
 	
-	private int staff_id;
+	private String staff_id;
 	private String name;
-	private String username;
 	private String password;
 	private String department;
 	private int tel_no;
 	
-	public user(int staff_id, String name, String username, String password, String department, int tel_no) {
-		super();
-		this.staff_id = staff_id;
-		this.name = name;
-		this.username = username;
-		this.password = password;
-		this.department = department;
-		this.tel_no = tel_no;
-	}
-	
-	public int getStaff_id() {
+	public String getStaff_id() {
 		return staff_id;
 	}
-	public void setStaff_id(int staff_id) {
+	public void setStaff_id(String staff_id) {
 		this.staff_id = staff_id;
 	}
 	public String getName() {
@@ -30,12 +19,6 @@ public class user {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public String getPassword() {
 		return password;
