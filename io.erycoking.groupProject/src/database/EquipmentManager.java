@@ -1,7 +1,6 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +15,7 @@ public class EquipmentManager {
 	
 	private String sql;
 	
-	public boolean insertItems(Equipment eq) throws SQLException{
+	public boolean insertItems(Equipment eq) throws SQLException, ClassNotFoundException{
 		
 		sql = "insert into equipments (equipement_id, " +
 				"name, quantity, current_value, description, data_acquired) " +
@@ -51,7 +50,7 @@ public class EquipmentManager {
 		}
 	}
 	
-	public Equipment[] displayInfo() throws SQLException{
+	public Equipment[] displayInfo() throws SQLException, ClassNotFoundException{
 		sql = "select * from equipments";
 		ResultSet rs = null;
 				
@@ -97,7 +96,7 @@ public class EquipmentManager {
 		}
 	}
 	
-	public Equipment getRow(Equipment eq) throws SQLException{
+	public Equipment getRow(Equipment eq) throws SQLException, ClassNotFoundException{
 		
 		sql = "select * from equipments where 	equipment_id =  ?";
 		ResultSet rs = null;
@@ -132,7 +131,7 @@ public class EquipmentManager {
 				st.close();
 		}
 	}
-	public boolean update(Equipment eq) throws SQLException{
+	public boolean update(Equipment eq) throws SQLException, ClassNotFoundException{
 		final String sql = "update equipments set equipment_id=?, name=?, quantity=?, current_value=?, description=?, data_acquired = ?";
 		int affected = 0;
 		
@@ -164,7 +163,7 @@ public class EquipmentManager {
 				st.close();
 		}
 	}
-	public boolean delete(Equipment eq) throws SQLException{
+	public boolean delete(Equipment eq) throws SQLException, ClassNotFoundException{
 		int affected = 0;
 		sql = "delete from equipments where equipment_id = ? ";
 		try{

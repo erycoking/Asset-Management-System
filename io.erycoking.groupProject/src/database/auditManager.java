@@ -15,7 +15,7 @@ public class auditManager {
 	private String sql;
 	private int affected;
 	
-public boolean insert(String staff_id, String action, Timestamp timestamp, String equip_id, int quantity) throws SQLException{
+public boolean insert(String staff_id, String action, Timestamp timestamp, String equip_id, int quantity) throws SQLException, ClassNotFoundException{
 		
 		sql  = "insert into audit_trail(staff_id, Action, timestamp, equipment_id, quantity) values(?,?,?,?,?)";
 		int affected = 0;
@@ -44,7 +44,7 @@ public boolean insert(String staff_id, String action, Timestamp timestamp, Strin
 		}
 		
 	}
-	public boolean update(String staff_id, String action, Timestamp timestamp, String equip_id, int quantity) throws SQLException{
+	public boolean update(String staff_id, String action, Timestamp timestamp, String equip_id, int quantity) throws SQLException, ClassNotFoundException{
 		
 		sql = "update audit_trail set staff_id=?, action=?, timestamp=?, equipment_id=?, quantity=? where staff_id=?";
 		int affected = 0;
@@ -75,7 +75,7 @@ public boolean insert(String staff_id, String action, Timestamp timestamp, Strin
 		
 	}
 
-	public void display() throws SQLException{
+	public void display() throws SQLException, ClassNotFoundException{
 		
 		sql = "select * from users";
 		
@@ -96,7 +96,7 @@ public boolean insert(String staff_id, String action, Timestamp timestamp, Strin
 		
 	}
 	
-	public boolean deleteOldRecords() throws SQLException{
+	public boolean deleteOldRecords() throws SQLException, ClassNotFoundException{
 		
 		sql = "delete from audit_trail where DATE_SUB(CURDATE(), INTERVAL, 1, YEAR) <= timestamp";
 		

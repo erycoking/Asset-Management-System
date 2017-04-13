@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class connectionManager {
 	
 	private static connectionManager instance = null;
-	
-	private final String db = "jdbc:mysql://localhost/asset_management";
+
+	private final String db = "jdbc:mysql://localhost:3306/asset_management?autoReconnect=true&useSSL=false";
 	private final String username = "root";
 	private final String password = "king";
 	
@@ -24,8 +24,9 @@ public class connectionManager {
 		}
 		return instance;
 	}
-	private boolean openConnection() throws SQLException{
+	private boolean openConnection() throws SQLException, ClassNotFoundException{
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(db, username, password);
 			return true;
 		} catch (SQLException e) {
@@ -34,7 +35,7 @@ public class connectionManager {
 		}
 	}
 	
-	public Connection getConnection() throws SQLException{
+	public Connection getConnection() throws SQLException, ClassNotFoundException{
 		if(conn == null){
 			if(openConnection()){
 				return conn;

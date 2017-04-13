@@ -2,7 +2,7 @@ package validate;
 
 public class validateEquipInputs {
 	public boolean validateEquipID(String id){
-		return id.matches("[]");
+		return id.matches("([a-zA-Z]+[0-9]+[/]*)*");
 	}
 	public boolean validateEquiName(String name){
 		return name.matches("[a-zA-Z]+[-/]*[a-zA-Z]*");
