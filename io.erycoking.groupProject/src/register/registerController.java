@@ -13,10 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import validate.validateUserInput;
 
@@ -81,13 +81,13 @@ public class registerController implements Initializable {
 											Stage stage = new Stage();
 											FXMLLoader loader = new FXMLLoader();
 											//loader.setLocation(getClass().getResource("afterLogin/afterLogin.fxml"));
-											Pane root = loader.load(getClass().getResource("/afterLogin/afterLogin.fxml").openStream());
+											Parent root = loader.load(getClass().getResource("/afterLogin/afterLogin.fxml").openStream());
 
 											afterLoginController aft = (afterLoginController) loader.getController();
 											aft.getUser(usr);
 
 											Scene scene = new Scene(root);
-											scene.getStylesheets().add(getClass().getResource("afterLogin.css").toExternalForm());
+											scene.getStylesheets().add(getClass().getResource("/afterLogin/afterLogin.css").toExternalForm());
 											stage.setScene(scene);
 											stage.setTitle("Active inventory");
 											stage.show();

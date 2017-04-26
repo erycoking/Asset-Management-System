@@ -1,22 +1,30 @@
 package validate;
 
+import org.apache.commons.validator.routines.RegexValidator;
+
 public class validateEquipInputs {
 	public boolean validateEquipID(String id){
-		return id.matches("([a-zA-Z]+[0-9]+[/]*)*");
-	}
+		String regex = "([a-zA-Z]+[0-9]+[/]*)*";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(id);	}
 	public boolean validateEquiName(String name){
-		return name.matches("[a-zA-Z]+[-/]*[a-zA-Z]*");
-	}
+		String regex = "[a-zA-Z]+[-/]*[a-zA-Z]*";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(name);	}
 	public boolean validateQuantity(String q){
-		return q.matches("[1-9]+");
-	}
+		String regex = "[1-9]+";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(q);	}
 	public boolean validateCurrentValue(String cash){
-		return cash.matches("[0-9]+[.]*([0-9]{2})*");
-	}
+		String regex = "[0-9]+[.]*([0-9]{2})*";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(cash);	}
 	public boolean validateDescription(String des){
-		return des.matches("[a-zA-Z]*[.-/]*");
-	}	
+		String regex = "[a-zA-Z]*[.-/]*";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(des);	}	
 	public boolean validateDateAcquired(String date){
-		return date.matches("[0-9]{2}[./-]{1}[0-9][./-]{1}[0-9]{4}");
-	}
+		String regex = "[0-9]{2}[./-]{1}[0-9][./-]{1}[0-9]{4}";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(date);	}
 }

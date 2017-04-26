@@ -1,22 +1,32 @@
 package validate;
 
+import org.apache.commons.validator.routines.RegexValidator;
+
 public class validateUserInput {
 	public boolean validateId(String id){
-		return id.matches("([a-zA-Z]+[0-9]+[/]+)+([0-9]+[/-]*)*");
+		String regex = "([a-zA-Z]+[0-9]+[/]+)+([0-9]+[/-]*)*";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(id);
 	}
 	public boolean validateUsername(String name){
-		return name.matches("[a-zA-Z]+([ '-][a-zA-Z]+)*");
+		String regex = "[a-zA-Z]+([ '-][a-zA-Z]+)*";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(name);
 	}
 	public boolean validatePassword(String passwd){
-		return passwd.matches("\\w{8,}");
-	}
+		String regex = "\\w{8,}";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(passwd);	}
 	public boolean validateFaculty(String fac){
-		return fac.matches("[a-zA-Z]+(\\s[a-zA-Z]+)*");
-	}
+		String regex = "[a-zA-Z]+(\\s[a-zA-Z]+)*";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(fac);	}
 	public boolean validateDepartment(String dep){
-		return dep.matches("[a-zA-Z]+([ ][a-zA-Z]+)*");
-	}
+		String regex = "[a-zA-Z]+([ ][a-zA-Z]+)*";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(dep);	}
 	public boolean validatePhonenum(String phone){
-		return phone.matches("([07]|[+254]|[254])+\\d{8}");
-	}
+		String regex = "([07]|[+254]|[254])+\\d{8}";
+		RegexValidator validator = new RegexValidator(regex);
+		return validator.isValid(phone);	}
 }

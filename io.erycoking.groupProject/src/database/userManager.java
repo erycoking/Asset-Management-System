@@ -81,11 +81,12 @@ public class userManager {
 	}
 	
 	public user getCurrentUser(user usr) throws SQLException, ClassNotFoundException{
-		sql = "select * from users where staff_id=?";
+		sql = "select * from users where name=?";
 		
 		try{
 			conn = connectionManager.getInstance().getConnection();
 			st = conn.prepareStatement(sql);
+			st.setString(1, usr.getName());
 			rs = st.executeQuery();
 			
 			while(rs.next()){
