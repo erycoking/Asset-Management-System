@@ -1,0 +1,10 @@
+.root{
+   -fx-background-image: url("/assetmanagement/images/egerton.jpg");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+}
+.label{
+    -fx-text-fill:white;
+    -fx-font-weight:bold;
+   
+}
