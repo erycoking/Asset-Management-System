@@ -12,6 +12,7 @@ public class afterLoginController implements Initializable{
 	@FXML
 	Label usrLabel = new Label();
 	
+	//initialize method
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
