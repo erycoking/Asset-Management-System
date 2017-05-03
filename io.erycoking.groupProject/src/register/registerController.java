@@ -22,6 +22,7 @@ import validate.validateUserInput;
 
 public class registerController implements Initializable {
 
+    //variable to match the UI
 	@FXML
 	private TextField staff_id;
 	@FXML
