@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package KaberereG;
-import javafx.scene.Scene;
+package systemAccess;
+import javafx.application.*;
+import javafx.event.*;
+import javafx.geometry.*;
+import javafx.scene.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.stage.*;
 public class Error {
     public static void display(){
         
