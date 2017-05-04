@@ -1,0 +1,4 @@
+
+regno in table Group are of type VARCHAR(16) i.e B14/45626/19.
+
+regno is also a primary key
