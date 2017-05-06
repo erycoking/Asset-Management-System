@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fb8c00;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beforeLogin.login2.HomeController">
+     <children>
+      <Button fx:id="btnbook" layoutX="21.0" layoutY="445.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #03a9f4;" text="Book" />
+      <Button fx:id="imageshow" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#showavailable" text="ViewAvailable Items " />
+      <Button fx:id="button1" layoutX="337.0" layoutY="267.0" onAction="#displayavailabes" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: #03a9f4;" text="Login">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font></Button>
+        <Button fx:id="button" layoutX="521.0" layoutY="425.0" onAction="#handleButtonAction" style="-fx-background-color: #03a9f4;" text="Click Me!" />
+      <JFXTextField fx:id="txtusername" layoutX="270.0" layoutY="170.0" />
+      <JFXPasswordField fx:id="txtpassword" layoutX="283.0" layoutY="223.0" prefHeight="17.0" prefWidth="135.0" />
+      <Label layoutX="113.0" layoutY="170.0" prefHeight="36.0" prefWidth="135.0" text="UserName:">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font></Label>
+      <Label layoutX="104.0" layoutY="227.0" prefHeight="43.0" prefWidth="179.0" text="Password:">
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font></Label>
+      <Label layoutX="112.0" layoutY="121.0" prefHeight="17.0" prefWidth="331.0" text="Log in to the Asset Management System" textFill="#081bff">
+         <font>
+            <Font name="System Bold Italic" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="dialoguelabel" layoutX="112.0" layoutY="91.0" prefHeight="17.0" prefWidth="298.0" />
+    </children>
+</AnchorPane>

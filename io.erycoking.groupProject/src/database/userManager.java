@@ -79,7 +79,7 @@ public class userManager {
 				rs.close();
 		}
 	}
-	
+	//should have passed the username and the password so that we get the object details from the Db and return that user
 	public user getCurrentUser(user usr) throws SQLException, ClassNotFoundException{
 		sql = "select * from users where name=?";
 		
@@ -109,6 +109,7 @@ public class userManager {
 				st.close();
 		}
 	}
+        //this is admins functionality
 	
 	public boolean update(user usr) throws SQLException, ClassNotFoundException{
 		
