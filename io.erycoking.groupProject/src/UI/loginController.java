@@ -30,7 +30,7 @@ public class loginController implements Initializable {
 		user returned_usr = new user();
 		usr.setName(name.getText());
 		usr.setPassword(passwd.getText());
-		
+		//we should have worked with userId incase they have the same Name??
 		userManager usrMan = new userManager();
 		returned_usr = usrMan.getCurrentUser(usr);
 		

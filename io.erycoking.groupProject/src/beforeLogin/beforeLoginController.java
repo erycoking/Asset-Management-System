@@ -12,7 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+//import  beforeLogin.login2;
+import beforeLogin.login2.*;
 public class beforeLoginController implements Initializable{
 	
 	@FXML
@@ -21,10 +22,11 @@ public class beforeLoginController implements Initializable{
 		
 		Stage stage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
+                Functions1 fnctns =new Functions1();
 		
-		Parent root = loader.load(getClass().getResource("/UI/login.fxml").openStream());
+		Parent root = loader.load(getClass().getResource("/beforeLogin/login2/Index.fxml").openStream());
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/UI/login.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("/UI/login.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle("Active Inventory");
 		stage.show();
