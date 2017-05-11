@@ -30,7 +30,7 @@ public class loginController implements Initializable {
 		user returned_usr = new user();
 		usr.setName(name.getText());
 		usr.setPassword(passwd.getText());
-		
+		//we should have worked with userId incase they have the same Name??
 		userManager usrMan = new userManager();
 		returned_usr = usrMan.getCurrentUser(usr);
 		
@@ -52,6 +52,20 @@ public class loginController implements Initializable {
 			
 		}
 	}
+        private void onRegister(ActionEvent event) throws IOException{
+            ((Node)event.getSource()).getScene().getWindow().hide();
+		
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		
+		Parent root = loader.load(getClass().getResource("/register/register.fxml").openStream());		
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("/register/register.css").toExternalForm());
+		stage.setScene(scene);
+		stage.setTitle("Active Inventory");
+		stage.show();
+		
+        }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
