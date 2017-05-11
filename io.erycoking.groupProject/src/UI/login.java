@@ -16,6 +16,7 @@ public class login extends Application {
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
 		stage.setScene(scene);
+                stage.setTitle("Active Inventory");
 		stage.show();
 	}
 
