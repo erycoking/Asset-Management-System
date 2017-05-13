@@ -1,0 +1,11 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color:#ffff33;
+}
+
+.tableitems{
+   -fx-background-radius:10,10;
+}

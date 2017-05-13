@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="445.0" prefWidth="1148.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="adminend.SuperadminController">
+    <stylesheets>
+        <URL value="@superadmin.css" />
+    </stylesheets>
+   <children>
+      <ScrollPane layoutX="14.0" layoutY="30.0" prefHeight="343.0" prefWidth="566.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="572.0">
+               <children>
+                  <TableView fx:id="tableaudits" layoutX="40.0" layoutY="33.0" prefHeight="327.0" prefWidth="308.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Name" />
+                      <TableColumn prefWidth="75.0" text="User Id" />
+                        <TableColumn prefWidth="99.0" text="Date" />
+                        <TableColumn prefWidth="304.0" text="Activity" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label layoutX="63.0" layoutY="6.0" prefHeight="17.0" prefWidth="374.0" text="The audit Trail for the Super System Administrator" />
+      <Button layoutX="1062.0" layoutY="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="77.0" text="&lt;&lt;&lt;--">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
