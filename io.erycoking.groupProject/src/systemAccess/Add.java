@@ -22,17 +22,22 @@ import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+//import static assetmanagement.connect.getConnection;
 
 public class Add  {
-    private static Connection c;
- connect conn=new connect();
+   
+ 
+ 
  
  private PreparedStatement pst;
     private static ResultSet rs;
     private static Statement st;
+    private static Connection c;
     TextField callId,name,quantity,cost; 
-    public static void display(){
-        
+    public static void display() throws SQLException{
+         connect con= new connect();
       Stage window=new Stage();
         window.setTitle("Add equipment");
         
@@ -109,34 +114,47 @@ public class Add  {
       back.setOnAction(e-> 
           
              Booking.display());
-          
+      
+           
           Button load=new Button("Load table");
-       load.setOnAction(e ->{
+          load.setOnAction(e->{
+             
+              con.getData();
+                  });
+      /* load.setOnAction(e ->{
           
-           try{
-               
-            String query="select * from equipment_table";
-         
-             st =c.createStatement();
-             rs=st.executeQuery(query);
-           // System.out.println("Records from database");
-            while(rs.next()){
-                data.add(new Equipment(
-                rs.getInt("CallID"),
-                rs.getString("name"),
-                rs.getInt("quantity"),
-                rs.getInt("cost")
-                ));
-                table.setItems(data);
-            }
-               
-            }
-        
-        catch(Exception er){
-            System.err.println(er);
-        }
+          try {
+              public static void data() throws NullPointerException{
+              table.setItems(connect.getData());
+              }
+              /*  try{
+              
+              String query="select * from equipment_table";
+              c=getConnection();
+              st=c.createStatement();
+              rs=st.executeQuery(query);
+              // System.out.println("Records from database");
+              while(rs.next()){
+              data.add(new Equipment(
+              rs.getInt("CallID"),
+              rs.getString("name"),
+              rs.getInt("quantity"),
+              rs.getInt("cost")
+              ));
+              table.setItems(data);
+              }
+              
+              }
+              
+              catch(Exception er){
+              System.err.println(er);
+              }
+          } catch (SQLException ex) {
+              Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
+          }
        }
-       );
+
+       );*/
   
      HBox layout=new HBox();
      layout.setPadding(new Insets(10,10,10,10));
@@ -150,8 +168,11 @@ public class Add  {
        window.show();
     } 
   
-
-        
+ //public ObservableList<Equipment> getData(){
+       ObservableList<Equipment> data=FXCollections.observableArrayList();
+       
+     //  data.add(new conn.getData());
+// }
             
         }
     

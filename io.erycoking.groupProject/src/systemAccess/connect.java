@@ -13,13 +13,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 public class connect{
     private static Connection con;
     private static Statement st;
     private static ResultSet rs;
-     public connect() {
-     }
-     public static Connection getConnection() throws SQLException{
+     public connect(){
+    //getConnection();
+     
+         
+ // public static Connection getConnection() throws SQLException{
     try{
          Class.forName("com.mysql.jdbc.Driver"); 
          String url="jdbc:mysql://localhost:3306/equipment"+"?verifyServerCertificate=false"+"&useSSL=false"+"&requireSSL=false";
@@ -29,28 +33,28 @@ public class connect{
         catch(Exception ex){
             System.out.println("Error here");
         }
-    return con;
+ //return con;
     }
 
-    public ArrayList<Equipment> getData(){
-      ArrayList<Equipment> list=new ArrayList<>();
+   public void getData(){
+      //final ObservableList<Equipment> data=FXCollections.observableArrayList();
         try{
             String query="select * from equipment_table";
             rs=st.executeQuery(query);
-           // System.out.println("Records from database");
+           System.out.println("Records from database");
             while(rs.next()){
                 Integer callid=rs.getInt("CallID");
                 String name=rs.getString("name");
                 Integer quantity=rs.getInt("quantity");
                 Integer cost=rs.getInt("cost");
                 
-                list.add(new Equipment(callid,name,quantity,cost));
-             
+               // data.add(new Equipment(callid,name,quantity,cost));
+              System.out.println("CallID: "+callid+"  "+"name: "+name+"  "+"quantity: "+quantity+ "  "+"cost: "+cost);
             }
         }
         catch(Exception e){
             System.out.println("Error");
         }
-        return list;    }
+           }
     
 }

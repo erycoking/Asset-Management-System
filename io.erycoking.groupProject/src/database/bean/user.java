@@ -7,6 +7,7 @@ public class user {
 	private String password;
 	private String faculty;
 	private String department;
+        private String role;
 	private int tel_no;
 	
 	public String getStaff_id() {
@@ -45,4 +46,11 @@ public class user {
 	public void setFaculty(String faculty) {
 		this.faculty = faculty;
 	}
+        public String getRole() {
+            return role;
+        }
+
+        public void setRole(String role) {
+            this.role = role;
+        }
 }

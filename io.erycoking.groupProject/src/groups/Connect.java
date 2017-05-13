@@ -21,7 +21,7 @@ import java.sql.Connection;
 public class Connect {
     
     static final String JDBC_URL = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/asset_management?autoReconnect=true&useSSL=false";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/asm?autoReconnect=true&useSSL=false";
     
     static final String User = "username";
     static final String Pass = "password";
@@ -33,7 +33,7 @@ public class Connect {
         return conn;
        }
        catch(ClassNotFoundException | SQLException se) {
-         System.err.printf("An error occured : %s ", se);
+         System.err.println("Error connecting to db : "+se);
          return null;
        }
     }
