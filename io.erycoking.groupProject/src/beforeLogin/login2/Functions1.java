@@ -5,6 +5,8 @@
  */
 package beforeLogin.login2;
 
+import adminend.SuperadminController;
+import booking.AddequipmentsController;
 import booking.BooklayoutController;
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,7 +44,7 @@ public class Functions1 {
 
     dbconnection dc = new dbconnection();
     PreparedStatement ps;
-   Connection conn = dc.ConnectDB();
+    Connection conn = dc.ConnectDB();
     ResultSet rs;
 
     public void showimagesavailabe() throws FileNotFoundException {
@@ -77,7 +79,7 @@ public class Functions1 {
         }
     }
 
-   public void auditlogin(String userID) throws SQLException {
+    public void auditlogin(String userID) throws SQLException {
 
         String inserting = " INSERT INTO Audittrail (`Userid`,`date_time`,`Activity`)VALUES('" + userID + "',SYSDATE(),'Logged in to LAMS')";
         ps = conn.prepareStatement(inserting);
@@ -106,87 +108,102 @@ public class Functions1 {
         ps = conn.prepareStatement(inserting);
         ps.execute();
     }
-    public void auditallocating(Integer bookid,String UserID,String allocatorId) throws SQLException{
+
+    public void auditallocating(Integer bookid, String UserID, String allocatorId) throws SQLException {
         try {
             String allocatorname;
-            String USER=null;
-            String Equipmentname=null;
-            Integer bookedeqpmntId=0;
-            Integer quantityallocated=0;
-            String allocating=" User/Technician +technician name+ allocated +username+:+ equipment+: quantity:5+quantityordered+ ";
-            // we need to get technician name= logindb,users name=login db, equipmentname=equipments db, quantity= bookedeqpmntsdb
-            //we select From Login where staffID= allocatorId:
-            //Select from equipments where eqpid=rs.getInt(1) //rs is resultset from bookedeqpmnts
-            //select frombooked eqpmnts where BookID=bookid
+            String USER = null;
+            String Equipmentname = null;
+            Integer bookedeqpmntId = 0;
+            Integer quantityallocated = 0;
+            String allocating = " User/Technician +technician name+ allocated +username+:+ equipment+: quantity:5+quantityordered+ ";
             
-            rs=conn.createStatement().executeQuery("SELECT * FROM users WHERE staffID='"+allocatorId+"'");
-            if(rs.next()){
-            allocatorname=rs.getString(2);
-           
-            rs=conn.createStatement().executeQuery("SELECT * FROM users WHERE staffID='"+UserID+"'");
-            while(rs.next()){
-            USER=rs.getString(2);
+            rs = conn.createStatement().executeQuery("SELECT * FROM users WHERE staffID='" + allocatorId + "'");
+            if (rs.next()) {
+                allocatorname = rs.getString(2);
+
+                rs = conn.createStatement().executeQuery("SELECT * FROM users WHERE staffID='" + UserID + "'");
+                while (rs.next()) {
+                    USER = rs.getString(2);
+                }
+                rs = conn.createStatement().executeQuery("SELECT * FROM bookedeqpmnts WHERE BookID='" + bookid + "'");
+                while (rs.next()) {
+                    bookedeqpmntId = rs.getInt(1);
+                    quantityallocated = rs.getInt(2);
+                }
+                rs = conn.createStatement().executeQuery("Select * from equipments where eqpID='" + bookedeqpmntId + "'");
+                while (rs.next()) {
+                    Equipmentname = rs.getString(2);
+                }
+                String booking = "User " + allocatorname + ": Logged in and allocated " + USER + " " + quantityallocated + " " + Equipmentname + " in number.";
+                String inserting = " INSERT INTO Audittrail (`Userid`,`date_time`,`Activity`)VALUES('" + UserID + "',SYSDATE(),'" + booking + "')";
+                ps = conn.prepareStatement(inserting);
+                ps.execute();
+                System.out.println("Congratulations,You successfully audited the allocation");
+            } else {
+                System.out.println("You are not logged in to allocate equipments here");
             }
-            rs=conn.createStatement().executeQuery("SELECT * FROM bookedeqpmnts WHERE BookID='"+bookid +"'");
-            while(rs.next()){
-                bookedeqpmntId=rs.getInt(1);
-                quantityallocated=rs.getInt(2);
-            }
-            rs=conn.createStatement().executeQuery("Select * from equipments where eqpID='"+ bookedeqpmntId+"'");
-            while(rs.next()){
-                Equipmentname=rs.getString(2);
-            }
-            String booking = "User " +allocatorname+ ": Logged in and allocated "+USER +" "+ quantityallocated + " " + Equipmentname+ " in number.";
-        String inserting = " INSERT INTO Audittrail (`Userid`,`date_time`,`Activity`)VALUES('" + UserID + "',SYSDATE(),'" + booking + "')";
-        ps = conn.prepareStatement(inserting);
-        ps.execute();
-        System.out.println("Congratulations,You successfully audited the allocation");
-             }
-            else{
-            System.out.println("You are not logged in to allocate equipments here");
-            }
-             
+
         } catch (SQLException ex) {
             Logger.getLogger(Functions1.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-    
+
     }
 
     public void logingIn(String username, String password) throws SQLException {
-        rs = conn.createStatement().executeQuery("SELECT * FROM users where username='"+ username +"' && password='"+password +"'");
+        rs = conn.createStatement().executeQuery("SELECT * FROM users where username='" + username + "' && password='" + password + "'");
         if (rs.next()) {
             //If there exists such a user the following is executed. and we need to pass the user ID to be able to monitor them
-
             String UserIdentity = rs.getString(1);
+            String name=rs.getString("Name");
             //Functions1 fnctns=new Functions1();
             //fnctns.
-            auditlogin(UserIdentity);
+           
             BooklayoutController bk = new BooklayoutController();
-            //method showstagetable is only shown if there are such credentials hence you wont view the next window if not logged in
-            bk.showstagetable(UserIdentity);
-            //we call this method to return the logged in user's Id to keep track of them
-            bk.useridentity(UserIdentity);
-            conn.close();//close the database connection
+            AddequipmentsController addeqpmn = new AddequipmentsController();
+            SuperadminController superadmin=new SuperadminController ();
+            switch (rs.getString("role")) {
+                //display the window with the priorities of a super admin
+                case "superadmin":
+                    //TESTING LINE
+                    System.out.println("You are the super user/admin");
+                    superadmin.showstagetable(UserIdentity);
+                     break;
+                case "admin":
+                    //the technicians window with priorities/responsibilities granted technician
+                    addeqpmn.showstage();
+                    bk.useridentity(UserIdentity);
+
+                    break;
+                default:
+                    //method showstagetable is only shown if there are such credentials hence you wont view the next window if not logged in
+                    bk.showstagetable(UserIdentity,username);
+                    //we call this method to return the logged in user's Id to keep track of them
+                    bk.useridentity(UserIdentity);
+                    break;
+
+            }
+          auditlogin(UserIdentity);
+            
         } else {
             conn.close();//close the connection before then output
             System.out.println("THE credentials does not exist");
 
         }
+        //conn.close();//close the database connection
     }
 
     //**************************************************************************************************************//
     //This method bookitem takes in the equipment id quantity oredered the logged in user Identification number, and from time
     //It then calculates the remaining quantity after the order and then returns the remaining commodities number
     //***************************************************************************************************************//
-  
     public Integer bookitem(Integer EqpId, Integer quantity, String useridentification, LocalDate fromtime, LocalDate Todate) throws SQLException {
         /*checks the id and  removes that item from unbooked eqpmnts db then puts 
         the item into booked db and qtty booked too.. then updates the unbooked 
         db qtty field by reducing by ordered amount 
          */
-       
-    String inserting = " INSERT INTO bookedeqpmnts (`eqpID`, `quantity`, `Fromdate_time`,`Todate_time`,`Userid`)VALUES('" + EqpId + "','" + quantity + "','" + fromtime + "','" + Todate + "','" + useridentification + "')";
+
+        String inserting = " INSERT INTO bookedeqpmnts (`eqpID`, `quantity`, `Fromdate_time`,`Todate_time`,`Userid`)VALUES('" + EqpId + "','" + quantity + "','" + fromtime + "','" + Todate + "','" + useridentification + "')";
         ps = conn.prepareStatement(inserting);
         ps.execute();
         rs = conn.createStatement().executeQuery("SELECT * FROM unbookedeqpmnts where eqpID='" + EqpId + "'");
@@ -200,16 +217,17 @@ public class Functions1 {
         System.out.println("remainders" + remaining);
         //we have to use the remaining value to be able to drop the raw with zero or no equipment available
         //for booking
-        if (remaining==0){
-          //if there are no remaining equipments remove the equipment from the unbooked list
-            String Delete="DELETE FROM unbookedeqpmnts WHERE quantity=0 ";
-            ps=conn.prepareStatement(Delete);
+        if (remaining == 0) {
+            //if there are no remaining equipments remove the equipment from the unbooked list
+            String Delete = "DELETE FROM unbookedeqpmnts WHERE quantity=0 ";
+            ps = conn.prepareStatement(Delete);
             ps.execute();
-        }else{       String Update = "UPDATE unbookedeqpmnts SET quantity='" + remaining + "' Where eqpID='" + EqpId + "'";
-        ps = conn.prepareStatement(Update);
-        ps.execute();
-        //we the audit the booking ction
-        this.auditbooking(useridentification, EqpId, quantity);
+        } else {
+            String Update = "UPDATE unbookedeqpmnts SET quantity='" + remaining + "' Where eqpID='" + EqpId + "'";
+            ps = conn.prepareStatement(Update);
+            ps.execute();
+            //we the audit the booking ction
+            this.auditbooking(useridentification, EqpId, quantity);
         }
 
         return remaining;
@@ -231,10 +249,27 @@ public class Functions1 {
             String inserting = " INSERT INTO allocatedeqpmnts(`eqpID`,`Userid`,`quantity`, `Fromdate_time`,`Todate_time`,`AllocatedbyID`)VALUES('" + equipmentId + "','" + userID + "','" + quantityordered + "','" + fromdate + "',SYSDATE(),'" + allocatorId + "')";
             ps = conn.prepareStatement(inserting);
             ps.execute();
-           
-        }
-        this.auditallocating(bookid,userID,allocatorId);
+            //after we allocate an equipment we have to remove it from the bookdequipments table
+            String Delete = "DELETE FROM bookedeqpmnts WHERE BookID='"+bookid+"' ";
+            ps = conn.prepareStatement(Delete);
+            ps.execute();
 
+        }
+        this.auditallocating(bookid, userID, allocatorId);
+
+    }
+
+    
+
+    public void auditunbooking(String userID, String equipment, Integer bookID, String type) {
+    try {
+            String inserting = " INSERT INTO Audittrail (`Userid`,`date_time`,`Activity`)VALUES('" + userID + "',SYSDATE(),'Unbooked the previous booking of'"+equipment+"'+: Book  reference Number+'"+bookID+"')";
+            ps = conn.prepareStatement(inserting);
+            ps.execute();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Functions1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

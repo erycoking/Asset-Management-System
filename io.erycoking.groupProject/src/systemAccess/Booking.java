@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
-public class Booking {
+public class Booking{
     Boolean answer;
     public static void display(){
     Stage window=new Stage();
@@ -20,7 +20,13 @@ public class Booking {
    
     button1.setOnAction(e ->
        
-            Add.display()
+            {
+        try {
+            Add.display();
+        } catch (SQLException ex) {
+            Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
             );
    
     Button button2=new Button("View Equipment");

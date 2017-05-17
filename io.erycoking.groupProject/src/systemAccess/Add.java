@@ -36,8 +36,8 @@ public class Add  {
     private static Statement st;
     private static Connection c;
     TextField callId,name,quantity,cost; 
-    public static void display(){
-        
+    public static void display() throws SQLException{
+         connect con= new connect();
       Stage window=new Stage();
         window.setTitle("Add equipment");
         
@@ -117,6 +117,10 @@ public class Add  {
       
            
           Button load=new Button("Load table");
+          load.setOnAction(e->{
+             
+              con.getData();
+                  });
       /* load.setOnAction(e ->{
           
           try {
@@ -164,11 +168,11 @@ public class Add  {
        window.show();
     } 
   
- public ObservableList<Equipment> getData(){
+ //public ObservableList<Equipment> getData(){
        ObservableList<Equipment> data=FXCollections.observableArrayList();
        
-       data.add(new conn.getData());
- }
+     //  data.add(new conn.getData());
+// }
             
         }
     

@@ -9,22 +9,20 @@ package groups;
  *
  * @author makwata
  */
-public class Groups {
-   private String regno;
-   private String name;
-   private boolean leader;
-   
-   public Groups() {
-     this.regno = "";
-     this.name = "";
-     this.leader = false;
-   }
-   
-   public Groups(String regno, String name, boolean leader){
-       this.regno = regno;
-       this.name = name;
-       this.leader = leader;
-   }
+public class Student {
+    
+    private String regno;
+    private String name;
+    
+    public Student() {
+      this.regno = "";
+      this.name = "";
+    }
+    
+    public Student(String regno, String name) {
+      this.regno = regno;
+      this.name = name;
+    }
 
     public String getRegno() {
         return regno;
@@ -34,10 +32,6 @@ public class Groups {
         return name;
     }
 
-    public boolean isLeader() {
-        return leader;
-    }
-
     public void setRegno(String regno) {
         this.regno = regno;
     }
@@ -45,9 +39,6 @@ public class Groups {
     public void setName(String name) {
         this.name = name;
     }
-
-    public void setLeader(boolean leader) {
-        this.leader = leader;
-    }
-   
+    
+    
 }

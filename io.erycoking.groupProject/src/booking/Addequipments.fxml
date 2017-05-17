@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1368.0" style="-fx-background-color: #fb8c00;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.AddequipmentsController">
+   <children>
+      <Label layoutX="190.0" layoutY="24.0" prefHeight="17.0" prefWidth="480.0" text="To display all the equipments add equipment functionality, update equipment,  etc" />
+      <Pane layoutX="6.0" layoutY="48.0" prefHeight="387.0" prefWidth="611.0" style="-fx-border-color: red;">
+         <children>
+            <Button fx:id="addequipmentbtn" layoutX="454.0" layoutY="323.0" mnemonicParsing="false" onAction="#addequipment" text="Add Equipment" />
+            <JFXTextField layoutX="112.0" layoutY="275.0" prefHeight="25.0" prefWidth="245.0" promptText="Normal or Undermaintainance" />
+            <Label layoutX="14.0" layoutY="279.0" prefHeight="17.0" prefWidth="62.0" text="Status" />
+            <ComboBox layoutX="36.0" layoutY="335.0" prefHeight="25.0" prefWidth="238.0" />
+            <GridPane layoutX="14.0" layoutY="32.0" prefHeight="225.0" prefWidth="318.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="87.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="87.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="394.0" minWidth="10.0" prefWidth="231.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="236.0" minHeight="0.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="273.0" minHeight="9.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="273.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="273.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXTextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="eqpname" GridPane.columnIndex="2" />
+                  <JFXTextField fx:id="eqpquantity" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXTextField fx:id="eqpcategory" prefHeight="29.0" prefWidth="231.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="eqpdetails" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Label layoutX="10.0" layoutY="19.0" prefHeight="17.0" prefWidth="68.0" text="EQuip Name" />
+                  <Label prefHeight="17.0" prefWidth="68.0" text="Equip Cost" GridPane.rowIndex="1" />
+                  <Label prefHeight="17.0" prefWidth="68.0" text="Quantity" GridPane.rowIndex="2" />
+                  <Label prefHeight="17.0" prefWidth="68.0" text="Category" GridPane.rowIndex="3" />
+                  <Label prefHeight="17.0" prefWidth="84.0" text="Equip Details" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <Label layoutX="219.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0" text="Add a New Equipment" />
+         </children>
+      </Pane>
+      <Pane layoutX="654.0" layoutY="48.0" prefHeight="387.0" prefWidth="699.0" style="-fx-border-color: red;">
+         <children>
+            <Label layoutX="141.0" layoutY="6.0" prefHeight="17.0" prefWidth="345.0" text="This are all the available equipments in the laboratory" />
+            <ScrollPane layoutX="12.0" layoutY="21.0" prefHeight="219.0" prefWidth="669.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="219.0" prefWidth="658.0">
+                     <children>
+                        <TableView layoutX="14.0" prefHeight="219.0" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <JFXTextField layoutX="89.0" layoutY="249.0" />
+            <JFXTextField layoutX="89.0" layoutY="300.0" />
+            <JFXTextField layoutX="332.0" layoutY="249.0" />
+            <JFXTextField layoutX="89.0" layoutY="348.0" />
+            <Label layoutX="4.0" layoutY="266.0" prefHeight="17.0" prefWidth="70.0" text="Equipment" />
+            <Label layoutX="243.0" layoutY="266.0" prefHeight="17.0" prefWidth="70.0" text="Category" />
+            <Label layoutY="317.0" prefHeight="17.0" prefWidth="78.0" text="Toatlquantity" />
+            <Label layoutX="4.0" layoutY="361.0" prefHeight="17.0" prefWidth="70.0" text="Status" />
+            <Label layoutX="243.0" layoutY="292.0" text="Details:" />
+            <TextArea layoutX="299.0" layoutY="284.0" prefHeight="96.0" prefWidth="261.0" />
+            <Button layoutX="602.0" layoutY="288.0" mnemonicParsing="false" text="Update" />
+            <Button layoutX="603.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Delete" />
+            <Button layoutX="604.0" layoutY="357.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Save" />
+            <Button layoutX="593.0" layoutY="249.0" mnemonicParsing="false" text="Load Table" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

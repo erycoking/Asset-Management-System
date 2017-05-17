@@ -9,7 +9,13 @@ and open the template in the editor.
 */
 
 .tableitems{
-  
+ 
    -fx-background-color: blue;
-
+}
+.labelstyle{
+    -fx-background-color:greenyellow;
+    -fx-background-radius:10,10;
+}
+.mainFxmlClass{
+    
 }
