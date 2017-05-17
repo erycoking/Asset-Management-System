@@ -37,7 +37,7 @@ public class Add  {
     private static Connection c;
     TextField callId,name,quantity,cost; 
     public static void display() throws SQLException{
-         connect con= new connect();
+        
       Stage window=new Stage();
         window.setTitle("Add equipment");
         
@@ -106,7 +106,7 @@ public class Add  {
      costColumn.setMinWidth(200);
      costColumn.setCellValueFactory(new PropertyValueFactory("cost")); 
      
-       
+       table.setItems(getData());
        
        table.getColumns().addAll(callColumn,nameColumn,quantityColumn,costColumn);
        Button back=new Button("Back");
@@ -115,51 +115,11 @@ public class Add  {
           
              Booking.display());
       
-           
-          Button load=new Button("Load table");
-          load.setOnAction(e->{
-             
-              con.getData();
-                  });
-      /* load.setOnAction(e ->{
-          
-          try {
-              public static void data() throws NullPointerException{
-              table.setItems(connect.getData());
-              }
-              /*  try{
-              
-              String query="select * from equipment_table";
-              c=getConnection();
-              st=c.createStatement();
-              rs=st.executeQuery(query);
-              // System.out.println("Records from database");
-              while(rs.next()){
-              data.add(new Equipment(
-              rs.getInt("CallID"),
-              rs.getString("name"),
-              rs.getInt("quantity"),
-              rs.getInt("cost")
-              ));
-              table.setItems(data);
-              }
-              
-              }
-              
-              catch(Exception er){
-              System.err.println(er);
-              }
-          } catch (SQLException ex) {
-              Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
-          }
-       }
-
-       );*/
   
      HBox layout=new HBox();
      layout.setPadding(new Insets(10,10,10,10));
      layout.setSpacing(10);
-     layout.getChildren().addAll(grid,table,load,back);
+     layout.getChildren().addAll(grid,table,back);
      
      
        Scene scene=new Scene(layout,1368,660);
@@ -167,13 +127,34 @@ public class Add  {
        window.setScene(scene);
        window.show();
     } 
-  
- //public ObservableList<Equipment> getData(){
+              
+ public static ObservableList<Equipment> getData() throws SQLException{
+     connect con=new connect();
+    
        ObservableList<Equipment> data=FXCollections.observableArrayList();
        
-     //  data.add(new conn.getData());
-// }
-            
+      // try{
+            String query="select * from equipment_table";
+          st=connect.getConnection().createStatement();
+            rs=st.executeQuery(query);
+           System.out.println("Records from database");
+            while(rs.next()){
+                Integer callid=rs.getInt("CallID");
+                String n=rs.getString("name");
+                Integer q=rs.getInt("quantity");
+                Integer cs=rs.getInt("cost");
+                
+               data.add(new Equipment(callid,n,q,cs));
+             
+             // System.out.println("CallID: "+callid+"  "+"name: "+name+"  "+"quantity: "+quantity+ "  "+"cost: "+cost);
+        //    }
+       // }
+       // catch(Exception e){
+         //   System.out.println("Error");
         }
+return data;
+      
+        }
+}
     
 
