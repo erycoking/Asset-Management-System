@@ -91,24 +91,34 @@ public class Add  {
        final ObservableList<Equipment> data=FXCollections.observableArrayList();
        //callId column
        TableColumn<Equipment,Integer>callColumn=new TableColumn<>("CallId");
-       callColumn.setMinWidth(200);
+       callColumn.setMinWidth(50);
        callColumn.setCellValueFactory(new PropertyValueFactory("callId"));
 //name column
        TableColumn<Equipment,String>nameColumn=new TableColumn<>("Name");
-       nameColumn.setMinWidth(200);
+       nameColumn.setMinWidth(100);
        nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
-     //quantity column
-     TableColumn<Equipment,Integer>quantityColumn=new TableColumn<>("Quantity");
-     quantityColumn.setMinWidth(200);
-     quantityColumn.setCellValueFactory(new PropertyValueFactory("quantity"));
+    
        //Cost column
        TableColumn<Equipment,Integer>costColumn=new TableColumn<>("Cost");
-     costColumn.setMinWidth(200);
+     costColumn.setMinWidth(50);
      costColumn.setCellValueFactory(new PropertyValueFactory("cost")); 
+     //Equipment details
+     TableColumn<Equipment,String>eqpDetails=new TableColumn<>("Equipment details");
+     eqpDetails.setMinWidth(200);
+     eqpDetails.setCellValueFactory(new PropertyValueFactory("eqpDetails"));
+      //quantity column
+     TableColumn<Equipment,Integer>quantityColumn=new TableColumn<>("Quantity");
+     quantityColumn.setMinWidth(100);
+     quantityColumn.setCellValueFactory(new PropertyValueFactory("quantity"));
+      //Equipment details
+     TableColumn<Equipment,String>eqpCategory=new TableColumn<>("Equipment Category");
+     eqpDetails.setMinWidth(100);
+     eqpDetails.setCellValueFactory(new PropertyValueFactory("eqpCategory"));
      
+     //Setting data items
        table.setItems(getData());
        
-       table.getColumns().addAll(callColumn,nameColumn,quantityColumn,costColumn);
+       table.getColumns().addAll(callColumn,nameColumn,costColumn,eqpDetails,quantityColumn,eqpCategory);
        Button back=new Button("Back");
        
       back.setOnAction(e-> 
@@ -134,17 +144,19 @@ public class Add  {
        ObservableList<Equipment> data=FXCollections.observableArrayList();
        
       // try{
-            String query="select * from equipment_table";
+            String query="select eqpID,eqpname,eqpcost,eqpdetails,quantity,eqpcategory from equipments";
           st=connect.getConnection().createStatement();
             rs=st.executeQuery(query);
            System.out.println("Records from database");
             while(rs.next()){
-                Integer callid=rs.getInt("CallID");
-                String n=rs.getString("name");
+              Integer callid=rs.getInt("eqpID");
+                String n=rs.getString("eqpname");
+                Integer cs=rs.getInt("eqpcost");
+                String eqd=rs.getString("eqpDetails");
                 Integer q=rs.getInt("quantity");
-                Integer cs=rs.getInt("cost");
+                String eqc=rs.getString("eqpCategory");
                 
-               data.add(new Equipment(callid,n,q,cs));
+               data.add(new Equipment(callid,n,cs,eqd,q,eqc));
              
              // System.out.println("CallID: "+callid+"  "+"name: "+name+"  "+"quantity: "+quantity+ "  "+"cost: "+cost);
         //    }
@@ -155,6 +167,6 @@ public class Add  {
 return data;
       
         }
-}
+} 
     
 
