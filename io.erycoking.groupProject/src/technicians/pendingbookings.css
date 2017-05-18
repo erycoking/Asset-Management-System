@@ -1,0 +1,36 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.bookeditemstable{
+    
+   -fx-background-color: black;
+
+}
+
+.background {
+    -fx-background-color:#f57c00 ;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: blueviolet;
+    -fx-opacity: 0.6;
+}
+.lowerbuttons{
+    -fx-background-color: green;
+}
+
+.button{
+    
+    -fx-background-radius: 10,10;
+    -fx-background-color: plum;
+}
+
+.labelbright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+}
