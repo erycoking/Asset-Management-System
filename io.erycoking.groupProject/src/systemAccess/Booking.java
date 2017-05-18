@@ -36,12 +36,16 @@ public class Booking{
     Button button2=new Button("View Equipment");
     
     Button button3=new Button("Book Equipment");
-    button3.setOnAction(e->{
-        BooklayoutController book=new BooklayoutController();
-        String regno="k13/36233/14";
-        String name="joy";
-        book.showstagetable(regno,name);
-    });
+    button3.setOnAction(e ->
+       
+            {
+            BooklayoutController bk=new BooklayoutController();
+            String UserID="S/13/21379/14";
+            String usersname="james";
+            bk.showstagetable(UserID, usersname);
+        
+    }
+            );
     
     Button button4=new Button("View booked Equipments");
     
