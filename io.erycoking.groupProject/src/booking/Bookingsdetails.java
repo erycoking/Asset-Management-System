@@ -22,32 +22,32 @@ public class Bookingsdetails {
     private final IntegerProperty quantityordered;
     private final StringProperty Fromtime;
     private final StringProperty Totime;
-    private final IntegerProperty orderuserId;
+    private final StringProperty orderuserId;
     private final IntegerProperty BookingId;
     private final IntegerProperty IdEq;//this keeps the equipment cost
     //private final DoubleProperty Quantity;
 
-    public Bookingsdetails(String Equipment, String Orderedby, Integer quantityordered, String Fromtime, Integer IdEq,String Totime,Integer orderuserId,Integer BookingId) {
+    public Bookingsdetails(String Equipment, String Orderedby, Integer quantityordered, String Fromtime, Integer IdEq,String Totime,String orderuserId,Integer BookingId) {
         this.Equipment = new SimpleStringProperty(Equipment);
         this.Orderedby = new SimpleStringProperty(Orderedby);
         this.quantityordered = new SimpleIntegerProperty(quantityordered);
         this.Fromtime = new SimpleStringProperty(Fromtime);
         this.IdEq = new SimpleIntegerProperty(IdEq);
         this.Totime=new SimpleStringProperty(Totime);
-        this.orderuserId=new SimpleIntegerProperty(orderuserId);
+        this.orderuserId=new SimpleStringProperty(orderuserId);
         this.BookingId=new SimpleIntegerProperty(BookingId);
     }
     //*********************************************************************************************//
     //this is the main constructor we are using in this system
     //**********************************************************************************************//
-    public Bookingsdetails(Integer IdEq,Integer quantityordered, String Orderedby,String Equipment,String Fromtime,String Totime,Integer orderuserId,Integer BookingId) {
+    public Bookingsdetails(Integer IdEq,Integer quantityordered, String Orderedby,String Equipment,String Fromtime,String Totime,String orderuserId,Integer BookingId) {
         this.Equipment = new SimpleStringProperty(Equipment);
         this.Orderedby = new SimpleStringProperty(Orderedby);
         this.quantityordered = new SimpleIntegerProperty(quantityordered);
         this.Fromtime = new SimpleStringProperty(Fromtime);
         this.IdEq = new SimpleIntegerProperty(IdEq);
         this.Totime=new SimpleStringProperty(Totime);
-        this.orderuserId=new SimpleIntegerProperty(orderuserId);
+        this.orderuserId=new SimpleStringProperty(orderuserId);
         this.BookingId=new SimpleIntegerProperty(BookingId);
     }
     public void setEquipment(String value) {
@@ -68,7 +68,7 @@ public class Bookingsdetails {
   public void setIdEq(Integer value){
   IdEq.set(value);
   }
-   public void setuserorderId(Integer value){
+   public void setuserorderId(String value){
       orderuserId.set(value);
   }
     public void setBookingId(Integer value){
@@ -109,7 +109,7 @@ public class Bookingsdetails {
     public Integer getIdEq() {
         return IdEq.get();
     }
-    public Integer getorderuserId() {
+    public String getorderuserId() {
         return orderuserId.get();
     }
     public Integer getBookingId() {

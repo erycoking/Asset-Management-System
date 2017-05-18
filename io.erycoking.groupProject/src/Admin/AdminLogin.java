@@ -20,7 +20,6 @@ import systemAccess.Booking;
  * @author Waithera
  */
 public class AdminLogin extends Application {
-
     @Override
     public void start(Stage window) {
         window.setTitle("Admin log in");
@@ -53,6 +52,7 @@ public class AdminLogin extends Application {
 
         window.setScene(scene);
         window.show();
+
 
     }
 

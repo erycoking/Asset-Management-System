@@ -109,9 +109,9 @@ public class BooklayoutController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    dbconnection dc= new dbconnection();
-            Connection conn = dc.ConnectDB();
-            PreparedStatement ps;
+    //dbconnection dc= new dbconnection();
+       //     Connection conn = dc.ConnectDB();
+       //     PreparedStatement ps;
 
     /* This method is called from the home controller to set or call the bookinglayout interface*/
     public void showstagetable(String UserID, String usersname) {
@@ -122,9 +122,9 @@ public class BooklayoutController implements Initializable {
             stage.getIcons().add(new Image("file:images/matthews.jpg"));
             stage.setTitle("These Are the Available Equipments and this is Your Identity Number If not please contact admin:" + UserID + usersname.toUpperCase());
           stage.setScene(new Scene(root1));
-          String css = BooklayoutController.class.getResource("/booklayout.css").toExternalForm();
+//          String css = BooklayoutController.class.getResource("/booklayout.css").toExternalForm();
                  root1.getStylesheets().clear();
-                root1.getStylesheets().add(css);
+              // root1.getStylesheets().add(css);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(Functions1.class.getName()).log(Level.SEVERE, null, ex);
@@ -134,9 +134,13 @@ public class BooklayoutController implements Initializable {
     /*This method  loads data into the table view from the database*/
     @FXML
     public void loaddatafromdatabase() throws SQLException, IOException {
+        dbconnection dc= new dbconnection();
+            Connection conn;
+           
+            PreparedStatement ps;
         
         data = FXCollections.observableArrayList();
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM unbookedeqpmnts");
+        ResultSet rs = dbconnection.ConnectDB().createStatement().executeQuery("SELECT * FROM unbookedeqpmnts");
         while (rs.next()) {
             if (rs.getInt(5) >= 1) {
                 data.add(new Availabledetails(rs.getString(2), rs.getString(6), rs.getInt(5), rs.getString(7), rs.getInt(1),rs.getInt(1)));
@@ -233,7 +237,9 @@ public class BooklayoutController implements Initializable {
     @FXML
     private void Viewallocated(ActionEvent event) {
         try {
-            
+            dbconnection dc= new dbconnection();
+            Connection conn = dc.ConnectDB();
+            PreparedStatement ps;
             data = FXCollections.observableArrayList();
             //select from allocated table and get the allocator id, eqpmentId, Quantity, from and to dates
             //query equipments for eqpmntname ,from login for allocator.
@@ -276,7 +282,9 @@ public class BooklayoutController implements Initializable {
             columnby.setText("Boooked by");
             columnFrom.setText("Booked From");
             btnunbook.setVisible(true);
-           
+           dbconnection dc= new dbconnection();
+            Connection conn = dc.ConnectDB();
+            PreparedStatement ps;
             data = FXCollections.observableArrayList();
             //select from allocated table and get the allocator id, eqpmentId, Quantity, from and to dates
             //query equipments for eqpmntname ,from login for allocator.
@@ -312,6 +320,9 @@ public class BooklayoutController implements Initializable {
             Availabledetails available= this.onthetableclick();
             Integer EqpId = available.getId();
             available.getBookID();
+            dbconnection dc= new dbconnection();
+            Connection conn = dc.ConnectDB();
+            PreparedStatement ps;
             //Test lines works properly
             //System.out.println("Booklayoutcontroller314// The bookId is " + available.getBookID());
             //System.out.println("The equipment id is " + EqpId);

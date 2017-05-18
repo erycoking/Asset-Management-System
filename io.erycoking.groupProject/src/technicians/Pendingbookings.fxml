@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="568.0" prefWidth="845.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="technicians.PendingbookingsController">
+    <stylesheets>
+        <URL value="@pendingbookings.css" />
+    </stylesheets>
+   <children>
+      <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="216.0" prefWidth="748.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="216.0" prefWidth="746.0">
+               <children>
+                  <TableView fx:id="bookeditemstable" layoutX="7.0" layoutY="14.0" onMouseClicked="#retrieverowclicked" prefHeight="216.0" prefWidth="748.0" styleClass="bookeditemstable" stylesheets="@pendingbookings.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="bookedEquipments" prefWidth="176.0" text="Equipment" />
+                      <TableColumn fx:id="Quantityordered" prefWidth="83.0" text="Quantity Odered" />
+                        <TableColumn fx:id="orderedBy" minWidth="0.0" prefWidth="142.0" text="OrderedBy" />
+                        <TableColumn fx:id="Fromtime" prefWidth="118.0" text="From Time" />
+                        <TableColumn fx:id="Totime" prefWidth="139.0" text="To Time" />
+                        <TableColumn fx:id="EquipmentCost" prefWidth="75.0" text="EQ-cost" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+    <Button id="showequipments/all" fx:id="Showequipments" layoutX="770.0" layoutY="33.0" mnemonicParsing="false" onAction="#addshowallequipments" prefHeight="25.0" prefWidth="67.0" styleClass="lowerbuttons" stylesheets="@pendingbookings.css" text="Next" />
+      <Button fx:id="btnallocate" layoutX="406.0" layoutY="355.0" mnemonicParsing="false" onAction="#Allocateequipment" styleClass="lowerbuttons" stylesheets="@pendingbookings.css" text="Allocate" />
+      <Button layoutX="406.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Cancel " />
+      <Label layoutX="245.0" layoutY="402.0" text="Cancel Booking" />
+      <Label fx:id="labelbright" layoutX="245.0" layoutY="357.0" text="Allocate Equipment" />
+      <Button id="buttonload" fx:id="loadingbutton" layoutX="484.0" layoutY="232.0" mnemonicParsing="false" onAction="#showpendingbookings" prefHeight="25.0" prefWidth="84.0" styleClass="lowerbuttons" stylesheets="@pendingbookings.css" text="Load" />
+      <Label fx:id="labelfromtime" layoutX="306.0" layoutY="306.0" prefHeight="17.0" prefWidth="141.0" text="fromtime" />
+      <Label fx:id="labeltotime" layoutX="465.0" layoutY="306.0" prefHeight="17.0" prefWidth="141.0" text="totime" />
+      <HBox layoutX="33.0" layoutY="254.0" prefHeight="40.0" prefWidth="302.0">
+         <children>
+            <Label fx:id="label" prefHeight="21.0" prefWidth="77.0" text="Equipment" />
+            <JFXTextField fx:id="txfdequipment" />
+         </children>
+      </HBox>
+      <HBox layoutX="33.0" layoutY="286.0" prefHeight="40.0" prefWidth="223.0">
+         <children>
+            <Label text="To" />
+            <JFXTextField fx:id="txfdallocatedto" />
+         </children>
+      </HBox>
+      <Label fx:id="labelkorderuserId" layoutX="463.0" layoutY="280.0" text="UserId" />
+      <Label fx:id="labeleqpcost" layoutX="546.0" layoutY="280.0" prefHeight="21.0" prefWidth="67.0" text="cost" />
+      <Label fx:id="labelquantity" layoutX="311.0" layoutY="280.0" prefHeight="17.0" prefWidth="104.0" text="quantity" />
+   </children>
+</AnchorPane>

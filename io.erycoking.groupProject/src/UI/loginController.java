@@ -22,13 +22,11 @@ import javafx.stage.Stage;
 import systemAccess.Booking;
 
 public class loginController implements Initializable {
-	 
-        @FXML 
-        private JFXTextField name;
-
-        @FXML 
-        private JFXTextField passwd;
-        
+	@FXML
+	private JFXTextField name;
+	@FXML
+	private JFXTextField passwd;
+	
 	@FXML
 	private void login(ActionEvent event) throws ClassNotFoundException, SQLException, IOException{
 		user usr = new user();
