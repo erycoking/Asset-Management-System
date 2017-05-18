@@ -59,7 +59,7 @@ public class Booking{
      scene.getStylesheets().addAll(Booking.class.getResource("style.css").toExternalForm());
     window.setScene(scene);
     
-    window.showAndWait();
+    window.show();
 }
     
             }
