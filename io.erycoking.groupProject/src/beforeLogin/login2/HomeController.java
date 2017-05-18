@@ -63,7 +63,7 @@ public class HomeController implements Initializable {
     private JFXPasswordField txtpassword;
     @FXML
     private Label dialoguelabel;
-    Functions1 fnctns=new Functions1();
+    
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -140,9 +140,11 @@ public class HomeController implements Initializable {
         }
        else{
        
-        ((Node) event.getSource()).getScene().getWindow().hide();
-         //this logingIn is a method in Functions1 class that checks existence of the user in the database
+        //this logingIn is a method in Functions1 class that checks existence of the user in the database
+        Functions1 fnctns=new Functions1();
         fnctns.logingIn(username, Password);
+        ((Node) event.getSource()).getScene().getWindow().hide();
+         
                        }
         }
    

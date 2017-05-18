@@ -1,0 +1,22 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 14, 2017, 11:01:38 AM
+    Author     : Matthews
+*/
+.mainFxmlClass {
+    -fx-background-image: url("/assetmanagement/images/egerton.jpg");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+   
+}
+.texts{
+   
+    -fx-text-fill:#0cf52f;
+    -fx-font-size:15px;
+    -fx-background-color:whitesmoke;
+    -fx-background-radius:6,6;
+}
