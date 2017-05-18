@@ -65,7 +65,7 @@ public class Functions1 {
 
             Scene scene = new Scene(root, 300, 250);
 
-            root = FXMLLoader.load(getClass().getResource("Index.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/login2/Index.fxml"));
             root.setStyle("-fx-background-color: #fb8c00");
             //root.setBackground(Background.EMPTY);
             //root.setBorder(Border.red);

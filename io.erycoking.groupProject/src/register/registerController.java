@@ -5,7 +5,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import afterLogin.afterLoginController;
 import database.userManager;
 import database.bean.user;
 import javafx.event.ActionEvent;
@@ -79,19 +78,7 @@ public class registerController implements Initializable {
 
 											((Node) event.getSource()).getScene().getWindow().hide();
 
-											Stage stage = new Stage();
-											FXMLLoader loader = new FXMLLoader();
-											//loader.setLocation(getClass().getResource("afterLogin/afterLogin.fxml"));
-											Parent root = loader.load(getClass().getResource("/afterLogin/afterLogin.fxml").openStream());
-
-											afterLoginController aft = (afterLoginController) loader.getController();
-											aft.getUser(usr);
-
-											Scene scene = new Scene(root);
-											scene.getStylesheets().add(getClass().getResource("/afterLogin/afterLogin.css").toExternalForm());
-											stage.setScene(scene);
-											stage.setTitle("Active inventory");
-											stage.show();
+											
 
 										} else {
 											err.setText("An error occurred while trying to register you.");
