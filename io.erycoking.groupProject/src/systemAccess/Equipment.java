@@ -19,6 +19,7 @@ public class Equipment {
    private final SimpleStringProperty name;
     private final SimpleIntegerProperty quantity;
      private final SimpleIntegerProperty cost;
+     
 
     public Equipment(int id,String n,int qty, int cst) {
         this.callId = new SimpleIntegerProperty(id);
