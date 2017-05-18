@@ -10,29 +10,12 @@ and open the template in the editor.
 
 .tableitems{
  
-    -fx-background-color:#ccffcc;
-    -fx-background-radius:10,10;
-    
+   -fx-background-color: blue;
 }
 .labelstyle{
     -fx-background-color:greenyellow;
     -fx-background-radius:10,10;
 }
-.mainFxmlClass {
+.mainFxmlClass{
     
-   -fx-background-repeat: no-repeat;
-   -fx-background-size: cover;
-   
 }
-.texts{
-   
-    -fx-text-fill:blueviolet;
-    -fx-font-size:13px;
-    -fx-background-color:whitesmoke;
-    -fx-background-radius:6,6;
-}
-.image{
-            -fx-background-image: url("/assetmanagement/images/equipment2.jpg");
-             -fx-background-repeat:repeat-y;
-             -fx-background-size: cover;
-}  

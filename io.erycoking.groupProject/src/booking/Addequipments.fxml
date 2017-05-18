@@ -16,6 +16,7 @@
             <Button fx:id="addequipmentbtn" layoutX="454.0" layoutY="323.0" mnemonicParsing="false" onAction="#addequipment" text="Add Equipment" />
             <JFXTextField layoutX="112.0" layoutY="275.0" prefHeight="25.0" prefWidth="245.0" promptText="Normal or Undermaintainance" />
             <Label layoutX="14.0" layoutY="279.0" prefHeight="17.0" prefWidth="62.0" text="Status" />
+            <ComboBox layoutX="36.0" layoutY="335.0" prefHeight="25.0" prefWidth="238.0" />
             <GridPane layoutX="14.0" layoutY="32.0" prefHeight="225.0" prefWidth="318.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="87.0" />
@@ -30,7 +31,7 @@
                   <RowConstraints maxHeight="273.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXTextField fx:id="eqpcost" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXTextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <JFXTextField fx:id="eqpname" GridPane.columnIndex="2" />
                   <JFXTextField fx:id="eqpquantity" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <JFXTextField fx:id="eqpcategory" prefHeight="29.0" prefWidth="231.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
@@ -52,33 +53,34 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="219.0" prefWidth="658.0">
                      <children>
-                        <TableView fx:id="tableallequipments" layoutX="14.0" onMouseClicked="#retrieveclickedeqpmnt" prefHeight="219.0" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView layoutX="14.0" prefHeight="219.0" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn fx:id="columnequipmentname" prefWidth="229.0" text="EQUIPMENT NAME" />
-                            <TableColumn fx:id="columnquantity" prefWidth="60.0" text="Quantity" />
-                              <TableColumn fx:id="columncategory" prefWidth="117.0" text="Category" />
-                              <TableColumn fx:id="columndatebrought" prefWidth="123.0" text="DateBrought" />
-                              <TableColumn fx:id="columncost" prefWidth="128.0" text="EqpmntCost" />
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
+                              <TableColumn prefWidth="75.0" text="Column X" />
                           </columns>
                         </TableView>
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <JFXTextField fx:id="tfeqpname" layoutX="89.0" layoutY="249.0" />
-            <JFXTextField fx:id="tftotalquantity" layoutX="89.0" layoutY="300.0" />
-            <JFXTextField fx:id="tfcategory" layoutX="332.0" layoutY="249.0" />
-            <JFXTextField fx:id="tfcost" layoutX="89.0" layoutY="348.0" />
+            <JFXTextField layoutX="89.0" layoutY="249.0" />
+            <JFXTextField layoutX="89.0" layoutY="300.0" />
+            <JFXTextField layoutX="332.0" layoutY="249.0" />
+            <JFXTextField layoutX="89.0" layoutY="348.0" />
             <Label layoutX="4.0" layoutY="266.0" prefHeight="17.0" prefWidth="70.0" text="Equipment" />
             <Label layoutX="243.0" layoutY="266.0" prefHeight="17.0" prefWidth="70.0" text="Category" />
             <Label layoutY="317.0" prefHeight="17.0" prefWidth="78.0" text="Toatlquantity" />
-            <Label layoutX="4.0" layoutY="361.0" prefHeight="17.0" prefWidth="70.0" text="Cost" />
+            <Label layoutX="4.0" layoutY="361.0" prefHeight="17.0" prefWidth="70.0" text="Status" />
             <Label layoutX="243.0" layoutY="292.0" text="Details:" />
-            <TextArea fx:id="tAdetails" layoutX="299.0" layoutY="284.0" prefHeight="96.0" prefWidth="261.0" />
-            <Button fx:id="buttonUpdated" layoutX="602.0" layoutY="288.0" mnemonicParsing="false" text="Update" />
-            <Button fx:id="buttondelete" layoutX="603.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Delete" />
+            <TextArea layoutX="299.0" layoutY="284.0" prefHeight="96.0" prefWidth="261.0" />
+            <Button layoutX="602.0" layoutY="288.0" mnemonicParsing="false" text="Update" />
+            <Button layoutX="603.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Delete" />
             <Button layoutX="604.0" layoutY="357.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Save" />
-            <Button fx:id="loadeqmnts" layoutX="593.0" layoutY="249.0" mnemonicParsing="false" onAction="#showallequipments" text="Load Table" />
+            <Button layoutX="593.0" layoutY="249.0" mnemonicParsing="false" text="Load Table" />
          </children>
       </Pane>
    </children>

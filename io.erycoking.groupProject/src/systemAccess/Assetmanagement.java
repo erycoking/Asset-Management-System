@@ -22,6 +22,7 @@ import javafx.stage.Stage;
  * @author USERf
  */
 public class Assetmanagement extends Application {
+    
   Stage window;
   Button button,button2,button3,button4;
   Scene scene1,scene2;

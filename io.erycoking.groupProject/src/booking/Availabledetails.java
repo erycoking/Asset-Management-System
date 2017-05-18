@@ -20,8 +20,6 @@ public class Availabledetails {
     private final StringProperty Available;
     private final IntegerProperty Id;
     private final IntegerProperty BookID;
-    private final StringProperty Details;
-     private final StringProperty Cost;
     //private final DoubleProperty Quantity;
 
     public Availabledetails(String Equipment, String Type, Integer quantity, String Available, Integer Id,Integer BookID) {
@@ -30,30 +28,13 @@ public class Availabledetails {
         this.quantity = new SimpleIntegerProperty(quantity);
         this.Available = new SimpleStringProperty(Available);
         this.Id = new SimpleIntegerProperty(Id);
-         this.BookID = new SimpleIntegerProperty(BookID);
-         this.Details=null;
-         this.Cost=null;
-    }
-
-   public  Availabledetails(String Equipment, String Type,String details, Integer quantity, String Available, Integer Id,String cost) {
-       this.Equipment = new SimpleStringProperty(Equipment);
-        this.Type = new SimpleStringProperty(Type);
-        this.quantity = new SimpleIntegerProperty(quantity);
-        this.Available = new SimpleStringProperty(Available);
-        this.Id = new SimpleIntegerProperty(Id);
          this.BookID = new SimpleIntegerProperty(Id);
-         this.Cost=new SimpleStringProperty(cost);
-         this.Details=new SimpleStringProperty(details);
-        
     }
 
    
 
     public String getType() {
         return Type.get();
-    }
-     public String getDetails() {
-        return Details.get();
     }
 
     public Integer getId() {
@@ -74,19 +55,11 @@ public class Availabledetails {
     public String getEquipment() {
         return Equipment.get();
     }
-     public String getCost() {
-        return Cost.get();
-    }
 
     public void setAvailable(String value) {
         Available.set(value);
     }
-public void setDetails(String value) {
-        Details.set(value);
-    }
-public void setCost(String value) {
-        Cost.set(value);
-    }
+
     public void setType(String value) {
         Type.set(value);
     }

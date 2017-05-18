@@ -9,8 +9,6 @@ import database.connectionManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +21,8 @@ public class dbconnection {
              try{
            
           Class.forName("com.mysql.jdbc.Driver");
-          Connection con = connectionManager.getInstance().getConnection();
+          Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/equipment2"+"?verifyServerCertificate=false"+"&useSSL=false"+"&requireSSL=false","grace","grace");
+       //   Connection con = connectionManager.getInstance().getConnection();
           return con;
             
         }catch(ClassNotFoundException | SQLException e){
@@ -31,8 +30,6 @@ public class dbconnection {
             return null;
     }      
 }
-public void closeDB(){
-        
-}
+
     
 }

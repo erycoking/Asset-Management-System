@@ -6,8 +6,6 @@ package booking;
 
 //import Technicians.*;
 import beforeLogin.login2.*;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +23,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,9 +36,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 //import lams.Functions1;
 //port lams.dbconnection;
 
@@ -74,6 +69,8 @@ public class BooklayoutController implements Initializable {
     @FXML
     private Button bookeqpmnt;
     @FXML
+    private Button chooseimage;
+    @FXML
     private ImageView image;
     @FXML
     private Button allocated;
@@ -81,7 +78,7 @@ public class BooklayoutController implements Initializable {
     private Button clearedbutton;
     //declare the user identity as static to be able to access it anywhere in this class' code
     private static String useridentity;
-   
+    Functions1 fnctns = new Functions1();
     @FXML
     private DatePicker todatepicker;
     @FXML
@@ -112,72 +109,41 @@ public class BooklayoutController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    dbconnection dc= new dbconnection();
-                        PreparedStatement ps;
+    //dbconnection dc= new dbconnection();
+       //     Connection conn = dc.ConnectDB();
+       //     PreparedStatement ps;
 
-    /* This method is called from the home controller to set or call the bookinglayout  user interface*/
+    /* This method is called from the home controller to set or call the bookinglayout interface*/
     public void showstagetable(String UserID, String usersname) {
         try {
-            this.view();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("booklayout.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.getIcons().add(new Image("file:images/matthews.jpg"));
             stage.setTitle("These Are the Available Equipments and this is Your Identity Number If not please contact admin:" + UserID + usersname.toUpperCase());
-          stage.setScene(new Scene(root1));  
-          String css = BooklayoutController.class.getResource("booklayout.css").toExternalForm();
+          stage.setScene(new Scene(root1));
+//          String css = BooklayoutController.class.getResource("/booklayout.css").toExternalForm();
                  root1.getStylesheets().clear();
-                root1.getStylesheets().add(css);
+              // root1.getStylesheets().add(css);
             stage.show();
-             //image.setImage(new Image("/assetmanagement/images/equipment2.jpg"));
-            // view();
         } catch (IOException ex) {
             Logger.getLogger(Functions1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-public void view() {
-        TilePane tile = new TilePane();//create the tilepane layout
-        tile.setPadding(new Insets(15, 15, 15, 15));
-        tile.setHgap(15);
-        String path = "F:\\phone\\image1";
 
-        File folder = new File(path);
-        File[] listOfFiles = folder.listFiles();
-
-        for (final File file : listOfFiles) {
-            ImageView imageView;
-           // imageView = createImageView(file);
-            image=createImageView(file);
-            //uncooment to see the tile pane with images
-          // tile.getChildren().addAll(imageView);
-        }
-    }
-   /*****************************************************************************************************/
-    //Method to help in creating a new imageview each time we have a new imagefile
-    /**
-     * @param imageFile
-     * @return ***************************************************************************************************/
-    public ImageView createImageView(final File imageFile) {
-        ImageView imageView = null;
-        try {
-            final Image image = new Image(new FileInputStream(imageFile), 150, 0, true,
-                    true);
-            imageView = new ImageView(image);
-            imageView.setFitWidth(150);
-        } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-        return imageView;
-    }
     /*This method  loads data into the table view from the database*/
     @FXML
     public void loaddatafromdatabase() throws SQLException, IOException {
-        Connection conn = dc.ConnectDB();
+        dbconnection dc= new dbconnection();
+            Connection conn;
+           
+            PreparedStatement ps;
+        
         data = FXCollections.observableArrayList();
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM unbookedeqpmnts");
+        ResultSet rs = dbconnection.ConnectDB().createStatement().executeQuery("SELECT * FROM unbookedeqpmnts");
         while (rs.next()) {
             if (rs.getInt(5) >= 1) {
-                data.add(new Availabledetails(rs.getString(2), rs.getString(6), rs.getString(4),rs.getInt(5), rs.getString(7), rs.getInt(1),rs.getString(3)));
+                data.add(new Availabledetails(rs.getString(2), rs.getString(6), rs.getInt(5), rs.getString(7), rs.getInt(1),rs.getInt(1)));
             }
         }
 
@@ -208,7 +174,6 @@ public void view() {
         // person.
         // String add = String.parseString(txfdquantity.getText());
         txfdquantity.setText(eqp.getQuantity().toString());
-        txtfdbookdetails.setText(eqp.getDetails());
         //txfdavailable.setText( person.getId());
     }
 
@@ -241,7 +206,7 @@ public void view() {
     @FXML
     private void bookitem(ActionEvent event) {
         try {
-             Functions1 fnctns = new Functions1();   Availabledetails available = tableitems.getSelectionModel().getSelectedItem();
+            Availabledetails available = tableitems.getSelectionModel().getSelectedItem();
             Integer EqpId = available.getId();
             String quantity = txfdquantity.getText();
             String useridentification = useridentity;
@@ -251,27 +216,30 @@ public void view() {
             System.out.println("The user id is " + useridentity);
             System.out.println("The user id is " + useridentity);
             //reduces the equipment quantity by the number of  equipments ordered
-           Integer remaining = fnctns.bookitem(EqpId, quantityordered, useridentification, fromtime, Todate);
+            Integer remaining = fnctns.bookitem(EqpId, quantityordered, useridentification, fromtime, Todate);
             //Note we can also pass the clicked equipment as an object in the parameter field of the booking method
             //and do the necessary booking in the method where it is by retrieving the objects values
             available.setQuantity(remaining);
-            
-                
-            
         } catch (SQLException ex) {
             Logger.getLogger(BooklayoutController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
+    @FXML
+    private void selectimage(ActionEvent event) {
+        //the file chooser below should be used in adding an equipmentso that we save the image path to the db
+    }
+//******************************************************************************************************************************
+// this function loads a specific users details of allocated equipments after they had previously booked them to the tableview
+//********************************************************************************************************************************
 
     @FXML
     private void Viewallocated(ActionEvent event) {
         try {
-            columnby.setText("Allocated by");
-        columnFrom.setText("Booked From");
-        btnunbook.setVisible(false);
+            dbconnection dc= new dbconnection();
             Connection conn = dc.ConnectDB();
+            PreparedStatement ps;
             data = FXCollections.observableArrayList();
             //select from allocated table and get the allocator id, eqpmentId, Quantity, from and to dates
             //query equipments for eqpmntname ,from login for allocator.
@@ -314,7 +282,9 @@ public void view() {
             columnby.setText("Boooked by");
             columnFrom.setText("Booked From");
             btnunbook.setVisible(true);
-           Connection conn = dc.ConnectDB();
+           dbconnection dc= new dbconnection();
+            Connection conn = dc.ConnectDB();
+            PreparedStatement ps;
             data = FXCollections.observableArrayList();
             //select from allocated table and get the allocator id, eqpmentId, Quantity, from and to dates
             //query equipments for eqpmntname ,from login for allocator.
@@ -347,24 +317,19 @@ public void view() {
     @FXML
     private void unbookequipment() {
         try {
-            Connection conn = dc.ConnectDB();
             Availabledetails available= this.onthetableclick();
-            if(!(available==null)){
             Integer EqpId = available.getId();
             available.getBookID();
+            dbconnection dc= new dbconnection();
+            Connection conn = dc.ConnectDB();
+            PreparedStatement ps;
             //Test lines works properly
-            System.out.println("Booklayoutcontroller314// The bookId is " + available.getBookID());
-            System.out.println("The equipment id is " + EqpId);
+            //System.out.println("Booklayoutcontroller314// The bookId is " + available.getBookID());
+            //System.out.println("The equipment id is " + EqpId);
             String Delete = "DELETE FROM bookedeqpmnts WHERE bookId='"+available.getBookID()+"'";
             ps = conn.prepareStatement(Delete);
             ps.execute();
-             Functions1 fnctns = new Functions1();
             fnctns.auditunbooking(this.loggedinuserId(),available.getEquipment(),available.getBookID(),available.getType());
-            JOptionPane.showMessageDialog(null, "Successful Unbooking", "Cancelled Booking", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(null, "Please select an Equipment to delete from the Table ", "No selection Made", JOptionPane.INFORMATION_MESSAGE);
-           
-            }     
         } catch (SQLException ex) {
             Logger.getLogger(BooklayoutController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -52,6 +52,7 @@ public class AdminLogin extends Application {
      HBox hbox=new HBox(10);
      hbox.getChildren().addAll(back,logout);
      hbox.setAlignment(Pos.BOTTOM_RIGHT);
+     
      border.setCenter(layout);
      border.setBottom(hbox);
       
