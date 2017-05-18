@@ -8,6 +8,8 @@ package beforeLogin.login2;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +32,14 @@ public class dbconnection {
             return null;
     }      
 }
+public void closeDB(){
+    
+         try {
+             con.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(dbconnection.class.getName()).log(Level.SEVERE, null, ex);
+         }
 
+}
     
 }
