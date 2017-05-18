@@ -28,6 +28,8 @@ public class userManager {
 			st.setString(4, usr.getFaculty());
 			st.setString(5, usr.getDepartment());
 			st.setInt(6, usr.getTel_no());
+                        st.setString(7, usr.getEmail());
+                        st.setString(8, usr.getRole());
 			
 			int affected = st.executeUpdate();
 			if(affected == 1)
@@ -65,6 +67,7 @@ public class userManager {
 				usr[i].setFaculty(rs.getString("faculty"));
 				usr[i].setDepartment(rs.getString("department"));
 				usr[i].setTel_no(rs.getInt("telephone_no"));
+                                usr[i].setEmail(rs.getString("email"));
 				i++;
 			}
 			
@@ -96,6 +99,8 @@ public class userManager {
 				usr.setFaculty(rs.getString("faculty"));
 				usr.setDepartment(rs.getString("department"));
 				usr.setTel_no(rs.getInt("telephone_no"));
+                                usr.setEmail(rs.getString("email"));
+                                usr.setRole(rs.getString("role"));
 			}
 			
 			return usr;
@@ -113,7 +118,7 @@ public class userManager {
 	
 	public boolean update(user usr) throws SQLException, ClassNotFoundException{
 		
-		sql = "update users set name=?, password=?, faculty=?, department=?, telephone_no=? where staff_id=?";
+		sql = "update users set name=?, password=?, faculty=?, department=?, telephone_no=?, email=? where staff_id=?";
 		
 		try{
 			conn = connectionManager.getInstance().getConnection();
@@ -124,6 +129,8 @@ public class userManager {
 			st.setString(4, usr.getDepartment());
 			st.setInt(5, usr.getTel_no());
 			st.setString(6, usr.getStaff_id());
+                        st.setString(7, usr.getEmail());
+                        st.setString(8, usr.getRole());
 			
 			int affected = st.executeUpdate();
 			if(affected == 1)
