@@ -1,5 +1,6 @@
 package UI;
 
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,11 +19,13 @@ import javafx.stage.Stage;
 import systemAccess.Booking;
 
 public class loginController implements Initializable {
-	@FXML
-	private TextField name;
-	@FXML
-	private TextField passwd;
-	
+	 
+        @FXML 
+        private JFXTextField name;
+
+        @FXML 
+        private JFXTextField passwd;
+        
 	@FXML
 	private void login(ActionEvent event) throws ClassNotFoundException, SQLException, IOException{
 		user usr = new user();
