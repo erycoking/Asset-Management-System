@@ -1,5 +1,7 @@
 package UI;
 
+import Admin.AdminLogin;
+import adminend.SuperadminController;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -7,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import database.userManager;
 import database.bean.user;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import systemAccess.Booking;
 
@@ -36,23 +39,33 @@ public class loginController implements Initializable {
 		userManager usrMan = new userManager();
 		returned_usr = usrMan.getCurrentUser(usr);
 		
-		if(name.getText() == returned_usr.getName() && passwd.getText() == returned_usr.getPassword()){
-                    if(returned_usr.getRole().equals("member")){
-			((Node)event.getSource()).getScene().getWindow().hide();
-                        
-                        Booking.display();
-                        
-                    }else if(returned_usr.getRole().equals("labtech")){
-                        
-                        ((Node)event.getSource()).getScene().getWindow().hide();
-			
-                    }else if(returned_usr.getRole().equals("admin")){
-                        
-                        ((Node)event.getSource()).getScene().getWindow().hide();
+                try{
+                    if(name.getText() == returned_usr.getName() && passwd.getText() == returned_usr.getPassword()){
+                        if(returned_usr.getRole().equals("user")){
+                            ((Node)event.getSource()).getScene().getWindow().hide();
+
+
+                        }else if(returned_usr.getRole().equals("labtech")){         
+                            ((Node)event.getSource()).getScene().getWindow().hide();
+
+                            Booking.display();
+
+                        }else if(returned_usr.getRole().equals("admin")){
+                            ((Node)event.getSource()).getScene().getWindow().hide();
+
+                            AdminLogin adm = new AdminLogin();
+                            Stage prStage = new Stage();
+                            adm.start(prStage);
+
+                        }
                     }
-		}
+                }catch(Exception e){
+                    Logger.getLogger(SuperadminController.class.getName()).log(Level.SEVERE, null, e);
+                }
 	}
-        private void onRegister(ActionEvent event) throws IOException{
+        
+        @FXML
+        private void register(ActionEvent event) throws IOException{
             ((Node)event.getSource()).getScene().getWindow().hide();
 		
 		Stage stage = new Stage();

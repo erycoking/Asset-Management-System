@@ -26,6 +26,6 @@
       <JFXTextField fx:id="name" labelFloat="true" promptText="Enter Name" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
       <JFXTextField fx:id="passwd" labelFloat="true" layoutX="78.0" layoutY="128.0" promptText="Enter password" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
       <JFXButton buttonType="RAISED" onAction="#login" prefHeight="25.0" prefWidth="139.0" ripplerFill="#14e294" styleClass="#089fea" text="Login" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <JFXButton buttonType="RAISED" layoutX="215.0" layoutY="301.0" onAction="#onRegister" prefHeight="25.0" prefWidth="136.0" ripplerFill="#14e294" styleClass="#089fea" text="Sign up" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <JFXButton buttonType="RAISED" layoutX="215.0" layoutY="301.0" onAction="#register" prefHeight="25.0" prefWidth="136.0" ripplerFill="#14e294" styleClass="#089fea" text="Sign up" GridPane.columnIndex="2" GridPane.rowIndex="4" />
    </children>
 </GridPane>

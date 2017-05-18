@@ -1,11 +1,14 @@
 package database;
 
+import adminend.SuperadminController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import database.bean.user;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class userManager {
 	
@@ -84,13 +87,19 @@ public class userManager {
 	}
 	//should have passed the username and the password so that we get the object details from the Db and return that user
 	public user getCurrentUser(user usr) throws SQLException, ClassNotFoundException{
-		sql = "select * from users where name=?";
+		sql = "select * from users where username=? and password=?";
 		
 		try{
 			conn = connectionManager.getInstance().getConnection();
 			st = conn.prepareStatement(sql);
 			st.setString(1, usr.getName());
+			st.setString(2, usr.getPassword());
 			rs = st.executeQuery();
+                        rs.last();
+                        if(rs.getRow()== 0){
+                            usr = null;
+                            return usr;
+                        }
 			
 			while(rs.next()){
 				usr.setStaff_id(rs.getString("staff_id"));
@@ -105,6 +114,8 @@ public class userManager {
 			
 			return usr;
 		}catch (SQLException e) {
+                        Logger.getLogger(SuperadminController.class.getName()).log(Level.SEVERE, null, e);
+
 			System.err.println(e.getMessage());
 			return null;
 		}finally{

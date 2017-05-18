@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 public class login extends Application {
 	
+        //starting application
 	public void start(Stage stage) throws IOException{
 		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 		
