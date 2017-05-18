@@ -32,13 +32,7 @@ public class dbconnection {
     }      
 }
 public void closeDB(){
-    
-         try {
-             con.close();
-         } catch (SQLException ex) {
-             Logger.getLogger(dbconnection.class.getName()).log(Level.SEVERE, null, ex);
-         }
-
+        
 }
     
 }

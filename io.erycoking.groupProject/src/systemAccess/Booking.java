@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package systemAccess;
+import booking.BooklayoutController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +36,17 @@ public class Booking{
     Button button2=new Button("View Equipment");
     
     Button button3=new Button("Book Equipment");
+    button3.setOnAction(e ->
+       
+            {
+       
+            BooklayoutController bk=new BooklayoutController();
+            String UserID="S/13/21379/14";
+            String usersname="james";
+            bk.showstagetable(UserID, usersname);
+        
+    }
+            );
     
     Button button4=new Button("View booked Equipments");
     
