@@ -35,7 +35,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 //import lams.Functions1;
@@ -243,7 +242,7 @@ public class BooklayoutController implements Initializable {
         columnFrom.setText("Booked From");
         btnunbook.setVisible(false);
             dbconnection dc= new dbconnection();
-            Connection conn = dc.ConnectDB();
+            Connection conn = dbconnection.ConnectDB();
             PreparedStatement ps;
             data = FXCollections.observableArrayList();
             //select from allocated table and get the allocator id, eqpmentId, Quantity, from and to dates
@@ -288,7 +287,7 @@ public class BooklayoutController implements Initializable {
             columnFrom.setText("Booked From");
             btnunbook.setVisible(true);
            dbconnection dc= new dbconnection();
-            Connection conn = dc.ConnectDB();
+            Connection conn = dbconnection.ConnectDB();
             PreparedStatement ps;
             data = FXCollections.observableArrayList();
             //select from allocated table and get the allocator id, eqpmentId, Quantity, from and to dates
@@ -327,7 +326,7 @@ public class BooklayoutController implements Initializable {
             Integer EqpId = available.getId();
             available.getBookID();
             dbconnection dc= new dbconnection();
-            Connection conn = dc.ConnectDB();
+            Connection conn = dbconnection.ConnectDB();
             PreparedStatement ps;
             //Test lines works properly
             System.out.println("Booklayoutcontroller314// The bookId is " + available.getBookID());

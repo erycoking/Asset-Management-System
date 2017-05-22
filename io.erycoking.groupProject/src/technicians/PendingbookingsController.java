@@ -100,7 +100,7 @@ public class PendingbookingsController implements Initializable {
         try {
             dbconnection dc;
             dc = new dbconnection();
-            Connection conn = dc.ConnectDB();
+            Connection conn = dbconnection.ConnectDB();
             data = FXCollections.observableArrayList();
             //query both tables that we need their data that is the equipments and booked equipments where the eqpment Ids matches
             ResultSet rs = conn.createStatement().executeQuery("select equipments.*, bookedeqpmnts.* from  equipments, bookedeqpmnts\n"

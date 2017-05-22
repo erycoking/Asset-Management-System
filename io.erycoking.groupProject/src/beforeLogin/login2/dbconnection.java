@@ -5,7 +5,6 @@
  */
 package beforeLogin.login2;
 
-import database.connectionManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
