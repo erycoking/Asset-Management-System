@@ -13,9 +13,28 @@ and open the template in the editor.
    -fx-background-color: blue;
 }
 .labelstyle{
-    -fx-background-color:greenyellow;
+    -fx-background-color:#bbdefb ;
     -fx-background-radius:10,10;
 }
 .mainFxmlClass{
-    
+    -fx-background-color: white;
+}
+.topmenu{
+  -fx-background-color:#303f9f  ;
+    -fx-background-radius:10,10;  
+}
+.sidebar{
+    -fx-background-color:black ;
+    -fx-background-radius:10,10;   
+   
+}
+.topcornerleft{
+    -fx-background-image: url("/assetmanagement/images/images_008.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+}
+.textsfields{
+    -fx-text-fill:blue;
+    -fx-background-color:white;
+    -fx-background-radius:6,6,6,6;
 }

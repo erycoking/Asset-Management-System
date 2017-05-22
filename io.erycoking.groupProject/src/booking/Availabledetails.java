@@ -18,6 +18,7 @@ public class Availabledetails {
     private final StringProperty Type;
     private final IntegerProperty quantity;
     private final StringProperty Available;
+    private final StringProperty Details;
     private final IntegerProperty Id;
     private final IntegerProperty BookID;
     //private final DoubleProperty Quantity;
@@ -28,7 +29,17 @@ public class Availabledetails {
         this.quantity = new SimpleIntegerProperty(quantity);
         this.Available = new SimpleStringProperty(Available);
         this.Id = new SimpleIntegerProperty(Id);
+         this.BookID = new SimpleIntegerProperty(BookID);
+         this.Details=null;
+    }
+     public Availabledetails(String Equipment, String Type, Integer quantity, String Available,String details,Integer Id,Integer BookID) {
+        this.Equipment = new SimpleStringProperty(Equipment);
+        this.Type = new SimpleStringProperty(Type);
+        this.quantity = new SimpleIntegerProperty(quantity);
+        this.Available = new SimpleStringProperty(Available);
+        this.Id = new SimpleIntegerProperty(Id);
          this.BookID = new SimpleIntegerProperty(Id);
+         this.Details=new SimpleStringProperty(details);
     }
 
    
@@ -37,6 +48,9 @@ public class Availabledetails {
         return Type.get();
     }
 
+    public String getDetails() {
+        return Details.get();
+    }
     public Integer getId() {
         return Id.get();
     }
@@ -63,7 +77,9 @@ public class Availabledetails {
     public void setType(String value) {
         Type.set(value);
     }
-
+ public void setDetails(String value) {
+        Details.set(value);
+    }
     public void setEquipment(String value) {
         Equipment.set(value);
     }

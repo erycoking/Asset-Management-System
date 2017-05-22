@@ -30,8 +30,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-
-
 /**
  
  * @author Matthews
@@ -53,7 +51,7 @@ public class AddequipmentsController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb){
     
     } 
     /**

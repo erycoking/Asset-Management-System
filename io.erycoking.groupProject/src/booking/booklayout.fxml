@@ -9,98 +9,105 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="1430.0" style="-fx-background-color: #fb8c00;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.BooklayoutController">
+<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="1430.0" styleClass="mainFxmlClass" stylesheets="@booklayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.BooklayoutController">
     
     <children>
-        <ScrollPane layoutX="12.0" layoutY="29.0" prefHeight="316.0" prefWidth="576.0" style="-fx-background-color: #8bc34a;">
+        <ScrollPane layoutX="176.0" layoutY="135.0" prefHeight="340.0" prefWidth="599.0" style="-fx-background-color: #8bc34a;">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="315.0" prefWidth="578.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="598.0">
                     <children>
-                        <TableView fx:id="tableitems" layoutX="3.0" layoutY="-7.0" onMouseClicked="#loadvalues" prefHeight="252.0" prefWidth="568.0" style="-fx-background-color: black;" stylesheets="@booklayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tableitems" layoutY="-22.0" onMouseClicked="#loadvalues" prefHeight="340.0" prefWidth="598.0" style="-fx-background-color: black;" stylesheets="@booklayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
-                                <TableColumn fx:id="columnEquipments" prefWidth="115.0" text="Equipment" />
-                                <TableColumn fx:id="columnType" prefWidth="87.0" text="Type" />
-                                <TableColumn fx:id="columnquantity" prefWidth="97.0" text="Quantity" />
-                                <TableColumn fx:id="columnavailable" prefWidth="193.0" text="Available" />
+                                <TableColumn fx:id="columnEquipments" prefWidth="160.0" text="Equipment" />
+                                <TableColumn fx:id="columnType" prefWidth="112.0" text="Type" />
+                                <TableColumn fx:id="columnquantity" prefWidth="99.0" text="Quantity" />
+                                <TableColumn fx:id="columnavailable" prefWidth="186.0" text="Available" />
                             </columns>
                         </TableView>
                     </children>
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <Label layoutX="50.0" layoutY="393.0" text="Equipment" textFill="#401919">
+        <Label layoutX="286.0" layoutY="510.0" prefHeight="19.0" prefWidth="77.0" styleClass="textsfields" text="Equipment" textFill="#401919">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
-        <Label layoutX="44.0" layoutY="431.0" text="Category" textFill="#401919">
+        <Label layoutX="291.0" layoutY="558.0" prefHeight="19.0" prefWidth="77.0" styleClass="textsfields" text="Category" textFill="#401919">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
-        <Label layoutX="45.0" layoutY="460.0" text="Quantity" textFill="#401919">
+        <Label layoutX="292.0" layoutY="602.0" prefHeight="19.0" prefWidth="77.0" styleClass="textsfields" text="Quantity" textFill="#401919">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
-        <Label layoutX="45.0" layoutY="493.0" prefHeight="19.0" prefWidth="77.0" text="From Date" textFill="#401919">
+        <Label layoutX="292.0" layoutY="647.0" prefHeight="19.0" prefWidth="77.0" styleClass="textsfields" text="From Date" textFill="#401919">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
-        <TextField fx:id="txfdequipment" layoutX="129.0" layoutY="392.0" />
-        <TextField fx:id="txfdcategory" layoutX="129.0" layoutY="430.0" />
-        <TextField fx:id="txfdquantity" layoutX="129.0" layoutY="459.0" />
-        <Label layoutX="291.0" layoutY="493.0" prefHeight="19.0" prefWidth="77.0" text="To date" textFill="#401919">
+        <TextField fx:id="txfdequipment" layoutX="376.0" layoutY="509.0" />
+        <TextField fx:id="txfdcategory" layoutX="376.0" layoutY="557.0" />
+        <TextField fx:id="txfdquantity" layoutX="376.0" layoutY="601.0" />
+        <Label layoutX="538.0" layoutY="648.0" prefHeight="19.0" prefWidth="77.0" styleClass="textsfields" text="To date" textFill="#401919">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
-        <Button fx:id="view" layoutX="451.0" layoutY="388.0" mnemonicParsing="false" onAction="#loaddatafromdatabase" prefHeight="29.0" prefWidth="66.0" styleClass="labelstyle" stylesheets="@booklayout.css" text="View">
+        <Button fx:id="view" layoutX="584.0" layoutY="512.0" mnemonicParsing="false" onAction="#loaddatafromdatabase" prefHeight="29.0" prefWidth="66.0" styleClass="labelstyle" stylesheets="@booklayout.css" text="View">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="bookeqpmnt" layoutX="406.0" layoutY="529.0" mnemonicParsing="false" onAction="#bookitem" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: #039be5;" text="Book">
+        <Button fx:id="bookeqpmnt" layoutX="653.0" layoutY="684.0" mnemonicParsing="false" onAction="#bookitem" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: #039be5;" text="Book">
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font>
         </Button>
-        <Button fx:id="chooseimage" layoutX="596.0" layoutY="36.0" mnemonicParsing="false" onAction="#selectimage" style="-fx-background-color: #039be5;" text="Search" />
-        <ImageView fx:id="image" fitHeight="641.0" fitWidth="55.0" layoutX="596.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" style="-fx-ba: #fb8c00;" />
-      <ScrollPane layoutX="673.0" layoutY="14.0" prefHeight="330.0" prefWidth="554.0">
+        <Button fx:id="chooseimage" layoutX="843.0" layoutY="153.0" mnemonicParsing="false" onAction="#selectimage" style="-fx-background-color: #039be5;" text="Search" />
+      <ScrollPane layoutX="789.0" layoutY="135.0" prefHeight="340.0" prefWidth="581.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="553.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="344.0" prefWidth="580.0">
                <children>
-                  <TableView fx:id="tableallocated" layoutX="6.0" onMouseClicked="#onthetableclick" prefHeight="255.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableallocated" layoutX="6.0" onMouseClicked="#onthetableclick" prefHeight="329.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="columnallocated" prefWidth="152.0" text="Equipment" />
                       <TableColumn fx:id="columnquantityallocated" prefWidth="57.0" text="Quantity" />
                         <TableColumn fx:id="columnby" prefWidth="128.0" text="Allocated/cleared by" />
                         <TableColumn fx:id="columnFrom" prefWidth="124.0" text="From" />
-                        <TableColumn fx:id="columnTo" prefWidth="72.0" text="To" />
+                        <TableColumn fx:id="columnTo" prefWidth="91.0" text="To" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label layoutX="16.0" layoutY="5.0" prefHeight="19.0" prefWidth="606.0" text="These are the available Equipments.Note: the others may have been booked or under maintenance" textFill="#2c0be8">
-         <font>
-            <Font name="System Bold Italic" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="788.0" layoutY="381.0" text=" View  accepted bookings " />
-      <Label layoutX="793.0" layoutY="417.0" text="View  your cleared bookings " />
-      <Button fx:id="allocated" layoutX="1014.0" layoutY="377.0" mnemonicParsing="false" onAction="#Viewallocated" styleClass="labelstyle" stylesheets="@booklayout.css" text="Allocated" />
-      <Button fx:id="clearedbutton" layoutX="1014.0" layoutY="410.0" mnemonicParsing="false" onAction="#viewcleared" prefHeight="25.0" prefWidth="66.0" text="Cleared" />
-      <Label layoutX="362.0" layoutY="369.0" text="Click View to load all the available items" />
-      <DatePicker fx:id="todatepicker" layoutX="354.0" layoutY="490.0" prefHeight="25.0" prefWidth="166.0" />
-      <DatePicker fx:id="Fromdatepicker" layoutX="129.0" layoutY="490.0" prefHeight="25.0" prefWidth="149.0" />
-      <Label layoutX="789.0" layoutY="352.0" prefHeight="17.0" prefWidth="175.0" text="View  your booked equipments" />
-      <Button fx:id="btnbooked" layoutX="1014.0" layoutY="348.0" mnemonicParsing="false" onAction="#viewbooked" prefHeight="25.0" prefWidth="66.0" styleClass="labelstyle" stylesheets="@booklayout.css" text="Booked" />
-      <TextArea fx:id="txtfdbookdetails" layoutX="35.0" layoutY="557.0" prefHeight="159.0" prefWidth="507.0" />
-      <TextArea fx:id="txfdallocateddetails" layoutX="693.0" layoutY="554.0" prefHeight="159.0" prefWidth="534.0" />
-      <Button fx:id="btnunbook" layoutX="1110.0" layoutY="348.0" mnemonicParsing="false" onAction="#unbookequipment" prefHeight="25.0" prefWidth="77.0" text="UNBOOK" />
+      <Label layoutX="924.0" layoutY="563.0" styleClass="textsfields" text=" View  accepted bookings " />
+      <Label layoutX="917.0" layoutY="618.0" styleClass="textsfields" text="View  your cleared bookings " />
+      <Button fx:id="allocated" layoutX="1099.0" layoutY="557.0" mnemonicParsing="false" onAction="#Viewallocated" styleClass="labelstyle" stylesheets="@booklayout.css" text="Allocated" />
+      <Button fx:id="clearedbutton" layoutX="1099.0" layoutY="614.0" mnemonicParsing="false" onAction="#viewcleared" prefHeight="25.0" prefWidth="66.0" styleClass="labelstyle" text="Cleared" />
+      <Label layoutX="544.0" layoutY="495.0" styleClass="textsfields" text="Click View to load all the available items" />
+      <DatePicker fx:id="todatepicker" layoutX="597.0" layoutY="645.0" prefHeight="25.0" prefWidth="166.0" />
+      <DatePicker fx:id="Fromdatepicker" layoutX="376.0" layoutY="646.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label layoutX="924.0" layoutY="511.0" prefHeight="17.0" prefWidth="175.0" styleClass="textsfields" text="View  your booked equipments" />
+      <Button fx:id="btnbooked" layoutX="1099.0" layoutY="513.0" mnemonicParsing="false" onAction="#viewbooked" prefHeight="25.0" prefWidth="66.0" styleClass="labelstyle" stylesheets="@booklayout.css" text="Booked" />
+      <Button fx:id="btnunbook" layoutX="1195.0" layoutY="513.0" mnemonicParsing="false" onAction="#unbookequipment" prefHeight="25.0" prefWidth="77.0" styleClass="labelstyle" text="UNBOOK" />
+      <Pane layoutX="-4.0" prefHeight="835.0" prefWidth="175.0" styleClass="sidebar" stylesheets="@booklayout.css" />
+      <Pane layoutX="-8.0" prefHeight="130.0" prefWidth="1430.0" styleClass="topmenu" stylesheets="@booklayout.css">
+         <children>
+            <Label layoutX="336.0" layoutY="65.0" prefHeight="51.0" prefWidth="794.0" text="LABORATORY  ASSETS MANAGEMENT SYSTEM" textFill="#f5f3fc">
+               <font>
+                  <Font name="System Bold Italic" size="35.0" />
+               </font>
+            </Label>
+              <ImageView fx:id="image" fitHeight="130.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" style="-fx-ba: #fb8c00;" styleClass="topcornerleft">
+               <image>
+                  <Image url="@../assetmanagement/images/images_008.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>

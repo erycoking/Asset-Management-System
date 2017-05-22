@@ -10,8 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class register extends Application{
+    
 	public void start(Stage stage2) throws IOException{
-		
 		Parent root2 = FXMLLoader.load(getClass().getResource("register.fxml"));
 		Scene scene2 = new Scene(root2);
 		scene2.getStylesheets().add(getClass().getResource("register.css").toExternalForm());

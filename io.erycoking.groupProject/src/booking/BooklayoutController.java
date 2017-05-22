@@ -37,6 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 //import lams.Functions1;
 //port lams.dbconnection;
 
@@ -97,10 +98,6 @@ public class BooklayoutController implements Initializable {
     private TableColumn<Availabledetails, String> columnTo;
     private ObservableList<Availabledetails> data2;
     @FXML
-    private TextArea txtfdbookdetails;
-    @FXML
-    private TextArea txfdallocateddetails;
-    @FXML
     private Button btnbooked;
     @FXML
     private Button btnunbook;
@@ -135,15 +132,13 @@ public class BooklayoutController implements Initializable {
     @FXML
     public void loaddatafromdatabase() throws SQLException, IOException {
         dbconnection dc= new dbconnection();
-            Connection conn;
-           
+            Connection conn=dc.ConnectDB();
             PreparedStatement ps;
-        
-        data = FXCollections.observableArrayList();
-        ResultSet rs = dbconnection.ConnectDB().createStatement().executeQuery("SELECT * FROM unbookedeqpmnts");
+                data = FXCollections.observableArrayList();
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM unbookedeqpmnts");
         while (rs.next()) {
             if (rs.getInt(5) >= 1) {
-                data.add(new Availabledetails(rs.getString(2), rs.getString(6), rs.getInt(5), rs.getString(7), rs.getInt(1),rs.getInt(1)));
+                data.add(new Availabledetails(rs.getString(2), rs.getString(6), rs.getInt(5), rs.getString(7),rs.getString(4),rs.getInt(1),rs.getInt(3)));
             }
         }
 
@@ -206,20 +201,27 @@ public class BooklayoutController implements Initializable {
     @FXML
     private void bookitem(ActionEvent event) {
         try {
+           if(!(tableitems.getSelectionModel().getSelectedItem()==null)){
             Availabledetails available = tableitems.getSelectionModel().getSelectedItem();
+            System.out.println(available.toString()+"this is the available object");
             Integer EqpId = available.getId();
             String quantity = txfdquantity.getText();
             String useridentification = useridentity;
             Integer quantityordered = Integer.parseInt(quantity);
             LocalDate fromtime = Fromdatepicker.getValue();
             LocalDate Todate = todatepicker.getValue();
-            System.out.println("The user id is " + useridentity);
+            System.out.println("The user EQPid is " + EqpId);
             System.out.println("The user id is " + useridentity);
             //reduces the equipment quantity by the number of  equipments ordered
             Integer remaining = fnctns.bookitem(EqpId, quantityordered, useridentification, fromtime, Todate);
             //Note we can also pass the clicked equipment as an object in the parameter field of the booking method
             //and do the necessary booking in the method where it is by retrieving the objects values
             available.setQuantity(remaining);
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Please select an equipment from the table ", "Null equipment Selection", JOptionPane.INFORMATION_MESSAGE);
+                 }
+            
         } catch (SQLException ex) {
             Logger.getLogger(BooklayoutController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -237,6 +239,9 @@ public class BooklayoutController implements Initializable {
     @FXML
     private void Viewallocated(ActionEvent event) {
         try {
+            columnby.setText("Allocated by");
+        columnFrom.setText("Booked From");
+        btnunbook.setVisible(false);
             dbconnection dc= new dbconnection();
             Connection conn = dc.ConnectDB();
             PreparedStatement ps;
@@ -317,6 +322,7 @@ public class BooklayoutController implements Initializable {
     @FXML
     private void unbookequipment() {
         try {
+            if(!(this.onthetableclick()==null)){
             Availabledetails available= this.onthetableclick();
             Integer EqpId = available.getId();
             available.getBookID();
@@ -324,12 +330,23 @@ public class BooklayoutController implements Initializable {
             Connection conn = dc.ConnectDB();
             PreparedStatement ps;
             //Test lines works properly
-            //System.out.println("Booklayoutcontroller314// The bookId is " + available.getBookID());
-            //System.out.println("The equipment id is " + EqpId);
-            String Delete = "DELETE FROM bookedeqpmnts WHERE bookId='"+available.getBookID()+"'";
-            ps = conn.prepareStatement(Delete);
+            System.out.println("Booklayoutcontroller314// The bookId is " + available.getBookID());
+            System.out.println("The equipment id is " + EqpId);
+            Integer BookId= available.getBookID();
+            String Delete = "DELETE FROM bookedeqpmnts WHERE bookId='"+BookId+"'";
+             ps = conn.prepareStatement(Delete);
             ps.execute();
+           /* String Update = "UPDATE unbookedeqpmnts SET quantity='" + remaining + "' Where eqpID='" + EqpId + "'";
+                ps = conn.prepareStatement(Update);
+                ps.execute();*/
+           this.viewbooked();
             fnctns.auditunbooking(this.loggedinuserId(),available.getEquipment(),available.getBookID(),available.getType());
+             JOptionPane.showMessageDialog(null, "Successfully unbooked the equipment", "Unbooking Successful", JOptionPane.INFORMATION_MESSAGE);
+           
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Please select a Booking from the table", "Null Booking selection ", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BooklayoutController.class.getName()).log(Level.SEVERE, null, ex);
         }

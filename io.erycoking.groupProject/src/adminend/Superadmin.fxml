@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -8,32 +11,97 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="445.0" prefWidth="1148.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="adminend.SuperadminController">
+<AnchorPane id="AnchorPane" prefHeight="742.0" prefWidth="1438.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminend.SuperadminController">
     <stylesheets>
         <URL value="@superadmin.css" />
     </stylesheets>
    <children>
-      <ScrollPane layoutX="14.0" layoutY="30.0" prefHeight="343.0" prefWidth="566.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="572.0">
+      <ScrollPane layoutX="221.0" layoutY="153.0" prefHeight="412.0" prefWidth="640.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="640.0">
                <children>
-                  <TableView fx:id="tableaudits" layoutX="40.0" layoutY="33.0" prefHeight="327.0" prefWidth="308.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Name" />
-                      <TableColumn prefWidth="75.0" text="User Id" />
-                        <TableColumn prefWidth="99.0" text="Date" />
-                        <TableColumn prefWidth="304.0" text="Activity" />
-                    </columns>
+                  <TableView fx:id="tableaudits" layoutX="2.0" layoutY="33.0" onMouseClicked="#tableClick" prefHeight="425.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn fx:id="ColumnName" prefWidth="164.0" text="Name" />
+                        <TableColumn fx:id="ColumnUserId" prefWidth="64.0" text="User Id" />
+                        <TableColumn fx:id="ColumnDate" prefWidth="152.0" text="Date" />
+                        <TableColumn fx:id="ColumnActivity" prefWidth="238.0" text="Activity" />
+                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-        </content>
+         </content>
       </ScrollPane>
-      <Label layoutX="63.0" layoutY="6.0" prefHeight="17.0" prefWidth="374.0" text="The audit Trail for the Super System Administrator" />
       <Button layoutX="1062.0" layoutY="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="77.0" text="&lt;&lt;&lt;--">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
+      <Pane layoutY="76.0" prefHeight="666.0" prefWidth="200.0" styleClass="sidebar" stylesheets="@superadmin.css">
+         <children>
+            <Pane layoutX="-2.0" layoutY="-75.0" prefHeight="128.0" prefWidth="1438.0" styleClass="topmenu" stylesheets="@superadmin.css">
+               <children>
+                  <Label layoutX="315.0" layoutY="83.0" prefHeight="39.0" prefWidth="540.0" text="LAB ASSETS MANAGEMENT ADMINISTRATOR BACKEND" textFill="#fcfcfc">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="128.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assetmanagement/images/images_006.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <GridPane layoutX="891.0" layoutY="237.0" prefHeight="260.0" prefWidth="370.0" styleClass="grid" stylesheets="@superadmin.css">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="68.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="302.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label styleClass="textsfields" text="StaffName:" />
+            <Label styleClass="textsfields" text="StaffID:" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="74.0" styleClass="textsfields" text="Department:" GridPane.rowIndex="2" />
+            <Label styleClass="textsfields" text="Role:" GridPane.rowIndex="3" />
+            <JFXTextField fx:id="tfstaffname" prefHeight="25.0" prefWidth="216.0" GridPane.columnIndex="1" />
+            <JFXTextField fx:id="tfstaffid" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <JFXTextField fx:id="tfstaffdepartment" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <JFXTextField fx:id="tfstaffrole" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <Label layoutX="891.0" layoutY="141.0" prefHeight="84.0" prefWidth="370.0" styleClass="grid" text="Update, Add or Delete User, Click button Users to load the Users" />
+      <HBox layoutX="901.0" layoutY="513.0" prefHeight="39.0" prefWidth="281.0">
+         <children>
+            <JFXButton prefHeight="40.0" prefWidth="83.0" text="Save">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton prefHeight="25.0" prefWidth="80.0" text="Update">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </JFXButton>
+            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="78.0" text="Delete">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
+      </HBox>
+      <Button layoutX="634.0" layoutY="600.0" mnemonicParsing="false" onAction="#retrieveAudits" text="Audit Records" />
+      <Button layoutX="741.0" layoutY="600.0" mnemonicParsing="false" onAction="#retrieveUsers" prefHeight="25.0" prefWidth="68.0" text="Users" />
    </children>
 </AnchorPane>
