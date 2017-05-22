@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class register extends Application{
+	@Override
 	public void start(Stage stage2) throws IOException{
 		
 		Parent root2 = FXMLLoader.load(getClass().getResource("register.fxml"));

@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,7 +23,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -173,7 +171,7 @@ public class Availablelequipments implements Initializable {
                     try {
                         /*Put a code here to update with the database*/
                         dbconnection dc = new dbconnection();
-                        Connection conn = dc.ConnectDB();
+                        Connection conn = dbconnection.ConnectDB();
                         String imgname = file.getName();
                         String sql = "select * from unbookedeqpmnts where image= '" + imgname + "'";
 

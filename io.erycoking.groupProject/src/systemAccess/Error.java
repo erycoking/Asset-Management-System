@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package systemAccess;
-import javafx.application.*;
-import javafx.event.*;
-import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;

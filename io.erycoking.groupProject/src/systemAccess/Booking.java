@@ -5,17 +5,17 @@
  */
 package systemAccess;
 
-import booking.BooklayoutController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
-public class Booking {
+public class Booking extends Application{
 
     Boolean answer;
 
@@ -52,4 +52,8 @@ public class Booking {
         window.showAndWait();
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        display();
+    }
 }

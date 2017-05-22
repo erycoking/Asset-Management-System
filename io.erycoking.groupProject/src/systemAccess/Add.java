@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package systemAccess;
-import javafx.application.*;
-import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -17,14 +15,9 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-//import static assetmanagement.connect.getConnection;
 
 public class Add  {
    
