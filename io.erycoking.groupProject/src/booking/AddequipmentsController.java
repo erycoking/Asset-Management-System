@@ -24,8 +24,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-
-
 /**
  
  * @author Matthews
@@ -47,7 +45,7 @@ public class AddequipmentsController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb){
     
     } 
     /**
