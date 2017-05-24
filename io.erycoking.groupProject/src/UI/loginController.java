@@ -43,26 +43,23 @@ public class loginController implements Initializable {
                                 userManager usrMan = new userManager();
                                 user returned_usr = usrMan.getCurrentUser(inputId, inputPwd);
                                 if(returned_usr != null){
-                                    if(inputId == returned_usr.getStaff_id() && inputPwd == returned_usr.getPassword()){
-                                        System.out.println("king");
-                                        if(returned_usr.getRole().equals("user")){
-                                            ((Node)event.getSource()).getScene().getWindow().hide();
+                                    if(returned_usr.getRole().equals("user")){
+                                        ((Node)event.getSource()).getScene().getWindow().hide();
 
-                                        }else if(returned_usr.getRole().equals("labtech")){         
-                                            ((Node)event.getSource()).getScene().getWindow().hide();
-                                            
-                                            Stage window= new Stage();
-                                            Booking b = new Booking();
-                                            b.start(window);
+                                    }else if(returned_usr.getRole().equals("labtech")){         
+                                        ((Node)event.getSource()).getScene().getWindow().hide();
 
-                                        }else if(returned_usr.getRole().equals("admin")){
-                                            ((Node)event.getSource()).getScene().getWindow().hide();
+                                        Stage window= new Stage();
+                                        Booking b = new Booking();
+                                        b.start(window);
 
-                                            AdminLogin adm = new AdminLogin();
-                                            Stage prStage = new Stage();
-                                            adm.start(prStage);
+                                    }else if(returned_usr.getRole().equals("admin")){
+                                        ((Node)event.getSource()).getScene().getWindow().hide();
 
-                                        }
+                                        AdminLogin adm = new AdminLogin();
+                                        Stage prStage = new Stage();
+                                        adm.start(prStage);
+
                                     }
                                 }else{err.setText("user doesn't exist");}
                             }else{err.setText("invalid password");}
