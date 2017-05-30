@@ -100,7 +100,7 @@ public class Functions1 {
         ps.execute();
         rs3.close();
         conn.close();
-         JOptionPane.showMessageDialog(null, "Successful Booking of equipment", "Book Success", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Successful Booking of equipment", "Book Success", JOptionPane.INFORMATION_MESSAGE);
 
     }
 

@@ -13,13 +13,13 @@ public class login extends Application {
         //starting application
 	@Override
 	public void start(Stage stage) throws IOException{
-                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-		
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
-		stage.setScene(scene);
-                stage.setTitle("Active Inventory");
-		stage.show();
+            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("Active Inventory");
+            stage.show();
 	}
 
 	public static void main(String[] args) {
