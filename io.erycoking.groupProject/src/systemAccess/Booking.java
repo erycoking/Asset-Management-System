@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
-public class Booking extends Application{
+public class Booking extends Application {
 
     Boolean answer;
 
