@@ -107,7 +107,7 @@ public class userManager {
                 usr.setTel_no(rs.getInt("telephone_no"));
                 usr.setEmail(rs.getString("email"));
                 usr.setRole(rs.getString("role"));
-                System.out.println(usr.getRole());
+//                System.out.println(usr.getRole());
                 return usr;
             }else{
                 System.out.println("No row were found");

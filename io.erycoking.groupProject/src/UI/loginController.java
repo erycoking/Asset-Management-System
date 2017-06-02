@@ -1,6 +1,7 @@
 package UI;
 
 import Admin.AdminLogin;
+import beforeLogin.login2.Functions1;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -22,9 +23,9 @@ import systemAccess.Booking;
 import validate.validateUserInput;
 
 public class loginController implements Initializable {
-	@FXML
-	private JFXTextField id;
-	@FXML
+    @FXML
+    private JFXTextField id;
+    @FXML
     private JFXPasswordField passwd;
     @FXML
     private Label err;
@@ -55,10 +56,13 @@ public class loginController implements Initializable {
 
                                     }else if(returned_usr.getRole().equals("admin")){
                                         ((Node)event.getSource()).getScene().getWindow().hide();
-
-                                        AdminLogin adm = new AdminLogin();
-                                        Stage prStage = new Stage();
-                                        adm.start(prStage);
+                                        
+                                        Functions1 fun = new Functions1();
+                                        fun.logingIn(returned_usr);
+                                        
+//                                        AdminLogin adm = new AdminLogin();
+//                                        Stage prStage = new Stage();
+//                                        adm.start(prStage);
 
                                     }
                                 }else{err.setText("user doesn't exist");}

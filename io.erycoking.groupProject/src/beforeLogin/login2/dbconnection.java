@@ -5,10 +5,10 @@
  */
 package beforeLogin.login2;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +21,7 @@ public class dbconnection {
            
           Class.forName("com.mysql.jdbc.Driver");
           
-          Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/asset_management","root","geek");
+          Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/asset_management","root","king");
        //   Connection con = connectionManager.getInstance().getConnection();
           return con;
             

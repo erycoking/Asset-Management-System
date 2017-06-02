@@ -8,6 +8,7 @@ package beforeLogin.login2;
 import adminend.SuperadminController;
 import booking.AddequipmentsController;
 import booking.BooklayoutController;
+import database.bean.user;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -163,29 +164,29 @@ public class Functions1 {
         }
     }
 
-    public void logingIn(String username, String password) throws SQLException {
-        dbconnection dc = new dbconnection();
-         PreparedStatement ps;
-        Connection conn = dc.ConnectDB();
-        rs = conn.createStatement().executeQuery("SELECT * FROM users where username='" + username + "' && password='" + password + "'");
-        if (rs.next()) {
+    public void logingIn(user usr) throws SQLException {
+        //dbconnection dc = new dbconnection();
+         //PreparedStatement ps;
+        //Connection conn = dc.ConnectDB();
+        //rs = conn.createStatement().executeQuery("SELECT * FROM users where username='" + username + "' && password='" + password + "'");
+        if (usr != null) {
             //If there exists such a user the following is executed. and we need to pass the user ID to be able to monitor them
-            String UserIdentity = rs.getString(1);
-            String name = rs.getString("Name");
+            String UserIdentity = usr.getStaff_id();
+            //String name = rs.getString("Name");
             //Functions1 fnctns=new Functions1();
             //fnctns.
 
             BooklayoutController bk = new BooklayoutController();
             AddequipmentsController addeqpmn = new AddequipmentsController();
             SuperadminController superadmin = new SuperadminController();
-            switch (rs.getString("role")) {
+            switch (usr.getRole()) {
                 //display the window with the priorities of a super admin
-                case "superadmin":
+                case "admin":
                     //TESTING LINE
                     System.out.println("You are the super user/admin");
                     superadmin.showstagetable(UserIdentity);
                     break;
-                case "admin":
+                case "labtec":
                     //the technicians window with priorities/responsibilities granted technician
                     addeqpmn.showstage();
                     bk.useridentity(UserIdentity);
@@ -193,7 +194,7 @@ public class Functions1 {
                     break;
                 default:
                     //method showstagetable is only shown if there are such credentials hence you wont view the next window if not logged in
-                    bk.showstagetable(UserIdentity, username);
+                    bk.showstagetable(UserIdentity, usr.getName());
                     //we call this method to return the logged in user's Id to keep track of them
                     bk.useridentity(UserIdentity);
                     break;
@@ -202,15 +203,15 @@ public class Functions1 {
             auditlogin(UserIdentity);
 
         } else {
-            conn.close();//close the connection before then output
+            //conn.close();//close the connection before then output
             System.out.println("THE credentials does not exist");
-
+            JOptionPane.showMessageDialog(null, "The credentials don't exist", "Invalid Details", JOptionPane.ERROR_MESSAGE);
         }
         //conn.close();//close the database connection
     }
 
     //**************************************************************************************************************//
-    //This method bookitem takes in the equipment id quantity oredered the logged in user Identification number, and from time
+    //This method bookitem takes in the equipment id quantity ordered the logged in user Identification number, and from time
     //It then calculates the remaining quantity after the order and then returns the remaining commodities number
     //***************************************************************************************************************//
     public Integer bookitem(Integer EqpId, Integer quantity, String useridentification, LocalDate fromtime, LocalDate Todate) throws SQLException {

@@ -129,7 +129,7 @@ public class HomeController implements Initializable {
        
         ((Node) event.getSource()).getScene().getWindow().hide();
          //this logingIn is a method in Functions1 class that checks existence of the user in the database
-        fnctns.logingIn(username, Password);
+        //fnctns.logingIn(username, Password);
                        }
         }
    
