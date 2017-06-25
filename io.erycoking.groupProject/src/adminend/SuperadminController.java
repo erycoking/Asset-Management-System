@@ -61,7 +61,7 @@ public class SuperadminController implements Initializable {
     private JFXTextField tfstaffrole;
     @FXML
     private JFXButton addbutton;
-    @FXML
+    @FXML 
     private JFXButton updatebutton;
     @FXML
     private Button deletebutton;
@@ -85,7 +85,7 @@ public class SuperadminController implements Initializable {
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.getIcons().add(new Image("file:images/matthews.jpg"));
-            stage.setTitle("These Are the Available Equipments and this is Your Identity Number If not please contact admin: "+useridentity);
+            stage.setTitle("This is the administators  page: "+useridentity);
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException ex) {
@@ -133,7 +133,7 @@ public class SuperadminController implements Initializable {
        rs.close();
        conn.close();
        
-        } catch (SQLException ex) {
+        }    catch (SQLException ex) {
             Logger.getLogger(SuperadminController.class.getName()).log(Level.SEVERE, null, ex);
         }
        

@@ -57,7 +57,7 @@ public class AddequipmentsController implements Initializable {
     private void addequipment(ActionEvent event) {
         try {
             //Create a connection to the database
-            if(!eqpquantity.getText().equals(" ")){
+            if(!eqpquantity.getText().equals("")){
             dbconnection dc;
             dc = new dbconnection();
             Connection conn = dbconnection.ConnectDB();
@@ -74,7 +74,8 @@ public class AddequipmentsController implements Initializable {
             else{
                 //test line
             System.out.println("you did not enter the quantity  field***at addequipmentscontroller line81");
-            }
+            JOptionPane.showMessageDialog(null, "Unsuccessful Equipment adding", "Add Equipment Fsiled", JOptionPane.INFORMATION_MESSAGE);
+                  }
             JOptionPane.showMessageDialog(null, "Successfully added '+eqpname.getText()+'The equipment", "Add Equipment", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(AddequipmentsController.class.getName()).log(Level.SEVERE, null, ex);

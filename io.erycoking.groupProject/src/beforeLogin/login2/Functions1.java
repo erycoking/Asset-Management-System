@@ -7,6 +7,7 @@ package beforeLogin.login2;
 
 import adminend.SuperadminController;
 import booking.AddequipmentsController;
+import technicians.PendingbookingsController;
 import booking.BooklayoutController;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,8 +51,7 @@ public class Functions1 {
 
             root = FXMLLoader.load(getClass().getResource("Index.fxml"));
             root.setStyle("-fx-background-color: #fb8c00");
-            //root.setBackground(Background.EMPTY);
-            //root.setBorder(Border.red);
+            
             root.getChildren().add(sp);
 
             scene = new Scene(root);
@@ -101,7 +101,6 @@ public class Functions1 {
         rs3.close();
         conn.close();
         JOptionPane.showMessageDialog(null, "Successful Booking of equipment", "Book Success", JOptionPane.INFORMATION_MESSAGE);
-
     }
 
     public void auditallocating(Integer bookid, String UserID, String allocatorId) throws SQLException {
@@ -116,11 +115,11 @@ public class Functions1 {
             Integer quantityallocated = 0;
             String allocating = " User/Technician +technician name+ allocated +username+:+ equipment+: quantity:5+quantityordered+ ";
 
-            rs = conn.createStatement().executeQuery("SELECT * FROM users WHERE staffID='" + allocatorId + "'");
+            rs = conn.createStatement().executeQuery("SELECT * FROM users WHERE staff_id='" + allocatorId + "'");
             if (rs.next()) {
                 allocatorname = rs.getString(2);
 
-                rs = conn.createStatement().executeQuery("SELECT * FROM users WHERE staffID='" + UserID + "'");
+                rs = conn.createStatement().executeQuery("SELECT * FROM users WHERE staff_id='" + UserID + "'");
                 while (rs.next()) {
                     USER = rs.getString(2);
                 }
@@ -137,9 +136,11 @@ public class Functions1 {
                 String inserting = " INSERT INTO Audittrail (`Userid`,`date_time`,`Activity`)VALUES('" + UserID + "',SYSDATE(),'" + booking + "')";
                 ps = conn.prepareStatement(inserting);
                 ps.execute();
-                System.out.println("Congratulations,You successfully audited the allocation");
+                //System.out.println("Congratulations,You successfully audited the allocation");
+                JOptionPane.showMessageDialog(null,"Successefuly Allocated the equipment", "Unbooking success", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                System.out.println("You are not logged in to allocate equipments here");
+               // System.out.println("You are not logged in to allocate equipments here");
+               JOptionPane.showMessageDialog(null,"Problem Auditing the Allocation","Auditing Problem",JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (SQLException ex) {
@@ -152,7 +153,7 @@ public class Functions1 {
              dbconnection dc = new dbconnection();
              PreparedStatement ps;
              Connection conn = dc.ConnectDB();
-             String action="Unbooked the previous booking of'" + equipment + "'+: Book  reference Number+'" + bookID + "'";
+             String action="Unbooked the previous booking of " + equipment + ": Book  reference Number " + bookID + " ";
             String inserting = " INSERT INTO Audittrail (`Userid`,`date_time`,`Activity`)VALUES('" + userID + "',SYSDATE(),'"+action+"')";
             ps = conn.prepareStatement(inserting);
             ps.execute();
@@ -160,18 +161,22 @@ public class Functions1 {
             JOptionPane.showMessageDialog(null,"Successefuly unbooked the equipment", "Unbooking success", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(Functions1.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Auditing failed/ Please report the issue", "System Error(Unbooking) ", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     public void logingIn(String username, String password) throws SQLException {
         dbconnection dc = new dbconnection();
          PreparedStatement ps;
+         String userIdentity;
+         String userid,name;
         Connection conn = dc.ConnectDB();
         rs = conn.createStatement().executeQuery("SELECT * FROM users where username='" + username + "' && password='" + password + "'");
         if (rs.next()) {
             //If there exists such a user the following is executed. and we need to pass the user ID to be able to monitor them
-            String UserIdentity = rs.getString(1);
-            String name = rs.getString("Name");
+            userIdentity  = rs.getString(1);
+             userid=rs.getString("staff_id");
+              name = rs.getString("Name");
             //Functions1 fnctns=new Functions1();
             //fnctns.
 
@@ -183,27 +188,31 @@ public class Functions1 {
                 case "superadmin":
                     //TESTING LINE
                     System.out.println("You are the super user/admin");
-                    superadmin.showstagetable(UserIdentity);
+                    superadmin.showstagetable(userIdentity);
                     break;
                 case "admin":
                     //the technicians window with priorities/responsibilities granted technician
-                    addeqpmn.showstage();
-                    bk.useridentity(UserIdentity);
+                   // addeqpmn.showstage();
+                    bk.useridentity(userIdentity);
+                    PendingbookingsController pending=new PendingbookingsController();
+                    pending.showpendingbookingslayout(userIdentity);
 
                     break;
                 default:
                     //method showstagetable is only shown if there are such credentials hence you wont view the next window if not logged in
-                    bk.showstagetable(UserIdentity, username);
+                   System.out.println("BEFORE STAGE"+ userIdentity +"THE USERS DETAILS"+username);
+                   bk.useridentity(userid);
+                    bk.showstagetable(userid,username);
                     //we call this method to return the logged in user's Id to keep track of them
-                    bk.useridentity(UserIdentity);
                     break;
 
             }
-            auditlogin(UserIdentity);
+            auditlogin(userIdentity);
 
         } else {
             conn.close();//close the connection before then output
-            System.out.println("THE credentials does not exist");
+            //System.out.println("THE credentials does not exist");
+            JOptionPane.showMessageDialog(null,"The credentials don't exist please check again","Error Login with credentials provided",JOptionPane.INFORMATION_MESSAGE);
 
         }
         //conn.close();//close the database connection
@@ -278,11 +287,11 @@ public class Functions1 {
         rs = conn.createStatement().executeQuery("SELECT * FROM bookedeqpmnts where BookID='" + bookid + "'");
         while (rs.next()) {
             equipmentId = rs.getInt(1);
-            quantityordered = rs.getInt(2);
-            fromdate = rs.getString(3);
-            todate = rs.getString(4);
+            quantityordered = rs.getInt(4);
+            fromdate = rs.getString(5);
+            todate = rs.getString(6);
             System.out.println("The from date is" + fromdate);
-            String inserting = " INSERT INTO allocatedeqpmnts(`eqpID`,`Userid`,`quantity`, `Fromdate_time`,`Todate_time`,`AllocatedbyID`)VALUES('" + equipmentId + "','" + userID + "','" + quantityordered + "','" + fromdate + "',SYSDATE(),'" + allocatorId + "')";
+            String inserting = " INSERT INTO allocatedeqpmnts(`eqpID`,`Userid`,`quantity`, `Fromdate_time`,`Todate_time`,`AllocatedbyID`,`BookID`)VALUES('" + equipmentId + "','" + userID + "','" + quantityordered + "','" + fromdate + "',SYSDATE(),'" + allocatorId + "','" + bookid + "')";
             ps = conn.prepareStatement(inserting);
             ps.execute();
             //after we allocate an equipment we have to remove it from the bookdequipments table

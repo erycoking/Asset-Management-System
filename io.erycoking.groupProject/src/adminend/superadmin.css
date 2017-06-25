@@ -12,12 +12,13 @@
 .labelstyle{
     -fx-background-color:greenyellow;
     -fx-background-radius:10,10;
+    -fx-font-weight: bold;
 }
 .mainFxmlClass{
     -fx-background-color:#9e9e9e;
 }
 .topmenu{
-  -fx-background-color:#303f9f  ;
+  -fx-background-color: linear-gradient(#2A5058, #61a2b1);
     -fx-background-radius:10,10;  
 }
 .sidebar{

@@ -121,13 +121,15 @@ public class BooklayoutController implements Initializable {
 //          String css = BooklayoutController.class.getResource("/booklayout.css").toExternalForm();
                  root1.getStylesheets().clear();
               // root1.getStylesheets().add(css);
+            
             stage.show();
+            
         } catch (IOException ex) {
             Logger.getLogger(Functions1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /*This method  loads data into the table view from the database*/
+    /*This method  loads unbooked data into the table view from the database*/
     @FXML
     public void loaddatafromdatabase() throws SQLException, IOException {
         dbconnection dc= new dbconnection();
@@ -140,7 +142,8 @@ public class BooklayoutController implements Initializable {
                 data.add(new Availabledetails(rs.getString(2), rs.getString(6), rs.getInt(5), rs.getString(7),rs.getString(4),rs.getInt(1),rs.getInt(3)));
             }
         }
-
+    
+//columnEquipments;
         columnEquipments.setCellValueFactory(new PropertyValueFactory<>("Equipment"));
         columnType.setCellValueFactory(new PropertyValueFactory<>("Type"));
         columnquantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -247,7 +250,7 @@ public class BooklayoutController implements Initializable {
             data = FXCollections.observableArrayList();
             //select from allocated table and get the allocator id, eqpmentId, Quantity, from and to dates
             //query equipments for eqpmntname ,from login for allocator.
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM allocatedeqpmnts where Userid='" + this.loggedinuserId() + "'");
+             ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM allocatedeqpmnts where Userid='" + this.loggedinuserId() + "'");
             while (rs.next()) {
                 ResultSet rs2 = conn.createStatement().executeQuery("SELECT * FROM equipments where eqpID='" + rs.getInt(1) + "'");
                 ResultSet rs3 = conn.createStatement().executeQuery("SELECT * FROM users where staff_id='" + rs.getString(6) + "'");
@@ -255,7 +258,9 @@ public class BooklayoutController implements Initializable {
                     if (rs3.next()) {
                         data.add(new Availabledetails(rs2.getString(2), rs3.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(1),rs.getInt("BookID")));
                     } else {
-                        columnallocated.setText("No items allocated yet");
+                        //columnallocated.setText("No items allocated yet");
+                        JOptionPane.showMessageDialog(null,"No allocated Equipments Yet for: "+useridentity,"No allocation Made recently",JOptionPane.INFORMATION_MESSAGE);
+                        tableallocated.setItems(null);
                     }
                 }
             }
@@ -293,6 +298,7 @@ public class BooklayoutController implements Initializable {
             //select from allocated table and get the allocator id, eqpmentId, Quantity, from and to dates
             //query equipments for eqpmntname ,from login for allocator.
             ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM bookedeqpmnts where Userid='" + this.loggedinuserId() + "'");
+            System.out.println("This is the loggedin user Id"+ this.loggedinuserId());
             while (rs.next()) {
                 ResultSet rs2 = conn.createStatement().executeQuery("SELECT * FROM equipments where eqpID='" + rs.getInt(3) + "'");
                 ResultSet rs3 = conn.createStatement().executeQuery("SELECT * FROM users where staff_id='" + rs.getString(2) + "'");
@@ -301,7 +307,7 @@ public class BooklayoutController implements Initializable {
                         data.add(new Availabledetails(rs2.getString(2), rs3.getString(2), rs.getInt(4), rs.getString(5), rs.getInt("eqpID"),rs.getInt("bookId")));
                       
                     } else {
-                        columnallocated.setText("No items allocated yet");
+                        columnallocated.setText("No items Booked yet");
                     }
                 }
             }

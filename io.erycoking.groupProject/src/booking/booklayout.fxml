@@ -16,7 +16,7 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="598.0">
                     <children>
-                        <TableView fx:id="tableitems" layoutY="-22.0" onMouseClicked="#loadvalues" prefHeight="340.0" prefWidth="598.0" style="-fx-background-color: black;" stylesheets="@booklayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tableitems" layoutY="-22.0" onMouseClicked="#loadvalues" prefHeight="340.0" prefWidth="598.0" styleClass="tableitems" stylesheets="@booklayout.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
                                 <TableColumn fx:id="columnEquipments" prefWidth="160.0" text="Equipment" />
                                 <TableColumn fx:id="columnType" prefWidth="112.0" text="Type" />
@@ -71,7 +71,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="344.0" prefWidth="580.0">
                <children>
-                  <TableView fx:id="tableallocated" layoutX="6.0" onMouseClicked="#onthetableclick" prefHeight="329.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableallocated" layoutX="6.0" onMouseClicked="#onthetableclick" prefHeight="329.0" prefWidth="553.0" styleClass="tableitems" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="columnallocated" prefWidth="152.0" text="Equipment" />
                       <TableColumn fx:id="columnquantityallocated" prefWidth="57.0" text="Quantity" />
