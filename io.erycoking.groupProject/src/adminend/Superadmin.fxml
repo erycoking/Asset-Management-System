@@ -11,61 +11,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="742.0" prefWidth="1438.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminend.SuperadminController">
+<AnchorPane id="AnchorPane" prefHeight="743.0" prefWidth="1414.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminend.SuperadminController">
     <stylesheets>
         <URL value="@superadmin.css" />
     </stylesheets>
    <children>
       <ScrollPane layoutX="221.0" layoutY="153.0" prefHeight="412.0" prefWidth="640.0">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="640.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="416.0" prefWidth="636.0">
                <children>
-                  <TableView fx:id="tableaudits" layoutX="2.0" layoutY="33.0" onMouseClicked="#tableClick" prefHeight="425.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableaudits" layoutX="2.0" layoutY="33.0" onMouseClicked="#tableClick" prefHeight="416.0" prefWidth="629.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="ColumnName" prefWidth="164.0" text="Name" />
-                        <TableColumn fx:id="ColumnUserId" prefWidth="64.0" text="User Id" />
-                        <TableColumn fx:id="ColumnDate" prefWidth="152.0" text="Date" />
-                        <TableColumn fx:id="ColumnActivity" prefWidth="238.0" text="Activity" />
+                        <TableColumn fx:id="ColumnUserId" prefWidth="138.0" text="User Id" />
+                        <TableColumn fx:id="ColumnDate" prefWidth="137.0" text="Date" />
+                        <TableColumn fx:id="ColumnActivity" prefWidth="179.0" text="Activity" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
-      <Button layoutX="1062.0" layoutY="23.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="77.0" text="&lt;&lt;&lt;--">
+      <Button layoutX="1279.0" layoutY="146.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="77.0" text="&lt;&lt;&lt;--">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Pane layoutY="76.0" prefHeight="666.0" prefWidth="200.0" styleClass="sidebar" stylesheets="@superadmin.css">
-         <children>
-            <Pane layoutX="-2.0" layoutY="-75.0" prefHeight="128.0" prefWidth="1438.0" styleClass="topmenu" stylesheets="@superadmin.css">
-               <children>
-                  <Label layoutX="315.0" layoutY="83.0" prefHeight="39.0" prefWidth="540.0" text="LAB ASSETS MANAGEMENT ADMINISTRATOR BACKEND" textFill="#fcfcfc">
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="128.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assetmanagement/images/images_006.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-      <GridPane layoutX="891.0" layoutY="237.0" prefHeight="260.0" prefWidth="370.0" styleClass="grid" stylesheets="@superadmin.css">
+      <GridPane layoutX="891.0" layoutY="237.0" prefHeight="330.0" prefWidth="398.0" styleClass="grid" stylesheets="@superadmin.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="68.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="302.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="212.0" minHeight="3.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="214.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="204.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="204.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="204.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label styleClass="textsfields" text="StaffName:" />
@@ -76,22 +60,28 @@
             <JFXTextField fx:id="tfstaffid" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <JFXTextField fx:id="tfstaffdepartment" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <JFXTextField fx:id="tfstaffrole" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <JFXTextField fx:id="tfusername" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <JFXTextField fx:id="tfpassword" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <JFXTextField fx:id="tfcontacts" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Contacts" GridPane.rowIndex="6" />
+            <Label styleClass="textsfields" text="Password" GridPane.rowIndex="5" />
+            <Label layoutX="10.0" layoutY="228.0" styleClass="textsfields" text="UserName" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Label layoutX="891.0" layoutY="141.0" prefHeight="84.0" prefWidth="370.0" styleClass="grid" text="Update, Add or Delete User, Click button Users to load the Users" />
-      <HBox layoutX="901.0" layoutY="513.0" prefHeight="39.0" prefWidth="281.0">
+      <HBox layoutX="902.0" layoutY="593.0" prefHeight="39.0" prefWidth="281.0">
          <children>
-            <JFXButton prefHeight="40.0" prefWidth="83.0" text="Save">
+            <JFXButton fx:id="addbutton" onAction="#adduser" prefHeight="40.0" prefWidth="83.0" text="Save">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton prefHeight="25.0" prefWidth="80.0" text="Update">
+            <JFXButton fx:id="updatebutton" onAction="#updateuser" prefHeight="25.0" prefWidth="80.0" text="Update">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </JFXButton>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="78.0" text="Delete">
+            <Button fx:id="deletebutton" mnemonicParsing="false" onAction="#deleteuser" prefHeight="39.0" prefWidth="78.0" text="Delete">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
@@ -103,5 +93,18 @@
       </HBox>
       <Button layoutX="634.0" layoutY="600.0" mnemonicParsing="false" onAction="#retrieveAudits" text="Audit Records" />
       <Button layoutX="741.0" layoutY="600.0" mnemonicParsing="false" onAction="#retrieveUsers" prefHeight="25.0" prefWidth="68.0" text="Users" />
+      <Label layoutX="-7.0" layoutY="51.0" prefHeight="692.0" prefWidth="215.0" styleClass="sidebar" />
+      <Label layoutX="-2.0" layoutY="7.0" prefHeight="128.0" prefWidth="1401.0" styleClass="topmenu" text="                                     LAB ASSETS MANAGEMENT ADMINISTRATOR BACKEND " textFill="#e8e4e4">
+         <graphic>
+            <ImageView fitHeight="128.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assetmanagement/images/images_006.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="29.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

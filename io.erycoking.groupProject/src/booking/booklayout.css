@@ -23,10 +23,16 @@ and open the template in the editor.
   -fx-background-color:#303f9f  ;
     -fx-background-radius:10,10;  
 }
+.topmenu :hover{
+    -fx-background-color:#388e3c;
+}
 .sidebar{
     -fx-background-color:black ;
     -fx-background-radius:10,10;   
    
+}
+.sidebar :hover{
+    -fx-background-color:#388e3c;
 }
 .topcornerleft{
     -fx-background-image: url("/assetmanagement/images/images_008.png");

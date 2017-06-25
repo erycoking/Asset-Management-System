@@ -44,3 +44,6 @@
     -fx-margin:4px;
    margin-bottom: 4px;
 }
+.button:hover{
+    -fx-background-color:#388e3c;
+}

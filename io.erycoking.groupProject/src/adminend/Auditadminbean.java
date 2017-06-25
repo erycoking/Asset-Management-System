@@ -24,30 +24,30 @@ public class Auditadminbean {
     private final StringProperty role;
     private final StringProperty date;
     private final StringProperty department;
-    private final IntegerProperty Id;
-    private final IntegerProperty BookID;
+    private final StringProperty Id;
+    private final StringProperty BookID;
     //private final DoubleProperty Quantity;
 
-    public Auditadminbean(String name, String activity, String date) {
+    public Auditadminbean(String name, String userid,String activity, String date) {
         this.name = new SimpleStringProperty(name);
         this.activity = new SimpleStringProperty(activity);
-        this.role = null;
+        this.role = new SimpleStringProperty(date);
         this.date= new SimpleStringProperty(date);
-        this.Id = null;
-         this.BookID = null;
-         this.department=null;
+        this.Id = new SimpleStringProperty(userid);
+         this.BookID = new SimpleStringProperty(userid);
+         this.department=new SimpleStringProperty(userid);
     }
     //constructor used for Users
      //USERRS name,Id,,department, role
-     public Auditadminbean(String name, String department, Integer id,String role) {
+    /* public Auditadminbean(String name, String department, String id,String role) {
         this.name = new SimpleStringProperty(name);
         this.activity = null;
         this.role = new SimpleStringProperty(role);
         this.date= null;
-        this.Id = new SimpleIntegerProperty(id);
+        this.Id = new SimpleStringProperty(id);
          this.BookID = null;
          this.department=new SimpleStringProperty(department);
-    }
+    }*/
    /*public Auditadminbean(String Equipment, String Type, Integer quantity, String Available,String details,Integer Id,Integer BookID) {
         this.Equipment = new SimpleStringProperty(Equipment);
         this.Type = new SimpleStringProperty(Type);
@@ -67,10 +67,10 @@ public class Auditadminbean {
     public String getDepartment() {
         return department.get();
     }
-    public Integer getId() {
+    public String getId() {
         return Id.get();
     }
-     public Integer getBookID() {
+     public String getBookID() {
         return BookID.get();
     }
 
@@ -104,10 +104,10 @@ public class Auditadminbean {
         role.set(value);
     }
 
-    public void setId(Integer value) {
+    public void setId(String value) {
         Id.set(value);
     }
-    public void setBookID(Integer value) {
+    public void setBookID(String value) {
         BookID.set(value);
     }
 

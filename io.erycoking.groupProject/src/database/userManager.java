@@ -1,11 +1,11 @@
 package database;
 
+import database.bean.user;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import database.bean.user;
 
 public class userManager {
 
@@ -17,7 +17,7 @@ public class userManager {
 
     public boolean insert(user usr) throws SQLException, ClassNotFoundException {
 
-        sql = "INSERT INTO `asset_management`.`users`(`staff_id`,`Name`,`password`,`faculty`,`department`,`telephone_no`)VALUES(?,?,?,?,?,?)";
+        sql = "INSERT INTO `asset_management`.`users`(`staff_id`,`Name`,`password`,`faculty`,`department`,`telephone_no`, `email`, `role`)VALUES(?,?,?,?,?,?,?,?)";
 
         try {
             conn = connectionManager.getInstance().getConnection();
@@ -29,7 +29,7 @@ public class userManager {
             st.setString(5, usr.getDepartment());
             st.setInt(6, usr.getTel_no());
             st.setString(7, usr.getEmail());
-            st.setString(8, usr.getRole());
+            st.setString(8, "member");
 
             int affected = st.executeUpdate();
             if (affected == 1) {
@@ -141,7 +141,7 @@ public class userManager {
             st.setInt(5, usr.getTel_no());
             st.setString(6, usr.getStaff_id());
             st.setString(7, usr.getEmail());
-            st.setString(8, usr.getRole());
+//            st.setString(8, usr.getRole());
 
             int affected = st.executeUpdate();
             if (affected == 1) {

@@ -6,6 +6,7 @@
 package adminend;
 
 import beforeLogin.login2.dbconnection;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +25,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -57,6 +59,18 @@ public class SuperadminController implements Initializable {
     private JFXTextField tfstaffdepartment;
     @FXML
     private JFXTextField tfstaffrole;
+    @FXML
+    private JFXButton addbutton;
+    @FXML
+    private JFXButton updatebutton;
+    @FXML
+    private Button deletebutton;
+    @FXML
+    private JFXTextField tfusername;
+    @FXML
+    private JFXTextField tfpassword;
+    @FXML
+    private JFXTextField tfcontacts;
 
     /**
      * Initializes the controller class.
@@ -85,9 +99,9 @@ public class SuperadminController implements Initializable {
         //Auditadminbean available= new Auditadminbean();
         Auditadminbean available=tableaudits.getSelectionModel().getSelectedItem();
         tfstaffname.setText(available.getName());
-        tfstaffid.setText(available.getName());
+        tfstaffid.setText(available.getId());
         tfstaffdepartment.setText(available.getActivity());
-        tfstaffrole.setText(available.getActivity());
+        tfstaffrole.setText(available.getRole());
             }
 //Calledwhen the user/admin wants to view the audits
     @FXML
@@ -104,12 +118,15 @@ public class SuperadminController implements Initializable {
               //  data.add(new Auditadminbean())
               ResultSet rs2=conn.createStatement().executeQuery("SELECT * FROM users WHERE staff_id='"+rs.getString(2)+"'");
               if(rs2.next()){
-               data.add(new Auditadminbean(rs2.getString(2),rs.getString(3),rs.getString(4)));
+               data.add(new Auditadminbean(rs2.getString(2),rs2.getString(1),rs.getString(4),rs.getString(3)));
             }
             }
             ColumnName.setText("UserIdentity");
+            ColumnUserId.setText("Staff Id");
+            ColumnDate.setText("Date");
+            ColumnActivity.setText("Activity");
         ColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-       ColumnUserId.setCellValueFactory(new PropertyValueFactory<>("name"));
+       ColumnUserId.setCellValueFactory(new PropertyValueFactory<>("Id"));
        ColumnActivity.setCellValueFactory(new PropertyValueFactory<>("activity"));
        ColumnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
        tableaudits.setItems(data);
@@ -130,7 +147,7 @@ public class SuperadminController implements Initializable {
         ResultSet rs=conn.createStatement().executeQuery("SELECT* FROM users");
         data=FXCollections.observableArrayList();
         while(rs.next()){
-        data.add(new Auditadminbean(rs.getString(2),rs.getString(6),rs.getInt(7),rs.getString(9)));
+        data.add(new Auditadminbean(rs.getString(2),rs.getString(6),rs.getString(1),rs.getString(9)));
        
         }
         ColumnName.setText("Staff Name");
@@ -138,7 +155,7 @@ public class SuperadminController implements Initializable {
         ColumnActivity.setText("Department");
         ColumnDate.setText("Staff Role");
         ColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        ColumnUserId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ColumnUserId.setCellValueFactory(new PropertyValueFactory<>("activity"));
         ColumnActivity.setCellValueFactory(new PropertyValueFactory<>("department"));
        ColumnDate.setCellValueFactory(new PropertyValueFactory<>("role"));
         tableaudits.setItems(data);
@@ -146,6 +163,27 @@ public class SuperadminController implements Initializable {
         catch(SQLException ex){
         Logger.getLogger(SuperadminController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void adduser(ActionEvent event) {
+       String staffname= tfstaffname.getText();
+        String staffID=tfstaffid.getText();
+        String staffdepartment=tfstaffdepartment.getText();
+        String staffrole=tfstaffrole.getText();
+        String username=tfusername.getText();
+        String password=tfpassword.getText();
+        String contacts=tfcontacts.getText();
+        //adminfunctions add= new adminfunctions();
+        adminfunctions.adduser(staffname,staffID,staffdepartment,staffrole,username,password,contacts);
+    }
+
+    @FXML
+    private void updateuser(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteuser(ActionEvent event) {
     }
     
 }
