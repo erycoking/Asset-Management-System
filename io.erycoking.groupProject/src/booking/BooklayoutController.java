@@ -117,7 +117,7 @@ public class BooklayoutController implements Initializable {
             stage.getIcons().add(new Image("file:images/matthews.jpg"));
             stage.setTitle("These Are the Available Equipments and this is Your Identity Number If not please contact admin:" + UserID + usersname.toUpperCase());
           stage.setScene(new Scene(root1));
-//          String css = BooklayoutController.class.getResource("/booklayout.css").toExternalForm();
+          String css = BooklayoutController.class.getResource("booklayout.css").toExternalForm();
                  root1.getStylesheets().clear();
               // root1.getStylesheets().add(css);
             
