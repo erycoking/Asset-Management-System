@@ -7,16 +7,75 @@ and open the template in the editor.
     Created on : Apr 29, 2017, 12:12:06 PM
     Author     : Matthews
 */
-
-.tableitems{
- 
-   -fx-background-color: blue;
+.tableitems{ 
+   -fx-base:#a9a9a9; /* base colour */
+-fx-control-inner-background:#000000; /* background colour */
+-fx-table-cell-border-color: transparent; /* border colour */
+-fx-table-header-border-color: transparent; /* header border colour */   
+}
+.tableitems:row-selection, /* set selection properties */
+.tableitems:col-selection {
+-fx-background-color: transparent; /* make transparent */
+-fx-text-fill: #444349; /* change selection colour */
+}
+.tableitems.column-header-background {
+-fx-background-color: transparent; /* make header transparent */
+} .tableitems.column-header, /* remove borders for table contents */
+.tableitems.filler {
+-fx-border-color: transparent;
+-fx-background-color: transparent;
+}
+.tableitems.column-header .label { /* set properties of header label */
+-fx-text-fill: #f2f2f2;
+-fx-font-size: 18pt; /* increase font size (from 12pt) */
 }
 .labelstyle{
-    -fx-background-color:greenyellow;
+    -fx-background-color:#bbdefb ;  
     -fx-background-radius:10,10;
+    -fx-font-weight: bold;
+    text-indent: 50px;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5),0,0,0,1 );
+}
+.labelstyle:hover{
+     -fx-background-color:#388e3c;
+     
+    
 }
 .mainFxmlClass{
-     -fx-background-color:#e0e0e0;
+ 
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1,#bbdefb);
 }
+.topmenu{
+  
+  -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+    -fx-background-radius:10,10; 
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5),0,0,0,1 );
 }
+.topmenu :hover{
+    -fx-background-color:#388e3c;
+    
+
+}
+.sidebar{
+  
+  -fx-background-color: linear-gradient(#2A5058, #303f9f);
+      -fx-background-radius:10,10;   
+   
+}
+.sidebar :hover{
+    -fx-background-color:#388e3c;
+}
+.topcornerleft{
+    -fx-background-image: url("/assetmanagement/images/images_008.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+}
+.textsfields{
+    -fx-text-fill:blue;
+   -fx-font-weight:bold;
+    -fx-underline: true;
+    -fx-background-radius:6,6,6,6;
+}
+.textsfields:hover{
+     -fx-background-color:#388e3c;
+    }

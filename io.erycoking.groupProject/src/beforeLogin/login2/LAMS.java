@@ -5,7 +5,6 @@
  */
 package beforeLogin.login2;
 
-import booking.BooklayoutController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

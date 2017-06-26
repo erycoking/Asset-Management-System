@@ -5,13 +5,12 @@
  *It also helps the technician view his specific completed, cleared and pending bookings which he/she is responsible over 
  */
 package technicians;
-
-
 import beforeLogin.login2.Functions1;
 import beforeLogin.login2.dbconnection;
 import booking.AddequipmentsController;
 import booking.Bookingsdetails;
 import booking.BooklayoutController;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +18,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +42,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -44,8 +50,11 @@ import javafx.stage.Stage;
  * @author Matthews
  */
 public class PendingbookingsController implements Initializable {
+    
 
+    private static String useridentity;
     private ObservableList<Bookingsdetails> data;
+    private ObservableList<allocatedequipmentsmodel> allocateddetailsdata;
     @FXML
     private TableView<Bookingsdetails> bookeditemstable;
     @FXML
@@ -90,17 +99,41 @@ public class PendingbookingsController implements Initializable {
      * Initializes the controller class.
      */
      BooklayoutController bk;
+    @FXML
+    private JFXButton allocatedbtn;
+    @FXML
+    private JFXButton returneqpmntbtn;
+    @FXML
+    private TableView<allocatedequipmentsmodel> allocateditemstable;
+    @FXML
+    private TableColumn<allocatedequipmentsmodel, String> bookedEquipments1;
+    @FXML
+    private TableColumn<allocatedequipmentsmodel, String> Quantityordered1;
+    @FXML
+    private TableColumn<allocatedequipmentsmodel, String> orderedBy1;
+    @FXML
+    private TableColumn<allocatedequipmentsmodel, String> Fromtime1;
+    @FXML
+    private TableColumn<allocatedequipmentsmodel, String> Totime1;
+    @FXML
+    private TableColumn<allocatedequipmentsmodel, String> EquipmentCost1;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+public static void userlogggedin(String useridentity) {
+     PendingbookingsController.useridentity=useridentity;   
+    }
+public String loggedinuserid(){
+    return useridentity;
+}
 
     @FXML
     public void showpendingbookings() {
         try {
             dbconnection dc;
             dc = new dbconnection();
-            Connection conn = dc.ConnectDB();
+            Connection conn = dbconnection.ConnectDB();
             data = FXCollections.observableArrayList();
             //query both tables that we need their data that is the equipments and booked equipments where the eqpment Ids matches
             ResultSet rs = conn.createStatement().executeQuery("select equipments.*, bookedeqpmnts.* from  equipments, bookedeqpmnts\n"
@@ -144,13 +177,15 @@ public class PendingbookingsController implements Initializable {
 
     }
 
-    public void showpendingbookingslayout() {
+    public void showpendingbookingslayout(String useridentity) {
 
         try {
+            PendingbookingsController.userlogggedin(useridentity);
             FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("Pendingbookings.fxml"));
             Parent root2 = (Parent) fxmlLoader2.load();
             Stage stage2 = new Stage();
-            stage2.setTitle("Administrator Only should see  this pending bookings");
+            stage2.setTitle("Administrator Page for pending bookings");
+           
             stage2.setScene(new Scene(root2));
             stage2.show();
 
@@ -199,6 +234,7 @@ public class PendingbookingsController implements Initializable {
             String userId= labelkorderuserId.getText();
              bk= new BooklayoutController();
             String loggedinuserId=bk.loggedinuserId();
+            
             //testing line... works as expected
             System.out.println("the logged in user"+loggedinuserId);
             Integer allocate=this.returnbookidselected();
@@ -212,6 +248,115 @@ public class PendingbookingsController implements Initializable {
   public void addshowallequipments(){
    AddequipmentsController add=new  AddequipmentsController();
         add.showstage();
+    }
+
+    @FXML
+    private void retrieveallocatedequipments(ActionEvent event) {
+            try {
+            dbconnection dc;
+            dc = new dbconnection();
+            Connection conn = dbconnection.ConnectDB();
+           // ObservableList<allocatedequipmentsmodel> allocateddetailsdata;
+            //data = FXCollections.observableArrayList();
+            allocateddetailsdata=FXCollections.observableArrayList();
+            ResultSet rs=conn.createStatement().executeQuery("select * from allocatedeqpmnts");
+            if(rs.next()){
+              //allocatedeqpmnts(`eqpID`,`Userid`,`quantity`, `Fromdate_time`,`Todate_time`,`AllocatedbyID`,`BookID`)VALUES('" + equipmentId + "','" + userID + "','" + quantityordered + "','" + fromdate + "',SYSDATE(),'" + allocatorId + "','" + bookid + "')";
+          
+            /*DateFormat df= new SimpleDateFormat("MM/dd/YYYY");
+            Date from,To;
+            try{
+            from=df.parse(rs.getString(4));
+            To=df.parse(rs.getString(5));
+            LocalDate eventfromdate =new LocalDate(from);
+            LocalDate eventtodate= To;
+            
+            Days.daysBetween(from,To);
+            }   catch (ParseException ex) {
+                    Logger.getLogger(PendingbookingsController.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
+            //if( rs3.next() && rs4.next()){
+          while(rs.next()){
+            ResultSet rs2=conn.createStatement().executeQuery("select * from equipments where eqpID='"+rs.getString("eqpID")+"'");
+           //allocated person details
+            ResultSet rs3=conn.createStatement().executeQuery("select * from users where staff_id='"+rs.getString("userid")+"'");
+          //for allocator details
+          ResultSet rs4=conn.createStatement().executeQuery("select * from users where staff_id='"+rs.getString(6)+"'");
+          if(rs2.next() && rs3.next() && rs4.next()){
+  allocateddetailsdata.add(new allocatedequipmentsmodel(
+            rs2.getString(2),rs.getString("eqpID"),rs3.getString("Name"), rs.getString("userid"),
+            rs4.getString("Name"),rs.getString(6), rs.getString(3), rs.getString(4), rs.getString(5),
+            rs.getString("AllocationNumber")));
+          }
+          }    
+          
+             bookedEquipments1.setCellValueFactory(new PropertyValueFactory<>("equipmentname"));//name
+            Fromtime1.setCellValueFactory(new PropertyValueFactory<>("fromdate"));
+            Quantityordered1.setCellValueFactory(new PropertyValueFactory<>("quantityAllocated"));
+            orderedBy1.setCellValueFactory(new PropertyValueFactory<>("allocatedToName"));
+            Totime1.setCellValueFactory(new PropertyValueFactory<>("todate"));
+             EquipmentCost1.setCellValueFactory(new PropertyValueFactory<>("allocatedByName"));
+            allocateditemstable.setItems(null);
+            allocateditemstable.setItems(allocateddetailsdata);
+        
+            
+            }
+            else{
+            JOptionPane.showMessageDialog(null,"No items allocated yet","Null allocations made ",JOptionPane.INFORMATION_MESSAGE);
+            }
+            rs.close();
+            conn.close();
+            
+         } catch (SQLException ex) {
+            Logger.getLogger(PendingbookingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void returnequipment(ActionEvent event) {
+        try {
+            dbconnection dc;
+            dc = new dbconnection();
+            Connection conn = dbconnection.ConnectDB();
+            PreparedStatement ps;
+            //
+            allocatedequipmentsmodel tablerowclicked = allocateditemstable.getSelectionModel().getSelectedItem();
+            tablerowclicked.getClass();
+            tablerowclicked.getAlloctionId();
+            String Equipment=txfdequipment.getText();
+            String returneqpmnt = "DELETE FROM allocatedeqpmnts WHERE AllocationNumber= '"+tablerowclicked.getAlloctionId()+"' ";
+            ps=conn.prepareStatement(returneqpmnt);
+            //since the .execute() method returns true if it is a resultset and false if not resultset or simply if it was an update
+            //like delete or update query has been executed
+           if( ps.execute()==false){
+               String ReturnEquipment= "System User" + tablerowclicked.getAllocatedByName()+ ": Returned" +  tablerowclicked.getEquipmentname()+" Quantity :"+ tablerowclicked.getQuantityAllocated()+" "+ ": Earlier Borrowed By:" +  tablerowclicked.getAllocatedToName() + ": Of ID number " +  tablerowclicked.getAllocatedToId() + " ";
+                String inserting = " INSERT INTO Audittrail (`Userid`,`date_time`,`Activity`)VALUES('" +this.loggedinuserid() + "',SYSDATE(),'" + ReturnEquipment + "')";
+                ps= conn.prepareStatement(inserting);
+                ps.execute();
+           JOptionPane.showMessageDialog(null,"Successfully Returned the equipment","Successful Return of Equipment",JOptionPane.INFORMATION_MESSAGE);
+           }
+           else{
+           JOptionPane.showMessageDialog(null,"System Failure Retruning the equipment '"+tablerowclicked.getAlloctionId()+"'","Failure Return of Equipment",JOptionPane.INFORMATION_MESSAGE);
+                      }
+            //Integer cost= Integer.parseInt(labeleqpcost.getText());
+            String fromtime=labelfromtime.getText();
+            String totime=labeltotime.getText();
+            //Integer quantity=Integer.parseInt(labelquantity.getText());
+            //Integer userId=Integer.parseInt( labelkorderuserId.getText());
+            // this is the user who had borrowed the equipment
+            String userId= labelkorderuserId.getText();
+            bk= new BooklayoutController();
+            String loggedinuserId=bk.loggedinuserId();
+            
+            //testing line... works as expected
+            System.out.println("the logged in user"+loggedinuserId);
+            System.out.println(tablerowclicked.getClass());
+            //Integer allocate=this.returnbookidselected();
+            //we pass the bookid, userId of whoever booked it before and the logged in technician or allocator Id
+            // fnctns.allocateequipment(allocate,userId,loggedinuserId);
+        } catch (SQLException ex) {
+            Logger.getLogger(PendingbookingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

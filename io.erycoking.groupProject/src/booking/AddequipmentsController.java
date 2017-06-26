@@ -7,8 +7,6 @@ package booking;
 
 import beforeLogin.login2.dbconnection;
 import com.jfoenix.controls.JFXTextField;
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -23,15 +21,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-
-
 /**
  
  * @author Matthews
@@ -53,7 +45,7 @@ public class AddequipmentsController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb){
     
     } 
     /**
@@ -65,10 +57,10 @@ public class AddequipmentsController implements Initializable {
     private void addequipment(ActionEvent event) {
         try {
             //Create a connection to the database
-            if(!eqpquantity.getText().equals(" ")){
+            if(!eqpquantity.getText().equals("")){
             dbconnection dc;
             dc = new dbconnection();
-            Connection conn = dc.ConnectDB();
+            Connection conn = dbconnection.ConnectDB();
             PreparedStatement pst;
             String insert="INSERT INTO EQUIPMENTS (eqpname, eqpcost, eqpdetails, quantity,eqpcategory,date_created)VALUES('"+eqpname.getText()+"',  10000, '"+eqpdetails.getText()+"','"+eqpquantity.getText()+"','"+eqpcategory.getText()+"',SYSDATE())" ;
             pst = conn.prepareStatement(insert);   
@@ -82,7 +74,8 @@ public class AddequipmentsController implements Initializable {
             else{
                 //test line
             System.out.println("you did not enter the quantity  field***at addequipmentscontroller line81");
-            }
+            JOptionPane.showMessageDialog(null, "Unsuccessful Equipment adding", "Add Equipment Fsiled", JOptionPane.INFORMATION_MESSAGE);
+                  }
             JOptionPane.showMessageDialog(null, "Successfully added '+eqpname.getText()+'The equipment", "Add Equipment", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(AddequipmentsController.class.getName()).log(Level.SEVERE, null, ex);

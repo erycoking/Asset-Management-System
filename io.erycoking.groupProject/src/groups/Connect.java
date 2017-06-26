@@ -7,34 +7,27 @@ package groups;
 
 /**
  *
- * @author philnzau
+ * @author makwata
  */
-
-/*
-*Connecting to the database is done here
-*
-*/
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Connection;
 
+// this class connects to the database
 public class Connect {
     
-    static final String JDBC_URL = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/asm?autoReconnect=true&useSSL=false";
+    Connection conn = null;
     
-    static final String User = "username";
-    static final String Pass = "password";
-    
+    // returns a connection to the database
     public static Connection ConnectDB() {
-       try {
-        Class.forName(JDBC_URL);
-        Connection conn = DriverManager.getConnection(DB_URL, User, Pass);
-        return conn;
-       }
-       catch(ClassNotFoundException | SQLException se) {
-         System.err.println("Error connecting to db : "+se);
-         return null;
-       }
+        try {
+          Class.forName("com.mysql.jdbc.Driver");
+          Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/asset_management?autoReconnect=true&useSSL=false", "root", "geek");
+          return conn;
+        }
+        catch(SQLException | ClassNotFoundException se) {
+           System.out.println("Error connecting to db : "+se);
+           return null;
+        }
     }
 }

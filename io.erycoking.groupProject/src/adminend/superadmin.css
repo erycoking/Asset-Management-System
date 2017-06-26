@@ -9,3 +9,42 @@
 .tableitems{
    -fx-background-radius:10,10;
 }
+.labelstyle{
+    -fx-background-color:greenyellow;
+    -fx-background-radius:10,10;
+    -fx-font-weight: bold;
+}
+.mainFxmlClass{
+    -fx-background-color:#9e9e9e;
+}
+.topmenu{
+  -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+    -fx-background-radius:10,10;  
+}
+.sidebar{
+    -fx-background-color:black ;
+    -fx-background-radius:10,10;   
+   
+}
+.topcornerleft{
+    -fx-background-image: url("/assetmanagement/images/images_008.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+}
+.textsfields{
+    -fx-text-fill:blue;
+    -fx-background-color:white;
+    -fx-background-radius:6,6,6,6;
+}
+.grid{
+    -fx-background-color:white;
+     -fx-background-radius:5,5;  
+}
+.button{
+    -fx-background-color:blueviolet;
+    -fx-margin:4px;
+   margin-bottom: 4px;
+}
+.button:hover{
+    -fx-background-color:#388e3c;
+}

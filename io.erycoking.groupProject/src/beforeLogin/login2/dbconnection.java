@@ -5,7 +5,6 @@
  */
 package beforeLogin.login2;
 
-import database.connectionManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,7 +20,8 @@ public class dbconnection {
              try{
            
           Class.forName("com.mysql.jdbc.Driver");
-          Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/equipment"+"?verifyServerCertificate=false"+"&useSSL=false"+"&requireSSL=false","grace","grace");
+          
+          Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/asset_management","root","geek");
        //   Connection con = connectionManager.getInstance().getConnection();
           return con;
             
@@ -31,5 +31,5 @@ public class dbconnection {
     }      
 }
 
-    
+        
 }

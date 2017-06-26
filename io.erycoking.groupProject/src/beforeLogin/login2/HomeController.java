@@ -8,13 +8,8 @@ package beforeLogin.login2;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,22 +18,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 //import lams.Equipments.Equipments;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
-//import views.Availablelequipments;
-//import views.BooklayoutController;
-//import views.booklayout.fxml;
 
 /**
  *
@@ -142,11 +129,11 @@ public class HomeController implements Initializable {
        
         ((Node) event.getSource()).getScene().getWindow().hide();
          //this logingIn is a method in Functions1 class that checks existence of the user in the database
+         System.out.println("the users logged in details"+username +Password);
         fnctns.logingIn(username, Password);
-                       }
-        }
-   
-        
+                     }
+        }    
         
     }
 
+ 
