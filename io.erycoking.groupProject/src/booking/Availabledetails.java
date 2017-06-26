@@ -50,10 +50,12 @@ public class Availabledetails {
     public String getDetails() {
         return Details.get();
     }
+
     public Integer getId() {
         return Id.get();
     }
-     public Integer getBookID() {
+
+    public Integer getBookID() {
         return BookID.get();
     }
 
@@ -76,9 +78,11 @@ public class Availabledetails {
     public void setType(String value) {
         Type.set(value);
     }
- public void setDetails(String value) {
+
+    public void setDetails(String value) {
         Details.set(value);
     }
+
     public void setEquipment(String value) {
         Equipment.set(value);
     }
@@ -90,6 +94,7 @@ public class Availabledetails {
     public void setId(Integer value) {
         Id.set(value);
     }
+
     public void setBookID(Integer value) {
         BookID.set(value);
     }

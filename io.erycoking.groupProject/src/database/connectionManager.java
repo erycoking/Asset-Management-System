@@ -8,9 +8,9 @@ public class connectionManager {
 	
 	private static connectionManager instance = null;
 
-        private final String db = "jdbc:mysql://localhost:3306/asset_management?autoReconnect=true&useSSL=false";
+        private final String db = "jdbc:mysql://localhost:3306/asset_management?autoReconnect=true&&useSSL=false";
 	private final String username = "root";
-	private final String password = "geek";
+	private final String password = "king";
 	
 	private static Connection conn  = null;
 	

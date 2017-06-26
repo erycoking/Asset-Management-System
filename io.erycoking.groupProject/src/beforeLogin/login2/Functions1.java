@@ -7,8 +7,18 @@ package beforeLogin.login2;
 
 import adminend.SuperadminController;
 import booking.AddequipmentsController;
-import technicians.PendingbookingsController;
 import booking.BooklayoutController;
+import database.bean.user;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
+import technicians.PendingbookingsController;
+
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,14 +28,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -165,56 +167,64 @@ public class Functions1 {
         }
     }
 
-    public void logingIn(String username, String password) throws SQLException {
-        dbconnection dc = new dbconnection();
-         PreparedStatement ps;
-         String userIdentity;
-         String userid,name;
-        Connection conn = dc.ConnectDB();
-        rs = conn.createStatement().executeQuery("SELECT * FROM users where username='" + username + "' && password='" + password + "'");
-        if (rs.next()) {
+    public void logingIn(user usr) throws SQLException {
+//        dbconnection dc = new dbconnection();
+//         PreparedStatement ps;
+//         String userIdentity;
+//         String userid,name;
+//        Connection conn = dc.ConnectDB();
+//        rs = conn.createStatement().executeQuery("SELECT * FROM users where username='" + username + "' && password='" + password + "'");
+//        if (rs.next()) {
             //If there exists such a user the following is executed. and we need to pass the user ID to be able to monitor them
-            userIdentity  = rs.getString(1);
-             userid=rs.getString("staff_id");
-              name = rs.getString("Name");
+            String userIdentity  = usr.getStaff_id();
+//             userid=rs.getString("staff_id");
+//              name = rs.getString("Name");
             //Functions1 fnctns=new Functions1();
             //fnctns.
 
             BooklayoutController bk = new BooklayoutController();
             AddequipmentsController addeqpmn = new AddequipmentsController();
             SuperadminController superadmin = new SuperadminController();
-            switch (rs.getString("role")) {
+            //test line
+        System.out.println("The users role is :"+usr.getRole());
+
+            switch (usr.getRole()) {
                 //display the window with the priorities of a super admin
-                case "superadmin":
+                case "admin":
                     //TESTING LINE
                     System.out.println("You are the super user/admin");
                     superadmin.showstagetable(userIdentity);
                     break;
-                case "admin":
+                case "labtech":
                     //the technicians window with priorities/responsibilities granted technician
                    // addeqpmn.showstage();
+                    System.out.println("You are the lab technician");
                     bk.useridentity(userIdentity);
                     PendingbookingsController pending=new PendingbookingsController();
                     pending.showpendingbookingslayout(userIdentity);
-
                     break;
+//                case "member":
+//                    //method showstagetable is only shown if there are such credentials hence you wont view the next window if not logged in
+//                    System.out.println("BEFORE STAGE"+ userIdentity +"THE USERS DETAILS"+usr.getName());
+//                    bk.useridentity(usr.getStaff_id());
+//                    bk.showstagetable(usr.getStaff_id(),usr.getName());
+//                    //we call this method to return the logged in user's Id to keep track of them
+//                    break;
                 default:
                     //method showstagetable is only shown if there are such credentials hence you wont view the next window if not logged in
-                   System.out.println("BEFORE STAGE"+ userIdentity +"THE USERS DETAILS"+username);
-                   bk.useridentity(userid);
-                    bk.showstagetable(userid,username);
-                    //we call this method to return the logged in user's Id to keep track of them
-                    break;
-
+                    System.out.println("BEFORE STAGE"+ userIdentity +"THE USERS DETAILS"+usr.getName());
+                    bk.useridentity(usr.getStaff_id());
+                    bk.showstagetable(usr.getStaff_id(),usr.getName());
+                    //we call this method to return the logged in user's Id to keep track of them                    break;
             }
             auditlogin(userIdentity);
 
-        } else {
-            conn.close();//close the connection before then output
-            //System.out.println("THE credentials does not exist");
-            JOptionPane.showMessageDialog(null,"The credentials don't exist please check again","Error Login with credentials provided",JOptionPane.INFORMATION_MESSAGE);
-
-        }
+//        } else {
+//            conn.close();//close the connection before then output
+//            //System.out.println("THE credentials does not exist");
+//            JOptionPane.showMessageDialog(null,"The credentials don't exist please check again","Error Login with credentials provided",JOptionPane.INFORMATION_MESSAGE);
+//
+//        }
         //conn.close();//close the database connection
     }
 
