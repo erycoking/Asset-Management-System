@@ -45,7 +45,7 @@ public class connect{
                 Integer quantity=rs.getInt("quantity");
                 Integer cost=rs.getInt("cost");
                 
-               data.add(new Equipment(callid,name,quantity,cost));
+              // data.add(new Equipment(callid,name,quantity,cost));
                
               System.out.println("CallID: "+callid+"  "+"name: "+name+"  "+"quantity: "+quantity+ "  "+"cost: "+cost);
             }
