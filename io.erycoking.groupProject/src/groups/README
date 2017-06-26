@@ -8,4 +8,4 @@ name is a string, registration number a string and the primary key, leader a boo
  
        create table students (regno varchar(25) primary key not null, name varchar(45) not null, leader tinyint(1));
 
-Author pnzau98.
+Author pnzau.
