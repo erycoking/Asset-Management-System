@@ -1,7 +1,0 @@
-
-regno in table Group are of type VARCHAR(16) i.e B14/45626/19.
-name is of type VARCHAR(50).
-leader in table Groups is of type longInt(1);
-
-regno is also a primary key in both table Students and table Groups.
-

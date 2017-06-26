@@ -4,12 +4,27 @@
  * and open the template in the editor.
  */
 package groups;
-
 /**
  *
  * @author makwata
  */
-public class UI {
-    // TODO working on the views update soonest by next week thursday everything will be in ship shape.
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class UI extends Application {
+    UIgroup uigroup = new UIgroup();
     
+   @Override
+   public void start(Stage stage){
+       stage.setTitle("asset management system");
+       stage.setWidth(1080);
+       stage.setHeight(720);
+       uigroup.showUi(stage);
+       stage.show();
+   }
+   
+   public static void main(String[] args) {
+       launch(args);
+   }
 }
