@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 10, 2017, 8:31:35 PM
+    Author     : makwata
+*/
+
+.root{
+    -fx-background-color: #263238;
+    -fx-font-family: 'Ubuntu';
+    -fx-font-size: 10pt;
+    -fx-font-weight: bold;
+}
+.label {
+   -fx-font-size: 11pt;
+   -fx-font-family: 'Ubuntu';
+   -fx-text-fill: #1b5e20;
+}
+
+.hbox > .text-label {
+   -fx-font-size: 11pt;
+   -fx-font-family: 'Ubuntu';
+}
+
+.table-view {
+    -fx-background-color: #263238;
+    -fx-font-color: grey;
+    -fx-font-size: 10pt;
+    -fx-font-family: 'Ubuntu';
+}
+.tablecolumn {
+    -fx-background-color: #263238;
+    -fx-cell-size: 45;
+}
+.button{
+    -fx-background-color: #1b5e20;
+    -fx-text-fill: white;
+    -fx-background-radius: 9 0 9 0, 9 0 9 0, 9 0 9 0;
+    -fx-font-family: 'Ubuntu';
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.button:hover {
+    -fx-background-color: black;
+}
+.actionbuttons {
+    -fx-background-color: #1b5e20;
+    -fx-text-fill: white;
+    -fx-background-radius: 9 9 9 9, 9 9 9 9, 9 9 9 9;
+    -fx-font-family: 'Ubuntu';
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.tree-table-cell:selected,
+.table-cell{
+     -fx-padding: 0.466667em;
+     -fx-border-width: 0.183333em; 
+}
+
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:hover {
+    -fx-background-color: green;
+}
+
+.column-header {
+    -fx-font-size: 17px;
+    -fx-padding: 4 0 2 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #593f3f;
+}
