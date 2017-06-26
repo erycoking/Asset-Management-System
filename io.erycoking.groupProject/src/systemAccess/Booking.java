@@ -26,7 +26,9 @@ public class Booking{
        
             {
         try {
+            
             Add.display();
+            
         } catch (SQLException ex) {
             Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
         }

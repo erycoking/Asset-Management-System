@@ -21,15 +21,33 @@ public class Equipment {
      private final SimpleStringProperty eqpDetails;
       private final SimpleIntegerProperty quantity;
       private final SimpleStringProperty eqpCategory;
-
-    public Equipment(int id,String n,int cst,String ed,int qty,String ec) {
+      private final SimpleStringProperty dateCreated;
+      
+ 
+   public Equipment(){
+       this.name=new SimpleStringProperty();
+       this.callId=new SimpleIntegerProperty();
+       
+       this.cost=new SimpleIntegerProperty();
+       this.eqpDetails=new SimpleStringProperty();
+       this.quantity=new SimpleIntegerProperty();
+       this.eqpCategory=new SimpleStringProperty();
+       this.dateCreated=new SimpleStringProperty();
+   }
+       
+    
+    public Equipment(int id,String n,int cst,String ed,int qty,String ec,String dc) {
         this.callId = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(n);
         this.cost = new SimpleIntegerProperty(cst);
          this.eqpDetails=new SimpleStringProperty(ed);
         this.quantity = new SimpleIntegerProperty(qty);
         this.eqpCategory=new SimpleStringProperty(ec);
+        this.dateCreated=new SimpleStringProperty(dc);
     }
+
+   
+       
     
     //set methods
    public void setCallId(int id){
@@ -49,8 +67,11 @@ public class Equipment {
         quantity.set(q);
     }
                  public void setEqpCategory(String eqc){
-           eqpDetails.set(eqc);
+           eqpCategory.set(eqc);
        }
+                 public void setDateCreated(String dc){
+        dateCreated.set(dc);
+    }
              
              //get methods
     public int getCallId(){
@@ -72,6 +93,9 @@ public class Equipment {
   
   public String getEqpCategory(){
         return eqpCategory.get();
+    }
+   public String getDateCreated(){
+        return dateCreated.get();
     }
     }
 
