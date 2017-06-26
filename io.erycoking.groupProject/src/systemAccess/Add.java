@@ -81,7 +81,7 @@ public class Add  {
       
       // GridPane.setConstraints(button1,2,6);
       
-       grid.getChildren().addAll(callId,callInput,name,nameInput,cost,costInput,quantity,quantityInput,button );
+       grid.getChildren().addAll(callId,callInput,name,nameInput,cost,costInput,quantity,quantityInput,button);
      //The table
        
        TableView<Equipment> table;
@@ -91,24 +91,24 @@ public class Add  {
        final ObservableList<Equipment> data=FXCollections.observableArrayList();
        //callId column
        TableColumn<Equipment,Integer>callColumn=new TableColumn<>("CallId");
-       callColumn.setMinWidth(50);
+       callColumn.setMinWidth(200);
        callColumn.setCellValueFactory(new PropertyValueFactory("callId"));
 //name column
        TableColumn<Equipment,String>nameColumn=new TableColumn<>("Name");
-       nameColumn.setMinWidth(100);
+       nameColumn.setMinWidth(200);
        nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
     
        //Cost column
        TableColumn<Equipment,Integer>costColumn=new TableColumn<>("Cost");
-     costColumn.setMinWidth(50);
+     costColumn.setMinWidth(100);
      costColumn.setCellValueFactory(new PropertyValueFactory("cost")); 
      //Equipment details
      TableColumn<Equipment,String>eqpDetails=new TableColumn<>("Equipment details");
-     eqpDetails.setMinWidth(200);
+     eqpDetails.setMinWidth(500);
      eqpDetails.setCellValueFactory(new PropertyValueFactory("eqpDetails"));
       //quantity column
      TableColumn<Equipment,Integer>quantityColumn=new TableColumn<>("Quantity");
-     quantityColumn.setMinWidth(100);
+     quantityColumn.setMinWidth(200);
      quantityColumn.setCellValueFactory(new PropertyValueFactory("quantity"));
       //Equipment details
      TableColumn<Equipment,String>eqpCategory=new TableColumn<>("Equipment Category");
@@ -116,6 +116,7 @@ public class Add  {
      eqpDetails.setCellValueFactory(new PropertyValueFactory("eqpCategory"));
      
      //Setting data items
+    // table.maxWidth(1050);
        table.setItems(getData());
        
        table.getColumns().addAll(callColumn,nameColumn,costColumn,eqpDetails,quantityColumn,eqpCategory);
@@ -152,17 +153,13 @@ public class Add  {
               Integer callid=rs.getInt("eqpID");
                 String n=rs.getString("eqpname");
                 Integer cs=rs.getInt("eqpcost");
-                String eqd=rs.getString("eqpDetails");
+                String eqd=rs.getString("eqpdetails");
                 Integer q=rs.getInt("quantity");
-                String eqc=rs.getString("eqpCategory");
+                String eqc=rs.getString("eqpcategory");
                 
                data.add(new Equipment(callid,n,cs,eqd,q,eqc));
              
-             // System.out.println("CallID: "+callid+"  "+"name: "+name+"  "+"quantity: "+quantity+ "  "+"cost: "+cost);
-        //    }
-       // }
-       // catch(Exception e){
-         //   System.out.println("Error");
+           
         }
 return data;
       
