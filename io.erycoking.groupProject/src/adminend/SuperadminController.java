@@ -8,21 +8,14 @@ package adminend;
 import beforeLogin.login2.dbconnection;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,6 +25,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -61,7 +64,7 @@ public class SuperadminController implements Initializable {
     private JFXTextField tfstaffrole;
     @FXML
     private JFXButton addbutton;
-    @FXML
+    @FXML 
     private JFXButton updatebutton;
     @FXML
     private Button deletebutton;
@@ -85,7 +88,7 @@ public class SuperadminController implements Initializable {
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.getIcons().add(new Image("file:images/matthews.jpg"));
-            stage.setTitle("These Are the Available Equipments and this is Your Identity Number If not please contact admin: "+useridentity);
+            stage.setTitle("This is the administators  page: "+useridentity);
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException ex) {
@@ -133,7 +136,7 @@ public class SuperadminController implements Initializable {
        rs.close();
        conn.close();
        
-        } catch (SQLException ex) {
+        }    catch (SQLException ex) {
             Logger.getLogger(SuperadminController.class.getName()).log(Level.SEVERE, null, ex);
         }
        
@@ -185,5 +188,18 @@ public class SuperadminController implements Initializable {
     @FXML
     private void deleteuser(ActionEvent event) {
     }
-    
+
+    @FXML
+    public void logout(Event event) throws IOException {
+        Stage stage = new Stage();
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        Parent root = loader.load(getClass().getResource("/UI/login.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/UI/login.css").toExternalForm());
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/equipment2.jpg")));
+        stage.setTitle("Active Inventory");
+        stage.show();
+    }
 }

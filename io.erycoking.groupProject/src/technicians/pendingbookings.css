@@ -34,3 +34,49 @@
     -fx-text-fill: black;
     -fx-opacity: 1;
 }
+.labelstyle{
+    -fx-background-color:#bbdefb ;  
+    -fx-background-radius:10,10;
+    -fx-font-weight: bold;
+    -fx-opacity:0.75;
+   -fx-indent: 150px;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5),0,0,0,1 );
+}
+.labelstyle:hover{
+    -fx-background-color:#388e3c;
+}
+.mainFxmlClass{
+ 
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1,#bbdefb);
+}
+.topmenu{
+  
+  -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+    -fx-background-radius:10,10; 
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5),0,0,0,1 );
+}
+.topmenu :hover{
+    -fx-background-color:#388e3c;
+    
+
+}
+.sidebar{
+  
+  -fx-background-color: linear-gradient(#2A5058, #303f9f);
+      -fx-background-radius:10,10;   
+   
+}
+.sidebar :hover{
+    -fx-background-color:#388e3c;
+}
+.topcornerleft{
+    -fx-background-image: url("/assetmanagement/images/images_008.png");
+   -fx-background-repeat: no-repeat;
+   -fx-background-size: cover;
+}
+.textsfields{
+    -fx-text-fill:blue;
+   -fx-font-weight:bold;
+    -fx-underline: true;
+    -fx-background-radius:6,6,6,6;
+}

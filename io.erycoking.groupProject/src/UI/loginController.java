@@ -1,15 +1,10 @@
 package UI;
 
-import Admin.AdminLogin;
 import beforeLogin.login2.Functions1;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-import database.userManager;
 import database.bean.user;
+import database.userManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +14,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import systemAccess.Booking;
 import validate.validateUserInput;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
     @FXML
@@ -44,27 +43,12 @@ public class loginController implements Initializable {
                                 userManager usrMan = new userManager();
                                 user returned_usr = usrMan.getCurrentUser(inputId, inputPwd);
                                 if(returned_usr != null){
-                                    if(returned_usr.getRole().equals("user")){
-                                        ((Node)event.getSource()).getScene().getWindow().hide();
 
-                                    }else if(returned_usr.getRole().equals("labtech")){         
-                                        ((Node)event.getSource()).getScene().getWindow().hide();
+                                    ((Node)event.getSource()).getScene().getWindow().hide();
 
-                                        Stage window= new Stage();
-                                        Booking b = new Booking();
-                                        b.start(window);
+                                    Functions1 fun = new Functions1();
+                                    fun.logingIn(returned_usr);
 
-                                    }else if(returned_usr.getRole().equals("admin")){
-                                        ((Node)event.getSource()).getScene().getWindow().hide();
-                                        
-                                        Functions1 fun = new Functions1();
-                                        fun.logingIn(returned_usr);
-                                        
-//                                        AdminLogin adm = new AdminLogin();
-//                                        Stage prStage = new Stage();
-//                                        adm.start(prStage);
-
-                                    }
                                 }else{err.setText("user doesn't exist");}
                             }else{err.setText("invalid password");}
                         }else{ err.setText("invalid staff ID");}                     

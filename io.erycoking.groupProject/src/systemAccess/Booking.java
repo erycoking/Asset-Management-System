@@ -5,15 +5,16 @@
  */
 package systemAccess;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.stage.*;
+import javafx.stage.Stage;
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Booking extends Application {
 
@@ -27,9 +28,12 @@ public class Booking extends Application {
 
         button1.setOnAction(e -> {
             try {
-                Add.display();
+                Add add = new Add();
+                add.display();
             } catch (SQLException ex) {
                 Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
             }
         });
 
