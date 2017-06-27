@@ -22,7 +22,7 @@ public class Connect {
     public static Connection ConnectDB() {
         try {
           Class.forName("com.mysql.jdbc.Driver");
-          Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/asset_management?autoReconnect=true&useSSL=false", "root", "geek");
+          Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/asset_management?autoReconnect=true&useSSL=false", "root", "king");
           return conn;
         }
         catch(SQLException | ClassNotFoundException se) {

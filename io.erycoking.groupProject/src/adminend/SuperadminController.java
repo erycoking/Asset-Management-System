@@ -35,6 +35,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Label;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -74,6 +76,12 @@ public class SuperadminController implements Initializable {
     private JFXTextField tfpassword;
     @FXML
     private JFXTextField tfcontacts;
+    @FXML
+    private Button auditrecords;
+    @FXML
+    private Button auditusers;
+    @FXML
+    private Label departmentlabel;
 
     /**
      * Initializes the controller class.
@@ -98,13 +106,32 @@ public class SuperadminController implements Initializable {
     }
 //Method called when the User Clicks the Table
     @FXML
-    private void tableClick(MouseEvent event) {
+    private Auditadminbean  tableClick() {
         //Auditadminbean available= new Auditadminbean();
-        Auditadminbean available=tableaudits.getSelectionModel().getSelectedItem();
+        Auditadminbean available=null;
+      available=tableaudits.getSelectionModel().getSelectedItem();
+        
+       // System.out.println("The email is"+available.getEmail());
+        if(available.getEmail().equals("")){
+            //System.out.println("The email is inside the if"+available.getEmail());
+      tfstaffname.setText(available.getName());
+        tfstaffid.setText(available.getId());
+        tfstaffdepartment.setText(available.getActivity());
+        departmentlabel.setText("Details");
+        }
+        else{
         tfstaffname.setText(available.getName());
         tfstaffid.setText(available.getId());
         tfstaffdepartment.setText(available.getActivity());
         tfstaffrole.setText(available.getRole());
+        tfusername.setText(available.getDate());
+        tfcontacts.setText(available.getBookID());//this is for telephone number 
+        //using the same model for different constructors
+        }
+        
+        
+        return available;
+        
             }
 //Calledwhen the user/admin wants to view the audits
     @FXML
@@ -150,7 +177,9 @@ public class SuperadminController implements Initializable {
         ResultSet rs=conn.createStatement().executeQuery("SELECT* FROM users");
         data=FXCollections.observableArrayList();
         while(rs.next()){
-        data.add(new Auditadminbean(rs.getString(2),rs.getString(6),rs.getString(1),rs.getString(9)));
+        //data.add(new Auditadminbean(rs.getString(2),rs.getString(6),rs.getString(1),rs.getString(9)));
+       data.add( new Auditadminbean(rs.getString(2), rs.getString(1),rs.getString("faculty"), rs.getString(3),rs.getString("email"),rs.getString(9),rs.getString(7),rs.getString("department")));
+               
        
         }
         ColumnName.setText("Staff Name");
@@ -177,16 +206,108 @@ public class SuperadminController implements Initializable {
         String username=tfusername.getText();
         String password=tfpassword.getText();
         String contacts=tfcontacts.getText();
-        //adminfunctions add= new adminfunctions();
-        adminfunctions.adduser(staffname,staffID,staffdepartment,staffrole,username,password,contacts);
+        if(staffname.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Name of the user", "Null name input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(staffID.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Staff Id of the user", "Null Identity number input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(staffdepartment.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Department of the user", "Null Department input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(staffrole.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Role of the user", "Null Role input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(contacts.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Contacts of the user", "Null contact input",JOptionPane.INFORMATION_MESSAGE);
+                }
+        else if(username.equals("")){
+        JOptionPane.showMessageDialog(null, "Username of the user required", "Null username input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(password.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the password of the user should login with ", "Null password input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }        
+        else{
+        adminfunctions add= new adminfunctions();
+        add.adduser(staffname,staffID,staffdepartment,staffrole,username,password,contacts);
+        }
     }
 
     @FXML
     private void updateuser(ActionEvent event) {
+        tableClick().getId();
+        System.out.println("The update user is here:"+tableClick().getName()+" "+tableClick().getId());
+        String staffname= tfstaffname.getText();
+        String staffID=tfstaffid.getText();
+        String staffdepartment=tfstaffdepartment.getText();
+        String staffrole=tfstaffrole.getText();
+        String username=tfusername.getText();
+        String password=tfpassword.getText();
+        String contacts=tfcontacts.getText();
+        if(staffname.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Name of the user", "Null name input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(staffID.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Staff Id of the user", "Null Identity number input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(staffdepartment.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Department of the user", "Null Department input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(staffrole.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Role of the user", "Null Role input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(contacts.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the Contacts of the user", "Null contact input",JOptionPane.INFORMATION_MESSAGE);
+                }
+        else if(username.equals("")){
+        JOptionPane.showMessageDialog(null, "Username of the user required", "Null username input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }
+        else if(password.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter the password of the user should login with ", "Null password input",JOptionPane.INFORMATION_MESSAGE);
+        
+        }        
+        else{
+            try {
+                //adminfunctions add= new adminfunctions();
+                //add.updateuser(staffname,staffID,staffdepartment,staffrole,username,password,tableClick().getEmail(),contacts);
+                dbconnection dc = new dbconnection();
+                PreparedStatement ps;
+                Connection conn = dc.ConnectDB();
+                String update="update users set Name='"+staffname+"', staff_id='"+staffID+"', username='"+username+"', password='"+password+"',department='"+staffdepartment+"', telephone_no='"+contacts+"', role='"+staffrole+"' where staff_id='"+ tableClick().getId()+"'";
+                ps=conn.prepareStatement(update);
+                ps.execute();
+                JOptionPane.showMessageDialog(null,"USer updated successfully","Update successful",JOptionPane.INFORMATION_MESSAGE);
+            } catch (SQLException ex) {
+                Logger.getLogger(SuperadminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @FXML
     private void deleteuser(ActionEvent event) {
+        try {
+            dbconnection dc = new dbconnection();
+            PreparedStatement ps;
+            Connection conn = dc.ConnectDB();
+            String update="Delete FROM users where staff_id='"+tableClick().getId()+"'";
+            ps=conn.prepareStatement(update);
+            ps.execute();
+            JOptionPane.showMessageDialog(null,"User Deleted successfully","Delete successful",JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(SuperadminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
     }
 
     @FXML
@@ -202,4 +323,7 @@ public class SuperadminController implements Initializable {
         stage.setTitle("Active Inventory");
         stage.show();
     }
-}
+
+
+    
+    }

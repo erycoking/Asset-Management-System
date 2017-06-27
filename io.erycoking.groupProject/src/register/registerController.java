@@ -80,6 +80,7 @@ public class registerController implements Initializable {
 											usr.setTel_no(Integer.parseInt(tel_no));
 											if (val.validateEmail(mail)){
 												usr.setEmail(mail);
+                                                                                                usr.setRole("member");
 												if (usrManager.insert(usr)) {
 													Functions1 fun = new Functions1();
 													fun.logingIn(usr);

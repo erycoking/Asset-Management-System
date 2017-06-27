@@ -7,6 +7,7 @@ package booking;
 //import Technicians.*;
 import beforeLogin.login2.Functions1;
 import beforeLogin.login2.dbconnection;
+import groups.UIgroup;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -200,7 +201,7 @@ public class BooklayoutController implements Initializable {
      */
 
     @FXML
-    private void bookitem(ActionEvent event) {
+    private void bookitem(ActionEvent event) throws ClassNotFoundException {
         try {
            if(!(tableitems.getSelectionModel().getSelectedItem()==null)){
             Availabledetails available = tableitems.getSelectionModel().getSelectedItem();
@@ -324,15 +325,26 @@ public class BooklayoutController implements Initializable {
     }
 
     @FXML
-    private void unbookequipment() {
+    private void unbookequipment() throws ClassNotFoundException {
         try {
             if(!(this.onthetableclick()==null)){
-            Availabledetails available= this.onthetableclick();
-            Integer EqpId = available.getId();
-            available.getBookID();
             dbconnection dc= new dbconnection();
             Connection conn = dbconnection.ConnectDB();
             PreparedStatement ps;
+            ResultSet rs;
+            Availabledetails available= this.onthetableclick();
+            Integer EqpId = available.getId();
+            //query the others using this bookId
+            rs=conn.createStatement().executeQuery("SELECT * FROM unbookedeqpmnts where eqpID='"+EqpId+"'");
+            if(rs.next()){
+            Integer quantity=rs.getInt("quantity");
+            System.out.println("the quantity in unbooked or the remaining after booking is"+quantity);
+            Integer readdedQuantity= quantity+available.getQuantity();
+            System.out.println("The readded quantity after booking is"+readdedQuantity);
+            available.getBookID();
+            
+            
+            
             //Test lines works properly
             System.out.println("Booklayoutcontroller314// The bookId is " + available.getBookID());
             System.out.println("The equipment id is " + EqpId);
@@ -340,9 +352,11 @@ public class BooklayoutController implements Initializable {
             String Delete = "DELETE FROM bookedeqpmnts WHERE bookId='"+BookId+"'";
              ps = conn.prepareStatement(Delete);
             ps.execute();
-           /* String Update = "UPDATE unbookedeqpmnts SET quantity='" + remaining + "' Where eqpID='" + EqpId + "'";
+            //update the unbooking
+            String Update = "UPDATE unbookedeqpmnts SET quantity='" + readdedQuantity + "' Where eqpID='" + EqpId + "'";
                 ps = conn.prepareStatement(Update);
-                ps.execute();*/
+                ps.execute();
+            }
            this.viewbooked();
             fnctns.auditunbooking(this.loggedinuserId(),available.getEquipment(),available.getBookID(),available.getType());
              JOptionPane.showMessageDialog(null, "Successfully unbooked the equipment", "Unbooking Successful", JOptionPane.INFORMATION_MESSAGE);
@@ -375,5 +389,16 @@ public class BooklayoutController implements Initializable {
         stage.setTitle("Active Inventory");
         stage.show();
     }
-
+    
+    @FXML
+    public void createGroup(ActionEvent event){
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        Stage stage = new Stage();
+        UIgroup group = new UIgroup();
+        stage.setTitle("asset management system");
+       stage.setWidth(1080);
+       stage.setHeight(720);
+       group.showUi(stage);
+       stage.show();
+    }
 }

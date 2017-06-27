@@ -45,7 +45,7 @@ public class adminfunctions {
        private void auditdeleteequipment(){
     
     }
-public static void adduser(String staffname, String staffID, String staffdepartment, String staffrole,String username,String password,String contacts) {
+public void adduser(String staffname, String staffID, String staffdepartment, String staffrole,String username,String password,String contacts) {
           try {
               dbconnection dc = new dbconnection();
               PreparedStatement ps;
@@ -63,4 +63,6 @@ public static void adduser(String staffname, String staffID, String staffdepartm
           }
     
         }
+
+   
 }

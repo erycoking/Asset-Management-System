@@ -42,6 +42,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import systemAccess.Add;
 
 
 /**
@@ -218,10 +219,10 @@ public String loggedinuserid(){
 //then we save the actions in the audit trail that is allocated details saved there
 //*********************************************************************************************************************//
     @FXML
-    private void Allocateequipment(ActionEvent event) {
+    private void Allocateequipment(ActionEvent event) throws ClassNotFoundException {
         try {
-            Bookingsdetails tablerowclicked = bookeditemstable.getSelectionModel().getSelectedItem();
-            tablerowclicked.getEquipment();
+            Bookingsdetails tablerowclicked =  bookeditemstable.getSelectionModel().getSelectedItem();
+            //tablerowclicked.getEquipmentname();
             //tablerowclicked.
             String Equipment=txfdequipment.getText();
             //Integer cost= Integer.parseInt(labeleqpcost.getText());
@@ -236,17 +237,23 @@ public String loggedinuserid(){
             
             //testing line... works as expected
             System.out.println("the logged in user"+loggedinuserId);
-            Integer allocate=this.returnbookidselected();
+            String allocate=tablerowclicked.getBookingId().toString(); //this.returnbookidselected();
             //we pass the bookid, userId of whoever booked it before and the logged in technician or allocator Id
            fnctns.allocateequipment(allocate,userId,loggedinuserId);
+           //fnctns.allocateequipment(tablerowclicked);
+           
         } catch (SQLException ex) {
             Logger.getLogger(PendingbookingsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @FXML
-  public void addshowallequipments(){
-   AddequipmentsController add=new  AddequipmentsController();
-        add.showstage();
+  public void addshowallequipments(ActionEvent event) throws SQLException, ClassNotFoundException{
+//   AddequipmentsController add=new  AddequipmentsController();
+//        add.showstage();
+    ((Node)event.getSource()).getScene().getWindow().hide();
+    Add add = new Add();
+    add.display();
+    
     }
 
     @FXML
@@ -276,20 +283,20 @@ public String loggedinuserid(){
                 }*/
             //if( rs3.next() && rs4.next()){
           while(rs.next()){
+              System.out.println("The returning details are: "+rs.getString("eqpID")+"user Id: "+rs.getString("userid")+" Thestaffid: "+ rs.getString(6));
             ResultSet rs2=conn.createStatement().executeQuery("select * from equipments where eqpID='"+rs.getString("eqpID")+"'");
            //allocated person details
             ResultSet rs3=conn.createStatement().executeQuery("select * from users where staff_id='"+rs.getString("userid")+"'");
           //for allocator details
           ResultSet rs4=conn.createStatement().executeQuery("select * from users where staff_id='"+rs.getString(6)+"'");
           if(rs2.next() && rs3.next() && rs4.next()){
-  allocateddetailsdata.add(new allocatedequipmentsmodel(
+        allocateddetailsdata.add(new allocatedequipmentsmodel(
             rs2.getString(2),rs.getString("eqpID"),rs3.getString("Name"), rs.getString("userid"),
-            rs4.getString("Name"),rs.getString(6), rs.getString(3), rs.getString(4), rs.getString(5),
-            rs.getString("AllocationNumber")));
+            rs4.getString("Name"),rs.getString(6), rs.getInt(3), rs.getString(4), rs.getString(5),
+            rs.getString("AllocationNumber"),rs.getString("BookID")));
           }
           }    
-          
-             bookedEquipments1.setCellValueFactory(new PropertyValueFactory<>("equipmentname"));//name
+                     bookedEquipments1.setCellValueFactory(new PropertyValueFactory<>("equipmentname"));//name
             Fromtime1.setCellValueFactory(new PropertyValueFactory<>("fromdate"));
             Quantityordered1.setCellValueFactory(new PropertyValueFactory<>("quantityAllocated"));
             orderedBy1.setCellValueFactory(new PropertyValueFactory<>("allocatedToName"));
@@ -318,11 +325,21 @@ public String loggedinuserid(){
             dc = new dbconnection();
             Connection conn = dbconnection.ConnectDB();
             PreparedStatement ps;
+            ResultSet rs;
+            
             //
             allocatedequipmentsmodel tablerowclicked = allocateditemstable.getSelectionModel().getSelectedItem();
             tablerowclicked.getClass();
             tablerowclicked.getAlloctionId();
             String Equipment=txfdequipment.getText();
+            rs=conn.createStatement().executeQuery("select * from unbookedeqpmnts where eqpID='"+tablerowclicked.getEquipmentId()+"'");
+            if(rs.next()){
+                 Integer quantityremained=rs.getInt("quantity");
+                 Integer readdedQuantity=tablerowclicked.getQuantityAllocated()+ rs.getInt("quantity");
+            System.out.println("This is the quantity that remained after return of equipment"+quantityremained);
+            String Update = "UPDATE unbookedeqpmnts SET quantity='" + readdedQuantity + "' Where eqpID='" + tablerowclicked.getEquipmentId()+ "'";
+                ps = conn.prepareStatement(Update);
+                ps.execute();
             String returneqpmnt = "DELETE FROM allocatedeqpmnts WHERE AllocationNumber= '"+tablerowclicked.getAlloctionId()+"' ";
             ps=conn.prepareStatement(returneqpmnt);
             //since the .execute() method returns true if it is a resultset and false if not resultset or simply if it was an update
@@ -337,6 +354,7 @@ public String loggedinuserid(){
            else{
            JOptionPane.showMessageDialog(null,"System Failure Retruning the equipment '"+tablerowclicked.getAlloctionId()+"'","Failure Return of Equipment",JOptionPane.INFORMATION_MESSAGE);
                       }
+        }
             //Integer cost= Integer.parseInt(labeleqpcost.getText());
             String fromtime=labelfromtime.getText();
             String totime=labeltotime.getText();

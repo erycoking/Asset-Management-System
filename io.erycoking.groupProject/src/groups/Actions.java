@@ -10,6 +10,7 @@ package groups;
  * @author makwata
  */
 
+import beforeLogin.login2.dbconnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Actions {
-    Connection conn = Connect.ConnectDB();
+    Connection conn = Connect.ConnectDB(); 
     ArrayList<Students> students = new ArrayList<>();
     Formatvalue format = new Formatvalue();
     

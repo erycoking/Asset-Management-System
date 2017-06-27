@@ -19,13 +19,14 @@ public class Auditadminbean {
      /*Declare the properties  we are to use ..of the audits */
     //AUDIT USERS NAME, DATE ACTIVITY
     //USERRS name,Id,,department, role
-    private final StringProperty name; //equipoment name
-    private final StringProperty activity;
-    private final StringProperty role;
-    private final StringProperty date;
-    private final StringProperty department;
-    private final StringProperty Id;
-    private final StringProperty BookID;
+    private final StringProperty name; //equipoment name and user name in users
+    private final StringProperty activity; //also faculty in users
+    private final StringProperty role; //role in users too
+    private final StringProperty date; //username
+    private final StringProperty department; //also department in users
+    private final StringProperty Id;           //Staff_id in users  email,
+    private final StringProperty BookID; //telephone number in users
+    private final StringProperty email; //email for users
     //private final DoubleProperty Quantity;
 
     public Auditadminbean(String name, String userid,String activity, String date) {
@@ -36,6 +37,17 @@ public class Auditadminbean {
         this.Id = new SimpleStringProperty(userid);
          this.BookID = new SimpleStringProperty(userid);
          this.department=new SimpleStringProperty(userid);
+         this.email=new SimpleStringProperty("");
+    }
+    public Auditadminbean(String name, String userid,String faculty, String username,String email,String role,String telephone,String department) {
+        this.name = new SimpleStringProperty(name);
+        this.activity = new SimpleStringProperty(faculty);
+        this.role = new SimpleStringProperty(role);
+        this.date= new SimpleStringProperty(username);
+        this.Id = new SimpleStringProperty(userid);
+         this.BookID = new SimpleStringProperty(telephone);
+         this.department=new SimpleStringProperty(department);
+         this.email=new SimpleStringProperty(email);
     }
     //constructor used for Users
      //USERRS name,Id,,department, role
@@ -85,6 +97,9 @@ public class Auditadminbean {
     public String getName() {
         return name.get();
     }
+    public String getEmail() {
+        return email.get();
+    }
 
     public void setDate(String value) {
         date.set(value);
@@ -109,6 +124,9 @@ public class Auditadminbean {
     }
     public void setBookID(String value) {
         BookID.set(value);
+    }
+     public void setEmail(String value) {
+        email.set(value);
     }
 
 }

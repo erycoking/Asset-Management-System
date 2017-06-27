@@ -5,6 +5,8 @@
  */
 package technicians;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -21,26 +23,28 @@ public class allocatedequipmentsmodel {
     private final StringProperty allocatedToId;
     private final StringProperty allocatedByName;
     private final StringProperty allocatedById;
-    private final StringProperty quantityAllocated;
+    private final IntegerProperty quantityAllocated;
     private final StringProperty fromdate;
     private final StringProperty todate;
     private final StringProperty datedelayed;
     private final StringProperty finedue;
     private final StringProperty allocationId;
+    private final StringProperty BookID;
 
-    public allocatedequipmentsmodel(String equipmentname, String equipmentId, String allocatedToName, String allocatedToId, String allocatedByName, String allocatedById, String quantityAllocated, String fromdate,String todate,String allocationId) {
+    public allocatedequipmentsmodel(String equipmentname, String equipmentId, String allocatedToName, String allocatedToId, String allocatedByName, String allocatedById, Integer quantityAllocated, String fromdate,String todate,String allocationId,String BookID) {
         this.equipmentname = new SimpleStringProperty(equipmentname);
         this.equipmentId = new SimpleStringProperty(equipmentId);
         this.allocatedToName = new SimpleStringProperty(allocatedToName);
         this.allocatedToId =new SimpleStringProperty( allocatedToId);
         this.allocatedByName =new SimpleStringProperty(allocatedByName);
         this.allocatedById = new SimpleStringProperty(allocatedById);
-        this.quantityAllocated =new SimpleStringProperty( quantityAllocated);
+        this.quantityAllocated =new SimpleIntegerProperty( quantityAllocated);
         this.fromdate = new SimpleStringProperty(fromdate);
         this.todate =new SimpleStringProperty(todate);
         this.datedelayed =null;//new SimpleStringProperty(datedelayed);
         this.finedue =null; //new SimpleStringProperty(finedue); to be implemented later incase they ask for fine
         this.allocationId=new SimpleStringProperty(allocationId);
+         this.BookID=new SimpleStringProperty(BookID);
     }
 
     public String getEquipmentname() {
@@ -67,7 +71,7 @@ public class allocatedequipmentsmodel {
         return allocatedById;
     }
 
-    public String getQuantityAllocated() {
+    public Integer getQuantityAllocated() {
         return quantityAllocated.get();
     }
 
@@ -88,6 +92,9 @@ public class allocatedequipmentsmodel {
     }
      public String getAlloctionId() {
         return allocationId.get();
+    }
+      public String getBookId() {
+        return BookID.get();
     }
       public void setEquipmentname(String value) {
         equipmentname.set(value);
@@ -113,7 +120,7 @@ public class allocatedequipmentsmodel {
         allocatedById.set(value);
     }
 
-    public void setQuantityAllocated(String value) {
+    public void setQuantityAllocated(Integer value) {
         quantityAllocated.set(value);
     }
 
@@ -133,6 +140,9 @@ public class allocatedequipmentsmodel {
     }
     public void setAllocationId(String value){
     allocationId.set(value);
+    }
+    public void setBookId(String value){
+   BookID.set(value);
     }
    
     

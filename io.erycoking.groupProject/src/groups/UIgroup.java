@@ -9,6 +9,9 @@ package groups;
  *
  * @author makwata
  */
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,6 +30,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
 
 public class UIgroup {
     
@@ -100,8 +108,25 @@ public class UIgroup {
        Button backButton = new Button("GO BACK!");
        backButton.setMaxSize(150,150);
        backButton.getStyleClass().add("actionbuttons");
-       backButton.setOnAction((ActionEvent event) -> {
-          
+       backButton.setOnAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+               Stage stage = new Stage();
+               ((Node)event.getSource()).getScene().getWindow().hide();
+               FXMLLoader loader = new FXMLLoader();
+               Parent root;
+               try {
+                    root = loader.load(getClass().getResource("/booking/booklayout.fxml"));
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/booking/booklayout.css").toExternalForm());
+                    stage.setScene(scene);
+//                    stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/equipment2.jpg")));
+                    stage.setTitle("Active Inventory");
+                    stage.show();
+               } catch (IOException ex) {
+                   Logger.getLogger(UIgroup.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
        });
        
        // configure the hBox layout for inputs and the text fields and the buttons add and delete are placed

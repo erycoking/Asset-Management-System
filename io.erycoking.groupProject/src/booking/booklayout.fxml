@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="1430.0" styleClass="mainFxmlClass" stylesheets="@booklayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.BooklayoutController">
+<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="1430.0" styleClass="mainFxmlClass" stylesheets="@booklayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.BooklayoutController">
     
     <children>
         <ScrollPane layoutX="176.0" layoutY="135.0" prefHeight="340.0" prefWidth="599.0" style="-fx-background-color: #8bc34a;">
@@ -114,5 +114,6 @@
          </children>
       </Pane>
       <Button fx:id="logout" layoutX="1105.0" layoutY="684.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
+      <Button layoutX="924.0" layoutY="684.0" mnemonicParsing="false" onAction="#createGroup" text="Create Groups" />
     </children>
 </AnchorPane>

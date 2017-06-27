@@ -29,9 +29,10 @@ public class Validator {
    
    // Validate if its a valid name
    public boolean isValidName(String s) {
-     String regex = "[a-zA-Z //s]{2,10}[a-zA-Z]{0,5}('[a-zA-Z]{0,11})";
-     System.out.println(s+" "+(!s.isEmpty() && !this.unSafeInput(s) && s.matches(regex)));
-     return !s.isEmpty() && !this.unSafeInput(s) && s.matches(regex);
+     String regex = "[A-Za-z \\s]{2,12}('[A-Za-z]{0,11})";
+     String regex1 = "[A-Za-z \\s]{2,12}[A-Za-z]{0,11}";
+     System.out.println(s+" "+(!s.isEmpty() && !this.unSafeInput(s) && (s.matches(regex) || s.matches(regex1))));
+     return !s.isEmpty() && !this.unSafeInput(s) && (s.matches(regex) || s.matches(regex1));
   }
    
     // if not a safe input return true

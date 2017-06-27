@@ -53,7 +53,6 @@ public class Functions1 {
 
             root = FXMLLoader.load(getClass().getResource("Index.fxml"));
             root.setStyle("-fx-background-color: #fb8c00");
-            
             root.getChildren().add(sp);
 
             scene = new Scene(root);
@@ -105,7 +104,7 @@ public class Functions1 {
         JOptionPane.showMessageDialog(null, "Successful Booking of equipment", "Book Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void auditallocating(Integer bookid, String UserID, String allocatorId) throws SQLException {
+    public void auditallocating(String bookid, String UserID, String allocatorId) throws SQLException {
         try {
             dbconnection dc = new dbconnection();
              PreparedStatement ps;
@@ -131,7 +130,7 @@ public class Functions1 {
                     quantityallocated = rs.getInt(2);
                 }
                 rs = conn.createStatement().executeQuery("Select * from equipments where eqpID='" + bookedeqpmntId + "'");
-                while (rs.next()) {
+                if (rs.next()) {
                     Equipmentname = rs.getString(2);
                 }
                 String booking = "User " + allocatorname + ": Logged in and allocated " + USER + " " + quantityallocated + " " + Equipmentname + " in number.";
@@ -286,7 +285,7 @@ public class Functions1 {
 
     }
 
-    public void allocateequipment(Integer bookid, String userID, String allocatorId) throws SQLException {
+    public void allocateequipment(String bookid, String userID, String allocatorId) throws SQLException {
         dbconnection dc = new dbconnection();
     PreparedStatement ps;
     Connection conn = dc.ConnectDB();
@@ -296,7 +295,7 @@ public class Functions1 {
         String todate = null;
         rs = conn.createStatement().executeQuery("SELECT * FROM bookedeqpmnts where BookID='" + bookid + "'");
         while (rs.next()) {
-            equipmentId = rs.getInt(1);
+            equipmentId = rs.getInt("eqpID");
             quantityordered = rs.getInt(4);
             fromdate = rs.getString(5);
             todate = rs.getString(6);
@@ -313,6 +312,7 @@ public class Functions1 {
         this.auditallocating(bookid, userID, allocatorId);
 
     }
+    
 
     
 

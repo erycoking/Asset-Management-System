@@ -17,7 +17,7 @@ public class userManager {
 
     public boolean insert(user usr) throws SQLException, ClassNotFoundException {
 
-        sql = "INSERT INTO `asset_management`.`users`(`staff_id`,`Name`, `username`,`password`,`faculty`,`department`,`telephone_no`, `email`, `role`)VALUES(?,?,?,?,?,?,?,?,?)";
+        sql = "INSERT INTO `asset_management`.`users`(`staff_id`,`Name`, `username`,`password`,`faculty`,`department`,`telephone_no`, `email`)VALUES(?,?,?,?,?,?,?,?);";
 
         try {
             conn = connectionManager.getInstance().getConnection();
@@ -30,7 +30,7 @@ public class userManager {
             st.setString(6, usr.getDepartment());
             st.setInt(7, usr.getTel_no());
             st.setString(8, usr.getEmail());
-            st.setString(9, "member");
+//            st.setString(9, "member");
 
             int affected = st.executeUpdate();
             if (affected == 1) {

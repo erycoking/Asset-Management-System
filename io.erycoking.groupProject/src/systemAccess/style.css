@@ -4,7 +4,7 @@
    -fx-background-size: cover;
 }
 .label{
-    -fx-text-fill:white;
+    -fx-text-fill:black;
     -fx-font-weight:bold;
    
 }

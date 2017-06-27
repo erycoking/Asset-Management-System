@@ -5,6 +5,8 @@
  */
 package systemAccess;
 import database.connectionManager;
+import groups.UIgroup;
+import java.io.IOException;
 import javafx.application.*;
 import javafx.event.*;
 import javafx.geometry.*;
@@ -23,6 +25,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 
 public class Add  {
    
@@ -36,7 +40,7 @@ public class Add  {
    public static TextField nameInput,costInput,detInput,quantityInput,catInput,date,dateInput; 
    public static TableView<Equipment>table;
     
-    public static void display() throws SQLException{
+    public static void display() throws SQLException, ClassNotFoundException{
         
       Stage window=new Stage();
         window.setTitle("Add equipment");
@@ -99,6 +103,8 @@ public class Add  {
               table.setItems(getData());
           } catch (SQLException ex) {
               Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
           }
    
   
@@ -107,8 +113,10 @@ public class Add  {
        
       
       // GridPane.setConstraints(button1,2,6);
+      Button back=new Button("Back");
+      GridPane.setConstraints(back,1,11);
       
-       grid.getChildren().addAll(name,nameInput,cost,costInput,equipmentDet,detInput,quantity,quantityInput,equipmentCat,catInput,dateL,dateInput,button);
+       grid.getChildren().addAll(name,nameInput,cost,costInput,equipmentDet,detInput,quantity,quantityInput,equipmentCat,catInput,dateL,dateInput,button,back);
      //The table
        
       // TableView<Equipment> table;
@@ -156,17 +164,34 @@ public class Add  {
        table.setItems(getData());
        
        table.getColumns().addAll(callColumn,nameColumn,costColumn,eqpDetails,quantityColumn,eqpCategory,dateCreated);
-       Button back=new Button("Back");
+      // Button back=new Button("Back");
        
-      back.setOnAction(e-> 
-          
-             Booking.display());
+      back.setOnAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+               Stage stage = new Stage();
+               ((Node)event.getSource()).getScene().getWindow().hide();
+               FXMLLoader loader = new FXMLLoader();
+               Parent root;
+               try {
+                    root = loader.load(getClass().getResource("/technicians/Pendingbookings.fxml"));
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/technicians/pendingbookings.css").toExternalForm());
+                    stage.setScene(scene);
+                   // stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/equipment2.jpg")));
+                    stage.setTitle("Active Inventory");
+                    stage.show();
+               } catch (IOException ex) {
+                   Logger.getLogger(UIgroup.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+       });
       
   
      HBox layout=new HBox();
      layout.setPadding(new Insets(10,10,10,10));
      layout.setSpacing(10);
-     layout.getChildren().addAll(grid,table,back);
+     layout.getChildren().addAll(grid,table);
      
      
        Scene scene=new Scene(layout,1300,650);
@@ -191,7 +216,7 @@ public class Add  {
 //        + "VALUES('"+nameInput.getText()+"','"+costInput.getText()+"','"+detInput.getText()+"','"+quantityInput.getText()+"','"+catInput.getText()+"','"+dateInput.getText()+"');";
  
     String query="INSERT INTO equipments(eqpname,eqpcost,eqpdetails,quantity,eqpcategory,date_created) Values(?,?,?,?,?,?);";
-            Connection conn = connect.getConnection();
+            Connection conn = connectionManager.getInstance().getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, nameInput.getText());
             stmt.setString(2, costInput.getText());
@@ -226,8 +251,8 @@ public class Add  {
     }
   
               
- public static ObservableList<Equipment> getData() throws SQLException{
-     connect con=new connect();
+ public static ObservableList<Equipment> getData() throws SQLException, ClassNotFoundException{
+    // Connection con=connectionManager.getInstance().getConnection();
     
        ObservableList<Equipment> data=FXCollections.observableArrayList();
        

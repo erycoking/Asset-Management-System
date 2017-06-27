@@ -32,6 +32,8 @@ public class Booking extends Application {
                 add.display();
             } catch (SQLException ex) {
                 Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 

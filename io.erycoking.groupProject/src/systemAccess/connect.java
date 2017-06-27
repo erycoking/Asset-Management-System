@@ -5,6 +5,7 @@
  */
 package systemAccess;
 
+import database.connectionManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,8 +24,9 @@ public class connect{
   public static Connection getConnection() throws SQLException{
     try{
          Class.forName("com.mysql.jdbc.Driver"); 
-         String url="jdbc:mysql://localhost:3306/equipment"+"?verifyServerCertificate=false"+"&useSSL=false"+"&requireSSL=false";
-         con= DriverManager.getConnection(url,"grace","grace");
+         String url="jdbc:mysql://localhost:3306/asset_management"+"?verifyServerCertificate=false"+"&useSSL=false"+"&requireSSL=false";
+         con= DriverManager.getConnection(url,"root","king");
+//         con = connectionManager.getInstance().getConnection();
         st=con.createStatement();
         }
         catch(Exception ex){
